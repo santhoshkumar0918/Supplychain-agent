@@ -5,314 +5,396 @@ from src.action_handler import register_action
 from datetime import datetime, timedelta
 import json
 
-logger = logging.getLogger("actions.sonic_actions")
+logger = logging.getLogger("actions.berry_sonic_actions")
 
-# Core Smart Contract Actions
-@register_action("initialize-smart-contract")
-def initialize_smart_contract(agent, **kwargs):
-    """Initialize supply chain smart contract on Sonic blockchain"""
-    try:
-        contract_params = {
-            "owner_address": kwargs.get("owner_address"),
-            "token_address": kwargs.get("token_address"),
-            "min_stake": float(kwargs.get("min_stake", 1000))
-        }
-        return agent.connection_manager.connections["sonic"].deploy_contract(
-            contract_params=contract_params
-        )
-    except Exception as e:
-        logger.error(f"Failed to initialize smart contract: {str(e)}")
-        return None
+# Constants for berry temperature monitoring
+BERRY_TEMP_AGENT_ADDRESS = "0xF28eC6250Fc5101D814dd78F9b1673b5e3a55cFa"
+BERRY_MANAGER_ADDRESS = "0x56516C11f350EeCe25AeA9e36ECd36CB6c71030d"
+OPTIMAL_TEMP = 2   # 2°C
+MAX_TEMP = 4       # 4°C
+MIN_TEMP = 0       # 0°C
 
-@register_action("register-supply-chain-participant")
-def register_participant(agent, **kwargs):
-    """Register a new participant in the supply chain"""
+# Berry Temperature Monitoring Actions
+@register_action("monitor-berry-temperature")
+async def monitor_berry_temperature(agent, **kwargs):
+    """Monitor and analyze temperature data for berry shipments"""
     try:
-        participant_data = {
-            "address": kwargs.get("address"),
-            "role": kwargs.get("role"),
-            "stake_amount": float(kwargs.get("stake_amount")),
-            "metadata": kwargs.get("metadata", {})
-        }
-        return agent.connection_manager.connections["sonic"].register_participant(
-            participant_data=participant_data
-        )
-    except Exception as e:
-        logger.error(f"Failed to register participant: {str(e)}")
-        return None
-
-# Temperature Monitoring Actions
-@register_action("monitor-temperature")
-def monitor_temperature(agent, **kwargs):
-    """Monitor and analyze temperature data from IoT sensors"""
-    try:
-        # Get current temperature readings
-        readings = agent.connection_manager.connections["sonic"].get_temperature_readings()
+        logger.info("Starting berry temperature monitoring...")
         
-        # Analyze for breaches
-        breaches = []
-        for reading in readings:
-            if is_temperature_breach(reading):
-                breach_data = {
-                    "shipment_id": reading["shipment_id"],
-                    "temperature": reading["temperature"],
-                    "duration": calculate_breach_duration(reading),
-                    "severity": calculate_breach_severity(reading),
-                    "timestamp": datetime.now().isoformat()
-                }
-                breaches.append(breach_data)
-                
-                # Record breach on blockchain
-                agent.connection_manager.connections["sonic"].record_temperature_breach(breach_data)
-                
-                # Trigger corrective actions
-                if breach_data["severity"] == "critical":
-                    initiate_emergency_protocol(agent, breach_data)
-                else:
-                    initiate_corrective_actions(agent, breach_data)
+        # Get batch ID from parameters or use default
+        batch_id = kwargs.get("batch_id", 0)
+        temperature = kwargs.get("temperature")
+        location = kwargs.get("location", "Unknown")
         
+        # Validate temperature data
+        if temperature is None:
+            # Use mock data if no temperature is provided
+            mock_temps = [2.5, 3.1, 4.2, 5.0, 3.8, 2.9]
+            temperature = mock_temps[int(datetime.now().timestamp()) % len(mock_temps)]
+            
+        # Determine location from time of day if not provided
+        if location == "Unknown":
+            hour = datetime.now().hour
+            if hour < 8:
+                location = "Cold Storage"
+            elif hour < 12:
+                location = "Loading Dock"
+            elif hour < 18:
+                location = "Transport"
+            else:
+                location = "Delivery Center"
+        
+        logger.info(f"Recording temperature {temperature}°C at {location} for batch {batch_id}")
+        
+        # Call contract method to record temperature
+        tx_data = {
+            "contract_address": BERRY_TEMP_AGENT_ADDRESS,
+            "method": "recordTemperature",
+            "args": [batch_id, int(temperature * 10), location],
+            "gas_limit": 200000
+        }
+        
+        tx_result = await agent.connection_manager.connections["sonic"].send_transaction(tx_data)
+        logger.info(f"Temperature recording transaction: {tx_result}")
+        
+        # Check for breaches
+        is_breach = temperature > MAX_TEMP or temperature < MIN_TEMP
+        breach_severity = "None"
+        
+        if is_breach:
+            deviation = abs(temperature - OPTIMAL_TEMP)
+            if deviation > 3:
+                breach_severity = "Critical"
+            elif deviation > 1:
+                breach_severity = "Warning"
+            else:
+                breach_severity = "Minor"
+                
+            logger.warning(f"Temperature breach detected: {temperature}°C, Severity: {breach_severity}")
+            
         return {
             "status": "completed",
-            "breaches": breaches,
-            "timestamp": datetime.now().isoformat()
-        }
-    except Exception as e:
-        logger.error(f"Temperature monitoring failed: {str(e)}")
-        return None
-
-# Demand Prediction Actions
-@register_action("predict-demand")  # Matches exactly with the task name in JSON
-async def predict_demand(agent, **kwargs):  # Make it async
-    """Generate demand forecasts using historical data and current factors"""
-    try:
-        logger.info("Starting demand prediction...")
-        
-        # Collect prediction inputs
-        try:
-            historical_data = await agent.connection_manager.connections["sonic"].get_historical_data(days=90)
-            logger.info(f"Retrieved historical data: {len(historical_data) if historical_data else 0} records")
-        except Exception as e:
-            logger.error(f"Failed to get historical data: {str(e)}")
-            historical_data = []
-
-        # Simplified initial version to test action registration
-        prediction = {
-            "forecast": 100,  # Placeholder value
-            "confidence_interval": 0.95,
+            "batch_id": batch_id,
+            "temperature": temperature,
+            "location": location,
+            "is_breach": is_breach,
+            "breach_severity": breach_severity,
             "timestamp": datetime.now().isoformat()
         }
         
-        logger.info(f"Generated prediction: {prediction}")
-        
-        # Record prediction (commented out for initial testing)
-        # await agent.connection_manager.connections["sonic"].record_demand_prediction(prediction)
-        
-        return {
-            "status": "completed",
-            "prediction": prediction
-        }
-
     except Exception as e:
-        logger.error(f"Demand prediction failed: {str(e)}", exc_info=True)
+        logger.error(f"Berry temperature monitoring failed: {str(e)}", exc_info=True)
         return {
             "status": "failed",
             "error": str(e)
         }
 
-# Helper function for debugging
+@register_action("manage-berry-quality")
+async def manage_berry_quality(agent, **kwargs):
+    """Assess and predict berry quality based on temperature history"""
+    try:
+        logger.info("Starting berry quality assessment...")
+        
+        # Get batch ID from parameters or use default
+        batch_id = kwargs.get("batch_id", 0)
+        
+        # Get temperature history for the batch
+        tx_data = {
+            "contract_address": BERRY_TEMP_AGENT_ADDRESS,
+            "method": "getTemperatureHistory",
+            "args": [batch_id],
+            "gas_limit": 100000
+        }
+        
+        temp_history = await agent.connection_manager.connections["sonic"].call_contract(tx_data)
+        
+        # If no history available, use mock data
+        if not temp_history or len(temp_history) == 0:
+            logger.info("No temperature history found, using mock data")
+            
+            # Generate mock temperature history
+            mock_history = []
+            base_time = datetime.now() - timedelta(hours=12)
+            
+            for i in range(6):
+                # Generate varying temperatures
+                if i == 3:  # Create a breach in the middle
+                    temp = 5.2
+                else:
+                    temp = 2.0 + (i % 3)
+                
+                # Generate locations
+                locations = ["Cold Storage", "Loading Dock", "Transport", "Transport", "Transport", "Delivery Center"]
+                
+                mock_history.append({
+                    "timestamp": (base_time + timedelta(hours=i*2)).isoformat(),
+                    "temperature": temp,
+                    "location": locations[i],
+                    "isBreached": temp > MAX_TEMP or temp < MIN_TEMP
+                })
+            
+            temp_history = mock_history
+        
+        # Calculate quality impact
+        quality_score = 100
+        shelf_life_hours = 72  # Default 3-day shelf life for berries
+        
+        for reading in temp_history:
+            temp = reading.get("temperature", 0)
+            if isinstance(temp, str):
+                temp = float(temp)
+                
+            if temp > MAX_TEMP:
+                deviation = temp - MAX_TEMP
+                quality_score -= deviation * 5
+                shelf_life_hours -= deviation * 4
+            elif temp < MIN_TEMP:
+                deviation = MIN_TEMP - temp
+                quality_score -= deviation * 7
+                shelf_life_hours -= deviation * 6
+        
+        # Ensure we don't go below zero
+        quality_score = max(0, quality_score)
+        shelf_life_hours = max(0, shelf_life_hours)
+        
+        # Determine recommended action based on quality
+        action = "No Action"
+        action_description = "Quality is within acceptable parameters."
+        
+        if quality_score < 60:
+            action = "Reject"
+            action_description = "Quality severely compromised. Recommend rejection."
+        elif quality_score < 70:
+            action = "Reroute"
+            action_description = "Quality concerns detected. Recommend rerouting to nearest facility."
+        elif quality_score < 80:
+            action = "Expedite"
+            action_description = "Quality at risk. Recommend expedited delivery."
+        elif quality_score < 90:
+            action = "Alert"
+            action_description = "Minor quality impact. Continue monitoring closely."
+        
+        result = {
+            "status": "completed",
+            "batch_id": batch_id,
+            "quality_score": round(quality_score, 1),
+            "shelf_life_hours": round(shelf_life_hours, 1),
+            "temperature_readings": len(temp_history),
+            "recommended_action": action,
+            "action_description": action_description,
+            "timestamp": datetime.now().isoformat()
+        }
+        
+        logger.info(f"Quality assessment complete: {result}")
+        return result
+        
+    except Exception as e:
+        logger.error(f"Berry quality management failed: {str(e)}", exc_info=True)
+        return {
+            "status": "failed",
+            "error": str(e)
+        }
+
+@register_action("process-agent-recommendations")
+async def process_agent_recommendations(agent, **kwargs):
+    """Process agent recommendations and update supplier reputation"""
+    try:
+        logger.info("Processing agent recommendations...")
+        
+        # Get parameters
+        batch_id = kwargs.get("batch_id", 0)
+        quality_score = kwargs.get("quality_score")
+        recommended_action = kwargs.get("recommended_action")
+        
+        # If quality score not provided, fetch from previous action or use default
+        if quality_score is None:
+            # Call the quality management function
+            quality_result = await manage_berry_quality(agent, batch_id=batch_id)
+            quality_score = quality_result.get("quality_score", 80)
+            recommended_action = quality_result.get("recommended_action", "No Action")
+        
+        # Call contract method to process recommendation
+        tx_data = {
+            "contract_address": BERRY_MANAGER_ADDRESS,
+            "method": "processAgentRecommendation",
+            "args": [batch_id],
+            "gas_limit": 300000
+        }
+        
+        tx_result = await agent.connection_manager.connections["sonic"].send_transaction(tx_data)
+        logger.info(f"Recommendation processing transaction: {tx_result}")
+        
+        # Get supplier details
+        supplier_tx_data = {
+            "contract_address": BERRY_MANAGER_ADDRESS,
+            "method": "getSupplierDetails",
+            "args": [agent.connection_manager.connections["sonic"].account.address],
+            "gas_limit": 100000
+        }
+        
+        supplier_details = await agent.connection_manager.connections["sonic"].call_contract(supplier_tx_data)
+        
+        # If no details available, use mock data
+        if not supplier_details:
+            supplier_details = {
+                "reputation": 85,
+                "totalBatches": 12,
+                "successfulBatches": 10
+            }
+        
+        # Calculate supplier action based on quality
+        supplier_action = "None"
+        
+        if quality_score >= 90:
+            supplier_action = "Reward"
+        elif quality_score < 60:
+            supplier_action = "Warn"
+        
+        return {
+            "status": "completed",
+            "batch_id": batch_id,
+            "quality_score": quality_score,
+            "recommended_action": recommended_action,
+            "supplier_reputation": supplier_details.get("reputation", 85),
+            "total_batches": supplier_details.get("totalBatches", 12),
+            "successful_batches": supplier_details.get("successfulBatches", 10),
+            "supplier_action": supplier_action,
+            "timestamp": datetime.now().isoformat()
+        }
+        
+    except Exception as e:
+        logger.error(f"Process agent recommendations failed: {str(e)}", exc_info=True)
+        return {
+            "status": "failed",
+            "error": str(e)
+        }
+
+@register_action("manage-batch-lifecycle")
+async def manage_batch_lifecycle(agent, **kwargs):
+    """Manage berry batch lifecycle from creation to delivery"""
+    try:
+        logger.info("Managing batch lifecycle...")
+        
+        # Get parameters
+        action = kwargs.get("action", "create")
+        berry_type = kwargs.get("berry_type", "Strawberry")
+        batch_id = kwargs.get("batch_id", 0)
+        
+        if action == "create":
+            # Create a new batch
+            tx_data = {
+                "contract_address": BERRY_TEMP_AGENT_ADDRESS,
+                "method": "createBatch",
+                "args": [berry_type],
+                "gas_limit": 200000
+            }
+            
+            tx_result = await agent.connection_manager.connections["sonic"].send_transaction(tx_data)
+            logger.info(f"Batch creation transaction: {tx_result}")
+            
+            # Get the batch count to determine the new batch ID
+            count_tx_data = {
+                "contract_address": BERRY_TEMP_AGENT_ADDRESS,
+                "method": "batchCount",
+                "args": [],
+                "gas_limit": 100000
+            }
+            
+            batch_count = await agent.connection_manager.connections["sonic"].call_contract(count_tx_data)
+            if batch_count:
+                batch_id = int(batch_count) - 1
+                
+            return {
+                "status": "completed",
+                "action": "create",
+                "berry_type": berry_type,
+                "batch_id": batch_id,
+                "timestamp": datetime.now().isoformat()
+            }
+            
+        elif action == "complete":
+            # Complete a shipment
+            tx_data = {
+                "contract_address": BERRY_MANAGER_ADDRESS,
+                "method": "completeShipment",
+                "args": [batch_id],
+                "gas_limit": 300000
+            }
+            
+            tx_result = await agent.connection_manager.connections["sonic"].send_transaction(tx_data)
+            logger.info(f"Shipment completion transaction: {tx_result}")
+            
+            return {
+                "status": "completed",
+                "action": "complete",
+                "batch_id": batch_id,
+                "timestamp": datetime.now().isoformat()
+            }
+            
+        elif action == "status":
+            # Get batch details
+            tx_data = {
+                "contract_address": BERRY_TEMP_AGENT_ADDRESS,
+                "method": "getBatchDetails",
+                "args": [batch_id],
+                "gas_limit": 100000
+            }
+            
+            batch_details = await agent.connection_manager.connections["sonic"].call_contract(tx_data)
+            
+            # If no details available, use mock data
+            if not batch_details:
+                batch_details = {
+                    "batchId": batch_id,
+                    "berryType": berry_type,
+                    "startTime": (datetime.now() - timedelta(hours=24)).timestamp(),
+                    "status": 1,  # 1 = InTransit
+                    "qualityScore": 85,
+                    "predictedShelfLife": 60 * 60 * 60  # 60 hours in seconds
+                }
+            
+            status_map = {
+                0: "Created",
+                1: "InTransit",
+                2: "Delivered",
+                3: "Rejected"
+            }
+            
+            current_status = status_map.get(batch_details.get("status", 1), "InTransit")
+            
+            return {
+                "status": "completed",
+                "action": "status",
+                "batch_id": batch_id,
+                "berry_type": batch_details.get("berryType", berry_type),
+                "batch_status": current_status,
+                "quality_score": batch_details.get("qualityScore", 85),
+                "predicted_shelf_life_hours": batch_details.get("predictedShelfLife", 60 * 60 * 60) / 3600,
+                "timestamp": datetime.now().isoformat()
+            }
+        
+    except Exception as e:
+        logger.error(f"Batch lifecycle management failed: {str(e)}", exc_info=True)
+        return {
+            "status": "failed",
+            "error": str(e)
+        }
+
+# Helper function to verify action registration
 def verify_action_registration():
     from src.action_handler import list_registered_actions
     actions = list_registered_actions()
-    logger.info(f"Registered actions: {actions}")
-    return "predict-demand" in actions
+    logger.info(f"Registered berry actions: {actions}")
+    required_actions = [
+        "monitor-berry-temperature", 
+        "manage-berry-quality", 
+        "process-agent-recommendations", 
+        "manage-batch-lifecycle"
+    ]
+    missing = [a for a in required_actions if a not in actions]
+    if missing:
+        logger.warning(f"Missing actions: {missing}")
+    return len(missing) == 0
 
-# Add this to check registration
+# Run verification
 verify_action_registration()
-
-
-# Route Optimization Actions
-@register_action("optimize-routes")
-def optimize_routes(agent, **kwargs):
-    """Optimize delivery routes considering multiple constraints"""
-    try:
-        # Get current delivery requirements
-        deliveries = agent.connection_manager.connections["sonic"].get_pending_deliveries()
-        current_conditions = {
-            "traffic": get_traffic_data(),
-            "weather": get_weather_data(),
-            "vehicle_status": get_vehicle_status(),
-            "temperature_zones": get_temperature_zones()
-        }
-        
-        # Generate optimized routes
-        optimized_routes = calculate_optimal_routes(
-            deliveries=deliveries,
-            conditions=current_conditions,
-            constraints={
-                "max_duration": 480,  # 8 hours
-                "temperature_variance": 1.5,
-                "priority_weight": 3
-            }
-        )
-        
-        # Record routes on blockchain
-        route_data = {
-            "routes": optimized_routes,
-            "conditions": current_conditions,
-            "metrics": calculate_route_metrics(optimized_routes),
-            "timestamp": datetime.now().isoformat()
-        }
-        agent.connection_manager.connections["sonic"].record_route_plan(route_data)
-        
-        return route_data
-    except Exception as e:
-        logger.error(f"Route optimization failed: {str(e)}")
-        return None
-
-# Shelf Life Management Actions
-@register_action("manage-shelf-life")
-def manage_shelf_life(agent, **kwargs):
-    """Track and predict product shelf life"""
-    try:
-        # Get current inventory status
-        inventory = agent.connection_manager.connections["sonic"].get_current_inventory()
-        
-        # Process each inventory item
-        shelf_life_data = {}
-        for item in inventory:
-            shelf_life_data[item["id"]] = {
-                "remaining_life": calculate_remaining_shelf_life(
-                    base_life=item["base_shelf_life"],
-                    temperature_history=item["temperature_history"],
-                    handling_events=item["handling_events"]
-                ),
-                "quality_score": calculate_quality_score(item),
-                "storage_recommendations": generate_storage_recommendations(item),
-                "priority_level": calculate_distribution_priority(item)
-            }
-        
-        # Update blockchain records
-        agent.connection_manager.connections["sonic"].update_shelf_life_data({
-            "shelf_life": shelf_life_data,
-            "timestamp": datetime.now().isoformat()
-        })
-        
-        return shelf_life_data
-    except Exception as e:
-        logger.error(f"Shelf life management failed: {str(e)}")
-        return None
-
-# Contract Execution Actions
-@register_action("execute-contracts")
-def execute_contracts(agent, **kwargs):
-    """Manage smart contracts on Sonic blockchain"""
-    try:
-        # Get pending contract actions
-        pending_actions = agent.connection_manager.connections["sonic"].get_pending_contract_actions()
-        
-        results = []
-        for action in pending_actions:
-            result = None
-            if action["type"] == "create_shipment":
-                result = create_shipment_contract(agent, action["data"])
-            elif action["type"] == "update_status":
-                result = update_shipment_status(agent, action["data"])
-            elif action["type"] == "complete_shipment":
-                result = complete_shipment(agent, action["data"])
-            elif action["type"] == "process_payment":
-                result = process_payment(agent, action["data"])
-            elif action["type"] == "handle_dispute":
-                result = handle_dispute(agent, action["data"])
-            
-            if result:
-                results.append({
-                    "action": action["type"],
-                    "result": result,
-                    "timestamp": datetime.now().isoformat()
-                })
-        
-        return results
-    except Exception as e:
-        logger.error(f"Contract execution failed: {str(e)}")
-        return None
-
-# Helper Functions
-def is_temperature_breach(reading):
-    """Check if temperature reading constitutes a breach"""
-    return (reading["temperature"] > reading["max_threshold"] or 
-            reading["temperature"] < reading["min_threshold"])
-
-def calculate_breach_duration(reading):
-    """Calculate duration of temperature breach"""
-    if "breach_start" not in reading:
-        return 0
-    start_time = datetime.fromisoformat(reading["breach_start"])
-    return (datetime.now() - start_time).total_seconds()
-
-def calculate_breach_severity(reading):
-    """Calculate severity of temperature breach"""
-    deviation = abs(reading["temperature"] - reading["target_temperature"])
-    duration = calculate_breach_duration(reading)
-    
-    if deviation > 5 or duration > 3600:  # 1 hour
-        return "critical"
-    elif deviation > 2 or duration > 1800:  # 30 minutes
-        return "warning"
-    return "minor"
-
-def initiate_emergency_protocol(agent, breach_data):
-    """Handle critical temperature breaches"""
-    # Notify stakeholders
-    notify_stakeholders(agent, breach_data)
-    # Adjust route if possible
-    adjust_route(agent, breach_data["shipment_id"])
-    # Update smart contract
-    update_shipment_status(agent, {
-        "shipment_id": breach_data["shipment_id"],
-        "status": "emergency",
-        "breach_data": breach_data
-    })
-
-def calculate_demand_forecast(historical_data, seasonal_factors, weather_data, events):
-    """Calculate demand forecast based on multiple factors"""
-    base_demand = calculate_base_demand(historical_data)
-    seasonal_adjustment = calculate_seasonal_adjustment(seasonal_factors)
-    weather_adjustment = calculate_weather_adjustment(weather_data)
-    event_adjustment = calculate_event_adjustment(events)
-    
-    return base_demand * seasonal_adjustment * weather_adjustment * event_adjustment
-
-def calculate_optimal_routes(deliveries, conditions, constraints):
-    """Calculate optimal delivery routes"""
-    # Implementation would include routing algorithm
-    # Consider temperature zones, time windows, and other constraints
-    return []
-
-def calculate_remaining_shelf_life(base_life, temperature_history, handling_events):
-    """Calculate remaining shelf life for a product"""
-    # Implementation would include shelf life calculation algorithm
-    return 0
-
-def create_shipment_contract(agent, data):
-    """Create a new shipment smart contract"""
-    try:
-        return agent.connection_manager.connections["sonic"].create_shipment(data)
-    except Exception as e:
-        logger.error(f"Failed to create shipment contract: {str(e)}")
-        return None
-
-def process_payment(agent, data):
-    """Process payment for completed shipment"""
-    try:
-        return agent.connection_manager.connections["sonic"].process_payment(data)
-    except Exception as e:
-        logger.error(f"Failed to process payment: {str(e)}")
-        return None
-
-def handle_dispute(agent, data):
-    """Handle dispute in shipment contract"""
-    try:
-        return agent.connection_manager.connections["sonic"].handle_dispute(data)
-    except Exception as e:
-        logger.error(f"Failed to handle dispute: {str(e)}")
-        return None
