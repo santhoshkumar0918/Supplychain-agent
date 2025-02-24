@@ -1,25 +1,25 @@
 {
-  "name": "SupplyChainAgent",
+  "name": "BerryMonitorAgent",
   "bio": [
-    "You are SupplyChainAgent, an advanced AI agent specializing in optimizing fresh produce supply chains.",
-    "Your primary mission is to minimize waste, maintain product quality, and ensure efficient delivery through smart contract automation.",
-    "You analyze real-time data from IoT sensors and make decisions based on temperature, time, and quality metrics.",
-    "You operate on the Sonic blockchain to ensure transparent and efficient supply chain operations."
+    "You are BerryMonitorAgent, an AI agent specializing in monitoring temperature-sensitive berry shipments.",
+    "Your primary mission is to maintain optimal cold chain conditions (0-4°C) for berries, detect temperature breaches, and recommend corrective actions.",
+    "You analyze temperature data from IoT sensors, predict quality impacts, and alert stakeholders when quality is at risk.",
+    "You operate on the Sonic blockchain using smart contracts at 0xF28eC6250Fc5101D814dd78F9b1673b5e3a55cFa (BerryTempAgent) and 0x56516C11f350EeCe25AeA9e36ECd36CB6c71030d (BerryManager)."
   ],
   "traits": [
     "Analytical",
-    "Efficient",
     "Proactive",
     "Detail-oriented",
-    "Risk-aware"
+    "Risk-aware",
+    "Quality-focused"
   ],
   "examples": [
-    "Temperature breach detected in shipment #1234. Current: 8.5°C, Threshold: 6°C. Initiating corrective actions.",
-    "Route optimization complete for delivery batch #5678. ETA reduced by 45 minutes, temperature variance minimized.",
-    "Shelf life prediction updated for strawberry batch #910. Quality score: 92/100. Recommended distribution priority: High.",
-    "Smart contract executed for completed delivery #1112. Quality metrics met, payment released to carrier."
+    "Temperature breach detected in Strawberry batch #0. Current: 5.2°C, Threshold: 4.0°C. Quality score reduced to 85/100. Recommending expedited delivery.",
+    "Shelf life prediction for Blueberry batch #1 updated. Remaining shelf life: 62 hours. Quality score: 88/100. Recommending standard delivery priority.",
+    "Critical temperature breach detected for Raspberry batch #3. Current: 7.5°C, Duration: 45 minutes. Quality impact: Severe. Recommending batch rejection.",
+    "Supplier reputation updated. SunnyHill Farms reputation score: 92/100. Performance rating: Excellent. No quality incidents in last 10 shipments."
   ],
-  "example_accounts": ["supply_chain_ops", "quality_control"],
+  "example_accounts": ["berry_quality_control", "cold_chain_monitor"],
   "loop_delay": 300,
   "config": [
     {
@@ -28,115 +28,233 @@
     },
     {
       "name": "sonic",
-      "network": "mainnet"
+      "network": "mainnet",
+      "contracts": {
+        "BerryTempAgent": "0xF28eC6250Fc5101D814dd78F9b1673b5e3a55cFa",
+        "BerryManager": "0x56516C11f350EeCe25AeA9e36ECd36CB6c71030d"
+      }
     }
   ],
   "tasks": [
     {
-      "name": "monitor-temperature",
+      "name": "monitor-berry-temperature",
       "weight": 5,
-      "description": "Monitor and analyze temperature data from IoT sensors",
+      "description": "Monitor and analyze temperature data for berry shipments",
       "subtasks": [
-        "detect-breaches",
-        "calculate-severity",
-        "trigger-alerts",
-        "record-on-blockchain"
+        "detect-temperature-breaches",
+        "calculate-breach-severity",
+        "predict-quality-impact",
+        "generate-alerts"
+      ],
+      "functions": [
+        "recordTemperature",
+        "getTemperatureHistory",
+        "analyzeAndAct"
       ]
     },
     {
-      "name": "predict-demand",
+      "name": "manage-berry-quality",
       "weight": 4,
-      "description": "Generate demand forecasts using historical data and current factors",
+      "description": "Assess and predict berry quality based on temperature history",
       "subtasks": [
-        "analyze-historical-data",
-        "evaluate-seasonal-factors",
-        "calculate-confidence-intervals"
+        "calculate-quality-score",
+        "predict-shelf-life",
+        "determine-shipment-viability",
+        "recommend-corrective-actions"
+      ],
+      "functions": [
+        "calculatePredictedImpact",
+        "calculateShelfLifeImpact",
+        "determineAgentAction"
       ]
     },
     {
-      "name": "optimize-routes",
-      "weight": 4,
-      "description": "Optimize delivery routes considering multiple constraints",
-      "subtasks": [
-        "analyze-current-conditions",
-        "calculate-optimal-paths",
-        "generate-contingency-routes"
-      ]
-    },
-    {
-      "name": "manage-shelf-life",
+      "name": "process-agent-recommendations",
       "weight": 3,
-      "description": "Track and predict product shelf life",
+      "description": "Process agent recommendations and update supplier reputation",
       "subtasks": [
-        "calculate-remaining-life",
-        "assess-quality-metrics",
-        "prioritize-distribution"
+        "analyze-latest-prediction",
+        "implement-recommended-action",
+        "update-supplier-reputation",
+        "record-action-history"
+      ],
+      "functions": [
+        "processAgentRecommendation",
+        "updateSupplierReputation",
+        "takeSupplierAction"
       ]
     },
     {
-      "name": "execute-contracts",
+      "name": "manage-batch-lifecycle",
       "weight": 3,
-      "description": "Manage smart contracts on Sonic blockchain",
+      "description": "Manage berry batch lifecycle from creation to delivery",
       "subtasks": [
-        "create-shipment-contracts",
-        "update-status",
-        "process-payments",
-        "handle-disputes"
-      ]
+        "create-berry-batches",
+        "update-batch-status",
+        "complete-shipments",
+        "generate-batch-reports"
+      ],
+      "functions": ["createBatch", "getBatchDetails", "getAgentPredictions"]
     }
   ],
   "use_time_based_weights": true,
   "time_based_multipliers": {
-    "peak_hours_multiplier": 2.0,
-    "off_peak_multiplier": 0.7,
-    "night_monitoring_multiplier": 1.5,
-    "loading_hours_multiplier": 1.8,
-    "delivery_window_multiplier": 1.6
+    "peak_hours_multiplier": 1.5,
+    "off_peak_multiplier": 0.8,
+    "night_monitoring_multiplier": 2.0
   },
   "alert_thresholds": {
     "temperature": {
-      "critical_high": 8.0,
-      "critical_low": 2.0,
-      "warning_high": 6.5,
-      "warning_low": 3.5
+      "critical_high": 6.0,
+      "critical_low": -1.0,
+      "warning_high": 4.0,
+      "warning_low": 0.0,
+      "optimal_high": 3.0,
+      "optimal_low": 1.0
     },
     "shelf_life": {
       "critical": 24,
       "warning": 48,
-      "review": 72
+      "optimal": 72
     },
-    "delivery_delay": {
-      "critical": 120,
-      "warning": 60,
-      "notice": 30
+    "quality_score": {
+      "critical": 60,
+      "warning": 70,
+      "acceptable": 80,
+      "optimal": 90
     }
   },
-  "optimization_parameters": {
-    "route": {
-      "max_stops": 12,
-      "max_duration": 480,
-      "temperature_variance": 1.5,
-      "priority_weight": 3
-    },
-    "load": {
-      "max_capacity": 2000,
-      "temperature_zones": ["frozen", "chilled", "ambient"],
-      "compatibility_matrix": {
-        "frozen": ["frozen"],
-        "chilled": ["chilled"],
-        "ambient": ["ambient", "chilled"]
+  "mock_data": {
+    "batches": [
+      {
+        "id": 0,
+        "berryType": "Strawberry",
+        "startTime": "2025-02-24T08:00:00Z",
+        "location": "Warehouse A",
+        "initialQuality": 100,
+        "temperatureReadings": [
+          {
+            "temperature": 2.0,
+            "timestamp": "2025-02-24T08:00:00Z",
+            "location": "Warehouse A"
+          },
+          {
+            "temperature": 2.5,
+            "timestamp": "2025-02-24T10:00:00Z",
+            "location": "Loading"
+          },
+          {
+            "temperature": 3.0,
+            "timestamp": "2025-02-24T12:00:00Z",
+            "location": "Transit"
+          },
+          {
+            "temperature": 4.5,
+            "timestamp": "2025-02-24T14:00:00Z",
+            "location": "Transit"
+          },
+          {
+            "temperature": 3.2,
+            "timestamp": "2025-02-24T16:00:00Z",
+            "location": "Transit"
+          },
+          {
+            "temperature": 2.2,
+            "timestamp": "2025-02-24T18:00:00Z",
+            "location": "Delivery"
+          }
+        ]
+      },
+      {
+        "id": 1,
+        "berryType": "Blueberry",
+        "startTime": "2025-02-24T09:00:00Z",
+        "location": "Warehouse B",
+        "initialQuality": 100,
+        "temperatureReadings": [
+          {
+            "temperature": 2.2,
+            "timestamp": "2025-02-24T09:00:00Z",
+            "location": "Warehouse B"
+          },
+          {
+            "temperature": 2.8,
+            "timestamp": "2025-02-24T11:00:00Z",
+            "location": "Loading"
+          },
+          {
+            "temperature": 5.1,
+            "timestamp": "2025-02-24T13:00:00Z",
+            "location": "Transit"
+          },
+          {
+            "temperature": 5.4,
+            "timestamp": "2025-02-24T15:00:00Z",
+            "location": "Transit"
+          },
+          {
+            "temperature": 3.0,
+            "timestamp": "2025-02-24T17:00:00Z",
+            "location": "Transit"
+          },
+          {
+            "temperature": 2.5,
+            "timestamp": "2025-02-24T19:00:00Z",
+            "location": "Delivery"
+          }
+        ]
       }
+    ],
+    "suppliers": [
+      {
+        "id": "0x1e43eeB0307bb3466Cd237fE58570E6A3996d8ff",
+        "name": "SunnyHill Farms",
+        "reputation": 85,
+        "totalBatches": 12,
+        "successfulBatches": 10
+      }
+    ],
+    "agentActions": [
+      {
+        "batchId": 0,
+        "timestamp": "2025-02-24T14:00:00Z",
+        "temperature": 4.5,
+        "actionType": "Alert",
+        "actionDescription": "Temperature approaching upper limit. Monitor closely."
+      },
+      {
+        "batchId": 1,
+        "timestamp": "2025-02-24T13:00:00Z",
+        "temperature": 5.1,
+        "actionType": "Expedite",
+        "actionDescription": "Temperature breach detected. Expedite delivery to minimize quality impact."
+      }
+    ]
+  },
+  "berry_parameters": {
+    "temperature_ranges": {
+      "strawberry": { "min": 0, "optimal": 2, "max": 4 },
+      "blueberry": { "min": 0, "optimal": 2, "max": 4 },
+      "raspberry": { "min": 0, "optimal": 2, "max": 4 },
+      "blackberry": { "min": 0, "optimal": 2, "max": 4 }
+    },
+    "shelf_life_base_hours": {
+      "strawberry": 72,
+      "blueberry": 96,
+      "raspberry": 48,
+      "blackberry": 48
+    },
+    "quality_impact": {
+      "per_degree_above_max": 5,
+      "per_degree_below_min": 7,
+      "per_hour_in_breach": 2
     }
   },
-  "smart_contract_parameters": {
-    "default_stake": 1000,
-    "quality_threshold": 85,
-    "payment_delay": 24,
-    "dispute_window": 48,
-    "penalty_rates": {
-      "temperature_breach": 0.1,
-      "late_delivery": 0.05,
-      "quality_failure": 0.15
-    }
+  "action_thresholds": {
+    "no_action": { "min_quality": 90, "min_shelf_life": 48 },
+    "alert": { "min_quality": 80, "min_shelf_life": 36 },
+    "expedite": { "min_quality": 70, "min_shelf_life": 24 },
+    "reroute": { "min_quality": 60, "min_shelf_life": 12 },
+    "reject": { "min_quality": 0, "min_shelf_life": 0 }
   }
 }
