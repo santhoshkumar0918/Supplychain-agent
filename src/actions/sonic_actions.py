@@ -1,11 +1,12 @@
 # src/actions/sonic_actions.py
+from src.action_handler import list_registered_actions
 import logging
 from dotenv import load_dotenv
 from src.action_handler import register_action
 from datetime import datetime, timedelta
 import json
 
-logger = logging.getLogger("actions.berry_sonic_actions")
+logger = logging.getLogger("actions.sonic_actions")
 
 # Constants for berry temperature monitoring
 BERRY_TEMP_AGENT_ADDRESS = "0xF28eC6250Fc5101D814dd78F9b1673b5e3a55cFa"
