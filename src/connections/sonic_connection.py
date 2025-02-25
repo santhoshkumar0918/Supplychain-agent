@@ -271,7 +271,7 @@ class SonicConnection(BaseConnection):
             if not private_key:
                 raise SonicConnectionError("Missing SONIC_PRIVATE_KEY in .env")
                 
-            account = self._web3.eth.account.from_key(private_key)
+            account = self._web3.s.account.from_key(private_key)
             self.account = account  # Make account accessible for other methods
             
             # Extract parameters from tx_data
