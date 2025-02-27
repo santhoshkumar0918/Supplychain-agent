@@ -52,10 +52,12 @@ async def monitor_berry_temperature(agent, **kwargs):
             "contract_address": BERRY_TEMP_AGENT_ADDRESS,
             "method": "recordTemperature",
             "args": [batch_id, int(temperature * 10), location],
-            "gas_limit": 200000
+            "gas_limit": 300000  # Increased gas limit
         }
         
-        tx_result = await agent.connection_manager.connections["sonic"].send_transaction(tx_data)
+        # Fix: Don't use await if send_transaction doesn't return a coroutine
+        sonic_connection = agent.connection_manager.connections["sonic"]
+        tx_result = sonic_connection.send_transaction(tx_data)
         logger.info(f"Temperature recording transaction: {tx_result}")
         
         # Check for breaches
@@ -103,11 +105,12 @@ async def manage_berry_quality(agent, **kwargs):
         tx_data = {
             "contract_address": BERRY_TEMP_AGENT_ADDRESS,
             "method": "getTemperatureHistory",
-            "args": [batch_id],
-            "gas_limit": 100000
+            "args": [batch_id]
         }
         
-        temp_history = await agent.connection_manager.connections["sonic"].call_contract(tx_data)
+        # Fix: Don't use await if call_contract doesn't return a coroutine
+        sonic_connection = agent.connection_manager.connections["sonic"]
+        temp_history = sonic_connection.call_contract(tx_data)
         
         # If no history available, use mock data
         if not temp_history or len(temp_history) == 0:
@@ -141,7 +144,12 @@ async def manage_berry_quality(agent, **kwargs):
         shelf_life_hours = 72  # Default 3-day shelf life for berries
         
         for reading in temp_history:
-            temp = reading.get("temperature", 0)
+            # Handle both dict and list formats
+            if isinstance(reading, dict):
+                temp = reading.get("temperature", 0)
+            else:  # Assume list format from contract
+                temp = reading[1] / 10.0  # Contract stores temp * 10
+                
             if isinstance(temp, str):
                 temp = float(temp)
                 
@@ -209,7 +217,7 @@ async def process_agent_recommendations(agent, **kwargs):
         
         # If quality score not provided, fetch from previous action or use default
         if quality_score is None:
-            # Call the quality management function
+            # Call the quality management function without await
             quality_result = await manage_berry_quality(agent, batch_id=batch_id)
             quality_score = quality_result.get("quality_score", 80)
             recommended_action = quality_result.get("recommended_action", "No Action")
@@ -219,21 +227,23 @@ async def process_agent_recommendations(agent, **kwargs):
             "contract_address": BERRY_MANAGER_ADDRESS,
             "method": "processAgentRecommendation",
             "args": [batch_id],
-            "gas_limit": 300000
+            "gas_limit": 500000  # Increased gas limit
         }
         
-        tx_result = await agent.connection_manager.connections["sonic"].send_transaction(tx_data)
+        # Fix: Don't use await if send_transaction doesn't return a coroutine
+        sonic_connection = agent.connection_manager.connections["sonic"]
+        tx_result = sonic_connection.send_transaction(tx_data)
         logger.info(f"Recommendation processing transaction: {tx_result}")
         
         # Get supplier details
         supplier_tx_data = {
             "contract_address": BERRY_MANAGER_ADDRESS,
             "method": "getSupplierDetails",
-            "args": [agent.connection_manager.connections["sonic"].account.address],
-            "gas_limit": 100000
+            "args": [sonic_connection.account.address]
         }
         
-        supplier_details = await agent.connection_manager.connections["sonic"].call_contract(supplier_tx_data)
+        # Fix: Don't use await if call_contract doesn't return a coroutine
+        supplier_details = sonic_connection.call_contract(supplier_tx_data)
         
         # If no details available, use mock data
         if not supplier_details:
@@ -242,6 +252,17 @@ async def process_agent_recommendations(agent, **kwargs):
                 "totalBatches": 12,
                 "successfulBatches": 10
             }
+        else:
+            # Convert list to dict if needed
+            if isinstance(supplier_details, list):
+                supplier_details = {
+                    "account": supplier_details[0],
+                    "isRegistered": supplier_details[1],
+                    "reputation": supplier_details[2],
+                    "totalBatches": supplier_details[3],
+                    "successfulBatches": supplier_details[4],
+                    "lastActionTime": supplier_details[5]
+                }
         
         # Calculate supplier action based on quality
         supplier_action = "None"
@@ -281,27 +302,31 @@ async def manage_batch_lifecycle(agent, **kwargs):
         berry_type = kwargs.get("berry_type", "Strawberry")
         batch_id = kwargs.get("batch_id", 0)
         
+        # Get Sonic connection
+        sonic_connection = agent.connection_manager.connections["sonic"]
+        
         if action == "create":
             # Create a new batch
             tx_data = {
                 "contract_address": BERRY_TEMP_AGENT_ADDRESS,
                 "method": "createBatch",
                 "args": [berry_type],
-                "gas_limit": 200000
+                "gas_limit": 300000  # Increased gas limit
             }
             
-            tx_result = await agent.connection_manager.connections["sonic"].send_transaction(tx_data)
+            # Fix: Don't use await if send_transaction doesn't return a coroutine
+            tx_result = sonic_connection.send_transaction(tx_data)
             logger.info(f"Batch creation transaction: {tx_result}")
             
             # Get the batch count to determine the new batch ID
             count_tx_data = {
                 "contract_address": BERRY_TEMP_AGENT_ADDRESS,
                 "method": "batchCount",
-                "args": [],
-                "gas_limit": 100000
+                "args": []
             }
             
-            batch_count = await agent.connection_manager.connections["sonic"].call_contract(count_tx_data)
+            # Fix: Don't use await if call_contract doesn't return a coroutine
+            batch_count = sonic_connection.call_contract(count_tx_data)
             if batch_count:
                 batch_id = int(batch_count) - 1
                 
@@ -319,10 +344,11 @@ async def manage_batch_lifecycle(agent, **kwargs):
                 "contract_address": BERRY_MANAGER_ADDRESS,
                 "method": "completeShipment",
                 "args": [batch_id],
-                "gas_limit": 300000
+                "gas_limit": 400000  # Increased gas limit
             }
             
-            tx_result = await agent.connection_manager.connections["sonic"].send_transaction(tx_data)
+            # Fix: Don't use await if send_transaction doesn't return a coroutine
+            tx_result = sonic_connection.send_transaction(tx_data)
             logger.info(f"Shipment completion transaction: {tx_result}")
             
             return {
@@ -337,11 +363,11 @@ async def manage_batch_lifecycle(agent, **kwargs):
             tx_data = {
                 "contract_address": BERRY_TEMP_AGENT_ADDRESS,
                 "method": "getBatchDetails",
-                "args": [batch_id],
-                "gas_limit": 100000
+                "args": [batch_id]
             }
             
-            batch_details = await agent.connection_manager.connections["sonic"].call_contract(tx_data)
+            # Fix: Don't use await if call_contract doesn't return a coroutine
+            batch_details = sonic_connection.call_contract(tx_data)
             
             # If no details available, use mock data
             if not batch_details:
@@ -353,6 +379,19 @@ async def manage_batch_lifecycle(agent, **kwargs):
                     "qualityScore": 85,
                     "predictedShelfLife": 60 * 60 * 60  # 60 hours in seconds
                 }
+            else:
+                # Convert list to dict if needed
+                if isinstance(batch_details, list):
+                    batch_details = {
+                        "batchId": batch_details[0],
+                        "berryType": batch_details[1],
+                        "startTime": batch_details[2],
+                        "endTime": batch_details[3],
+                        "isActive": batch_details[4],
+                        "status": batch_details[5],
+                        "qualityScore": batch_details[6],
+                        "predictedShelfLife": batch_details[7]
+                    }
             
             status_map = {
                 0: "Created",

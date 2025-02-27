@@ -28,7 +28,8 @@
     },
     {
       "name": "sonic",
-      "network": "mainnet",
+      "network": "testnet",
+      "use mock mode": true,
       "contracts": {
         "BerryTempAgent": "0xF28eC6250Fc5101D814dd78F9b1673b5e3a55cFa",
         "BerryManager": "0x56516C11f350EeCe25AeA9e36ECd36CB6c71030d"
