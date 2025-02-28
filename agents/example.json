@@ -20,7 +20,7 @@
     "Supplier reputation updated. SunnyHill Farms reputation score: 92/100. Performance rating: Excellent. No quality incidents in last 10 shipments."
   ],
   "example_accounts": ["berry_quality_control", "cold_chain_monitor"],
-  "loop_delay": 300,
+  "loop_delay": 10,
   "config": [
     {
       "name": "anthropic",

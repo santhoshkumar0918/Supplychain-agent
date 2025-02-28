@@ -247,15 +247,15 @@ async def process_agent_recommendations(agent, **kwargs):
         
         # If no details available, use mock data
         if not supplier_details:
-            supplier_details = {
+            supplier_details_dict = {
                 "reputation": 85,
                 "totalBatches": 12,
                 "successfulBatches": 10
             }
         else:
-            # Convert list to dict if needed
-            if isinstance(supplier_details, list):
-                supplier_details = {
+            # Convert list or tuple to dict if needed
+            if isinstance(supplier_details, (list, tuple)):
+                supplier_details_dict = {
                     "account": supplier_details[0],
                     "isRegistered": supplier_details[1],
                     "reputation": supplier_details[2],
@@ -263,6 +263,8 @@ async def process_agent_recommendations(agent, **kwargs):
                     "successfulBatches": supplier_details[4],
                     "lastActionTime": supplier_details[5]
                 }
+            else:
+                supplier_details_dict = supplier_details  # If it's already a dict
         
         # Calculate supplier action based on quality
         supplier_action = "None"
@@ -277,9 +279,9 @@ async def process_agent_recommendations(agent, **kwargs):
             "batch_id": batch_id,
             "quality_score": quality_score,
             "recommended_action": recommended_action,
-            "supplier_reputation": supplier_details.get("reputation", 85),
-            "total_batches": supplier_details.get("totalBatches", 12),
-            "successful_batches": supplier_details.get("successfulBatches", 10),
+            "supplier_reputation": supplier_details_dict.get("reputation", 85),
+            "total_batches": supplier_details_dict.get("totalBatches", 12),
+            "successful_batches": supplier_details_dict.get("successfulBatches", 10),
             "supplier_action": supplier_action,
             "timestamp": datetime.now().isoformat()
         }
@@ -371,7 +373,7 @@ async def manage_batch_lifecycle(agent, **kwargs):
             
             # If no details available, use mock data
             if not batch_details:
-                batch_details = {
+                batch_details_dict = {
                     "batchId": batch_id,
                     "berryType": berry_type,
                     "startTime": (datetime.now() - timedelta(hours=24)).timestamp(),
@@ -380,9 +382,9 @@ async def manage_batch_lifecycle(agent, **kwargs):
                     "predictedShelfLife": 60 * 60 * 60  # 60 hours in seconds
                 }
             else:
-                # Convert list to dict if needed
-                if isinstance(batch_details, list):
-                    batch_details = {
+                # Convert list or tuple to dict if needed
+                if isinstance(batch_details, (list, tuple)):
+                    batch_details_dict = {
                         "batchId": batch_details[0],
                         "berryType": batch_details[1],
                         "startTime": batch_details[2],
@@ -392,6 +394,8 @@ async def manage_batch_lifecycle(agent, **kwargs):
                         "qualityScore": batch_details[6],
                         "predictedShelfLife": batch_details[7]
                     }
+                else:
+                    batch_details_dict = batch_details  # If it's already a dict
             
             status_map = {
                 0: "Created",
@@ -400,16 +404,16 @@ async def manage_batch_lifecycle(agent, **kwargs):
                 3: "Rejected"
             }
             
-            current_status = status_map.get(batch_details.get("status", 1), "InTransit")
+            current_status = status_map.get(batch_details_dict.get("status", 1), "InTransit")
             
             return {
                 "status": "completed",
                 "action": "status",
                 "batch_id": batch_id,
-                "berry_type": batch_details.get("berryType", berry_type),
+                "berry_type": batch_details_dict.get("berryType", berry_type),
                 "batch_status": current_status,
-                "quality_score": batch_details.get("qualityScore", 85),
-                "predicted_shelf_life_hours": batch_details.get("predictedShelfLife", 60 * 60 * 60) / 3600,
+                "quality_score": batch_details_dict.get("qualityScore", 85),
+                "predicted_shelf_life_hours": batch_details_dict.get("predictedShelfLife", 60 * 60 * 60) / 3600,
                 "timestamp": datetime.now().isoformat()
             }
         

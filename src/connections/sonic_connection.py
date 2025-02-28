@@ -140,6 +140,20 @@ class SonicConnection(BaseConnection):
             self.berry_temp_agent = None
             self.berry_manager = None
 
+    def get_optimal_gas_price(self):
+        """Get optimal gas price for Sonic Blaze Testnet"""
+        # Set a minimum gas price high enough to avoid "underpriced" errors
+        # For Sonic Blaze Testnet, 10 gwei seems to be the minimum
+        minimum_gas_price = self._web3.to_wei(10, 'gwei')
+        
+        # Get current network gas price
+        network_gas_price = self._web3.eth.gas_price
+        
+        # Use the higher of the two values
+        optimal_price = max(minimum_gas_price, network_gas_price * 2)
+        logger.info(f"Using gas price: {self._web3.from_wei(optimal_price, 'gwei')} gwei")
+        return optimal_price
+
     def _estimate_transaction_gas(self, tx_params, contract_func, args):
         """Estimate gas for a transaction and check if enough balance is available"""
         try:
@@ -149,8 +163,8 @@ class SonicConnection(BaseConnection):
             # Estimate gas with a 20% buffer
             estimated_gas = int(self._web3.eth.estimate_gas(tx_for_estimate) * 1.2)
             
-            # Get current gas price (use a slightly lower value for testnet)
-            gas_price = int(self._web3.eth.gas_price * 0.95)
+            # Get optimal gas price
+            gas_price = self.get_optimal_gas_price()
             
             # Calculate total cost
             total_cost = estimated_gas * gas_price
@@ -177,7 +191,7 @@ class SonicConnection(BaseConnection):
             return {
                 "has_funds": True,  # Assume funds are available if estimation fails
                 "gas_limit": 500000,  # Higher default gas limit for safety
-                "gas_price": self._web3.eth.gas_price,
+                "gas_price": self.get_optimal_gas_price(),
                 "total_cost": 0,
                 "balance": 0
             }
@@ -400,8 +414,8 @@ class SonicConnection(BaseConnection):
                 # Update transaction parameters with gas settings
                 # Increase gas limit with each retry
                 gas_limit = int(gas_info["gas_limit"] * (1 + (retry_count * 0.2)))
-                # Reduce gas price slightly with each retry
-                gas_price = int(gas_info["gas_price"] * (1 - (retry_count * 0.05)))
+                # Use optimal gas price
+                gas_price = self.get_optimal_gas_price()
                 
                 tx_params.update({
                     'gas': gas_limit,
