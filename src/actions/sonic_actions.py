@@ -259,6 +259,7 @@ async def monitor_berry_temperature(agent, **kwargs):
                 breach_severity = "Minor"
             
             # Update breach metrics
+           
             update_health_metrics("temperature_breach", True, {
                 "batch_id": batch_id,
                 "temperature": temperature,

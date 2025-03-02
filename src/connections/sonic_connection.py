@@ -20,8 +20,9 @@ file_handler.setFormatter(logging.Formatter("%(asctime)s - %(levelname)s - %(nam
 logger.addHandler(file_handler)
 
 # Contract addresses
-BERRY_TEMP_AGENT_ADDRESS = "0xF28eC6250Fc5101D814dd78F9b1673b5e3a55cFa"
-BERRY_MANAGER_ADDRESS = "0x56516C11f350EeCe25AeA9e36ECd36CB6c71030d"
+BERRY_TEMP_AGENT_ADDRESS = "0x0670F34eA61de9d6152bD998C98087100CE64090"
+BERRY_MANAGER_ADDRESS = "0x2c6Aa1fEAdE5D65e7f4D2FA597E926f6A19f1545"
+
 
 # Transaction history storage
 transaction_history = []
@@ -351,13 +352,21 @@ class SonicConnection(BaseConnection):
            return int(estimated_gas * 1.2)  # 20% buffer
         except Exception as e:
            logger.warning(f"Gas estimation failed: {e}, using safe default")
-           # Use higher default for processAgentRecommendation which is failing
-           if hasattr(contract_func, "__name__") and contract_func.__name__ == "processAgentRecommendation":
-               return 500000
+           # Use higher default gas limits based on method
+           if hasattr(contract_func, "__name__"):
+               method_name = contract_func.__name__
+               # Give processAgentRecommendation a higher gas limit due to known issues
+               if "processAgentRecommendation" in method_name:
+                   logger.info(f"Using high gas limit (500000) for {method_name} due to known issues")
+                   return 500000
+               elif "create" in method_name.lower():
+                   return 200000
+               elif "process" in method_name.lower():
+                   return 300000
+               elif "complete" in method_name.lower():
+                   return 400000
            return 300000  # Safe default for other functions
     
-    
-
     def _estimate_transaction_gas(self, tx_params, contract_func, args):
         """Estimate gas for a transaction and check if enough balance is available with better error handling"""
         try:
@@ -372,21 +381,28 @@ class SonicConnection(BaseConnection):
                 estimated_gas = int(base_estimate * 1.2)  # 20% buffer
                 logger.debug(f"Base gas estimate: {base_estimate}, with buffer: {estimated_gas}")
             except Exception as e:
-                logger.warning(f"Gas estimation failed: {e}, using safe default")
-                # Use a safe default based on transaction type
-                method_name = contract_func.__name__ if hasattr(contract_func, "__name__") else "unknown"
-                
-                # Set default gas limits based on method
-                if "create" in method_name.lower():
-                    estimated_gas = 200000
-                elif "process" in method_name.lower():
-                    estimated_gas = 300000
-                elif "complete" in method_name.lower():
-                    estimated_gas = 400000
+                # Check specifically for the arithmetic overflow/underflow error
+                if "Panic error 0x11: Arithmetic operation" in str(e):
+                    logger.warning(f"Arithmetic overflow/underflow detected: {e}, using high gas limit")
+                    method_name = contract_func.__name__ if hasattr(contract_func, "__name__") else "unknown"
+                    logger.info(f"Setting high gas limit (600000) for {method_name} due to arithmetic error")
+                    estimated_gas = 600000
                 else:
-                    estimated_gas = 500000  # Higher default for unknown methods
-                
-                logger.info(f"Using default gas limit for {method_name}: {estimated_gas}")
+                    logger.warning(f"Gas estimation failed: {e}, using safe default")
+                    # Use a safe default based on transaction type
+                    method_name = contract_func.__name__ if hasattr(contract_func, "__name__") else "unknown"
+                    
+                    # Set default gas limits based on method
+                    if "create" in method_name.lower():
+                        estimated_gas = 200000
+                    elif "process" in method_name.lower():
+                        estimated_gas = 300000
+                    elif "complete" in method_name.lower():
+                        estimated_gas = 400000
+                    else:
+                        estimated_gas = 500000  # Higher default for unknown methods
+                    
+                    logger.info(f"Using default gas limit for {method_name}: {estimated_gas}")
             
             # Get optimal gas price
             gas_price = self.get_optimal_gas_price()
@@ -662,6 +678,23 @@ class SonicConnection(BaseConnection):
                 method = tx_data.get("method")
                 args = tx_data.get("args", [])
                 
+                # Special handling for processAgentRecommendation to prevent arithmetic errors
+                if method == "processAgentRecommendation" and len(args) > 0:
+                    batch_id = args[0]
+                    # Check if batch has predictions before proceeding
+                    try:
+                        predictions = self.get_agent_predictions(batch_id)
+                        if not predictions:
+                            logger.warning(f"No predictions found for batch {batch_id}, skipping processAgentRecommendation")
+                            return {
+                                "success": False,
+                                "error": "No predictions available for this batch",
+                                "batch_id": batch_id
+                            }
+                    except Exception as e:
+                        logger.warning(f"Could not check predictions: {e}")
+                        # Continue with the transaction anyway, as it will be handled in the contract
+                        
                 # Get contract instance
                 contract = None
                 if contract_address == BERRY_TEMP_AGENT_ADDRESS:
@@ -1072,7 +1105,7 @@ class SonicConnection(BaseConnection):
                 "contract_address": BERRY_TEMP_AGENT_ADDRESS,
                 "method": "recordTemperature",
                 "args": [batch_id, temperature, location],
-                "gas_limit": 300000
+                "gas_limit": 450000
             }
             
             result = self.send_transaction(tx_data)
@@ -1093,7 +1126,7 @@ class SonicConnection(BaseConnection):
                 "temperature": temperature,
                 "location": location
             }
-        def get_batch_details(self, batch_id: int) -> Dict[str, Any]:
+    def get_batch_details(self, batch_id: int) -> Dict[str, Any]:
             """Get details for a berry batch"""
             if self.use_mock_mode:
                 logger.info(f"MOCK MODE: Getting details for batch {batch_id}")
@@ -1305,6 +1338,16 @@ class SonicConnection(BaseConnection):
                 if not register_result.get("success", False):
                     raise SonicConnectionError("Failed to register supplier before processing recommendation")
             
+            # Check if batch has predictions before proceeding
+            predictions = self.get_agent_predictions(batch_id)
+            if not predictions:
+                logger.warning(f"No predictions found for batch {batch_id}, skipping processAgentRecommendation")
+                return {
+                    "success": False,
+                    "error": "No predictions available for this batch",
+                    "batch_id": batch_id
+                }
+            
             # Use send_transaction method with proper gas handling
             tx_data = {
                 "contract_address": BERRY_MANAGER_ADDRESS,
@@ -1420,7 +1463,7 @@ class SonicConnection(BaseConnection):
                 "error": str(e),
                 "batch_id": batch_id
             }
-    
+   
     # Action handler methods with improved error handling
     def monitor_berry_temperature(self, **kwargs) -> Dict[str, Any]:
         """Monitor and analyze temperature data for berry shipments"""
