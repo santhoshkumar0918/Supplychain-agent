@@ -1731,3 +1731,325 @@ Traceback (most recent call last):
 TypeError: unsupported operand type(s) for +=: 'int' and 'dict'
 2025-03-02 12:41:03,700 - INFO - actions.sonic_actions - Alert would be sent (alerting disabled): action_failure - Temperature monitoring failed for batch 0: unsupported operand type(s) for +=: 'int' and 'dict'
 2025-03-02 12:43:26,333 - INFO - actions.sonic_actions - Managing batch lifecycle...
+2025-03-02 12:49:31,587 - INFO - actions.sonic_actions - Starting batch sequence management...
+2025-03-02 12:49:31,588 - INFO - actions.sonic_actions - Step 1: Creating new batch for Strawberry
+2025-03-02 12:49:31,588 - INFO - actions.sonic_actions - Managing batch lifecycle...
+2025-03-02 12:49:37,638 - INFO - actions.sonic_actions - Batch creation transaction: {'success': False, 'error': '("The function \'createBatch\' was not found in this contract\'s abi.", \' Are you sure you provided the correct contract abi?\')', 'method': 'createBatch', 'execution_time': 6.049556732177734}
+2025-03-02 12:49:37,648 - ERROR - actions.sonic_actions - Batch lifecycle management failed: Method batchCount not found on contract
+Traceback (most recent call last):
+  File "/home/santhoshkumar/Supplai/Supllychain-agent/src/connections/sonic_connection.py", line 987, in call_contract
+    contract_function = getattr(contract.functions, method)
+  File "/home/santhoshkumar/.cache/pypoetry/virtualenvs/zerepy-v00vExBy-py3.13/lib/python3.13/site-packages/web3/contract/contract.py", line 421, in __getattr__
+    raise ABIFunctionNotFound(
+    ...<2 lines>...
+    )
+web3.exceptions.ABIFunctionNotFound: ("The function 'batchCount' was not found in this contract's abi.", ' Are you sure you provided the correct contract abi?')
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/santhoshkumar/Supplai/Supllychain-agent/src/actions/sonic_actions.py", line 791, in manage_batch_lifecycle
+    batch_count = sonic_connection.call_contract(count_tx_data)
+  File "/home/santhoshkumar/Supplai/Supllychain-agent/src/connections/sonic_connection.py", line 990, in call_contract
+    raise SonicConnectionError(f"Method {method} not found on contract") from e
+src.connections.sonic_connection.SonicConnectionError: Method batchCount not found on contract
+2025-03-02 12:49:37,650 - INFO - actions.sonic_actions - Alert would be sent (alerting disabled): action_failure - Batch lifecycle management failed for action create, batch 0: Method batchCount not found on contract
+2025-03-02 12:49:37,650 - ERROR - actions.sonic_actions - Batch sequence management failed: Failed to create batch: Method batchCount not found on contract
+Traceback (most recent call last):
+  File "/home/santhoshkumar/Supplai/Supllychain-agent/src/actions/sonic_actions.py", line 1157, in manage_batch_sequence
+    raise Exception(f"Failed to create batch: {create_result.get('error', 'Unknown error')}")
+Exception: Failed to create batch: Method batchCount not found on contract
+2025-03-02 12:49:37,651 - INFO - actions.sonic_actions - Alert would be sent (alerting disabled): action_failure - Batch sequence management failed: Failed to create batch: Method batchCount not found on contract
+2025-03-02 12:49:43,652 - INFO - actions.sonic_actions - Starting berry quality assessment...
+2025-03-02 12:49:43,661 - ERROR - actions.sonic_actions - Berry quality management failed: Method getTemperatureHistory not found on contract
+Traceback (most recent call last):
+  File "/home/santhoshkumar/Supplai/Supllychain-agent/src/connections/sonic_connection.py", line 987, in call_contract
+    contract_function = getattr(contract.functions, method)
+  File "/home/santhoshkumar/.cache/pypoetry/virtualenvs/zerepy-v00vExBy-py3.13/lib/python3.13/site-packages/web3/contract/contract.py", line 421, in __getattr__
+    raise ABIFunctionNotFound(
+    ...<2 lines>...
+    )
+web3.exceptions.ABIFunctionNotFound: ("The function 'getTemperatureHistory' was not found in this contract's abi.", ' Are you sure you provided the correct contract abi?')
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/santhoshkumar/Supplai/Supllychain-agent/src/actions/sonic_actions.py", line 426, in manage_berry_quality
+    temp_history = sonic_connection.call_contract(tx_data)
+  File "/home/santhoshkumar/Supplai/Supllychain-agent/src/connections/sonic_connection.py", line 990, in call_contract
+    raise SonicConnectionError(f"Method {method} not found on contract") from e
+src.connections.sonic_connection.SonicConnectionError: Method getTemperatureHistory not found on contract
+2025-03-02 12:49:43,663 - INFO - actions.sonic_actions - Alert would be sent (alerting disabled): action_failure - Quality assessment failed for batch 0: Method getTemperatureHistory not found on contract
+2025-03-02 17:15:36,833 - INFO - actions.sonic_actions - Processing agent recommendations...
+2025-03-02 17:15:36,841 - INFO - actions.sonic_actions - [Batch #0] Quality score not provided, fetching from quality management
+2025-03-02 17:15:36,841 - INFO - actions.sonic_actions - Starting berry quality assessment...
+2025-03-02 17:15:36,859 - ERROR - actions.sonic_actions - Berry quality management failed: Method getTemperatureHistory not found on contract
+Traceback (most recent call last):
+  File "/home/santhoshkumar/Supplai/Supllychain-agent/src/connections/sonic_connection.py", line 1064, in call_contract
+    contract_function = getattr(contract.functions, method)
+  File "/home/santhoshkumar/.cache/pypoetry/virtualenvs/zerepy-v00vExBy-py3.13/lib/python3.13/site-packages/web3/contract/contract.py", line 421, in __getattr__
+    raise ABIFunctionNotFound(
+    ...<2 lines>...
+    )
+web3.exceptions.ABIFunctionNotFound: ("The function 'getTemperatureHistory' was not found in this contract's abi.", ' Are you sure you provided the correct contract abi?')
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/santhoshkumar/Supplai/Supllychain-agent/src/actions/sonic_actions.py", line 426, in manage_berry_quality
+    temp_history = sonic_connection.call_contract(tx_data)
+  File "/home/santhoshkumar/Supplai/Supllychain-agent/src/connections/sonic_connection.py", line 1067, in call_contract
+    raise SonicConnectionError(f"Method {method} not found on contract") from e
+src.connections.sonic_connection.SonicConnectionError: Method getTemperatureHistory not found on contract
+2025-03-02 17:15:36,862 - INFO - actions.sonic_actions - Alert would be sent (alerting disabled): action_failure - Quality assessment failed for batch 0: Method getTemperatureHistory not found on contract
+2025-03-02 17:15:36,862 - INFO - actions.sonic_actions - [Batch #0] Fetched quality score: 80, action: No Action
+2025-03-02 17:15:37,699 - INFO - actions.sonic_actions - [Batch #0] Recommendation processing transaction: {'success': False, 'error': 'No predictions available for this batch', 'batch_id': 0}
+2025-03-02 17:15:37,712 - ERROR - actions.sonic_actions - Process agent recommendations failed: Method getSupplierDetails not found on contract
+Traceback (most recent call last):
+  File "/home/santhoshkumar/Supplai/Supllychain-agent/src/connections/sonic_connection.py", line 1064, in call_contract
+    contract_function = getattr(contract.functions, method)
+  File "/home/santhoshkumar/.cache/pypoetry/virtualenvs/zerepy-v00vExBy-py3.13/lib/python3.13/site-packages/web3/contract/contract.py", line 421, in __getattr__
+    raise ABIFunctionNotFound(
+    ...<2 lines>...
+    )
+web3.exceptions.ABIFunctionNotFound: ("The function 'getSupplierDetails' was not found in this contract's abi.", ' Are you sure you provided the correct contract abi?')
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/santhoshkumar/Supplai/Supllychain-agent/src/actions/sonic_actions.py", line 657, in process_agent_recommendations
+    supplier_details = sonic_connection.call_contract(supplier_tx_data)
+  File "/home/santhoshkumar/Supplai/Supllychain-agent/src/connections/sonic_connection.py", line 1067, in call_contract
+    raise SonicConnectionError(f"Method {method} not found on contract") from e
+src.connections.sonic_connection.SonicConnectionError: Method getSupplierDetails not found on contract
+2025-03-02 17:15:37,714 - INFO - actions.sonic_actions - Alert would be sent (alerting disabled): action_failure - Recommendation processing failed for batch 0: Method getSupplierDetails not found on contract
+2025-03-02 17:15:43,715 - INFO - actions.sonic_actions - Starting berry temperature monitoring...
+2025-03-02 17:15:43,715 - INFO - actions.sonic_actions - [Batch #0] Using mock temperature data: 3.1°C
+2025-03-02 17:15:43,715 - INFO - actions.sonic_actions - [Batch #0] Auto-determined location: Transport
+2025-03-02 17:15:43,715 - INFO - actions.sonic_actions - [Batch #0] Recording temperature 3.1°C at Transport
+2025-03-02 17:15:49,757 - INFO - actions.sonic_actions - [Batch #0] Temperature recording transaction: {'success': False, 'error': '("The function \'recordTemperature\' was not found in this contract\'s abi.", \' Are you sure you provided the correct contract abi?\')', 'method': 'recordTemperature', 'execution_time': 6.041223049163818}
+2025-03-02 17:15:49,757 - INFO - actions.sonic_actions - [Batch #0] Temperature monitoring completed in 6.04 seconds
+2025-03-02 17:20:50,872 - INFO - actions.sonic_actions - Managing batch lifecycle...
+2025-03-02 17:20:56,917 - INFO - actions.sonic_actions - Batch creation transaction: {'success': False, 'error': '("The function \'createBatch\' was not found in this contract\'s abi.", \' Are you sure you provided the correct contract abi?\')', 'method': 'createBatch', 'execution_time': 6.044467926025391}
+2025-03-02 17:20:56,926 - ERROR - actions.sonic_actions - Batch lifecycle management failed: Method batchCount not found on contract
+Traceback (most recent call last):
+  File "/home/santhoshkumar/Supplai/Supllychain-agent/src/connections/sonic_connection.py", line 1064, in call_contract
+    contract_function = getattr(contract.functions, method)
+  File "/home/santhoshkumar/.cache/pypoetry/virtualenvs/zerepy-v00vExBy-py3.13/lib/python3.13/site-packages/web3/contract/contract.py", line 421, in __getattr__
+    raise ABIFunctionNotFound(
+    ...<2 lines>...
+    )
+web3.exceptions.ABIFunctionNotFound: ("The function 'batchCount' was not found in this contract's abi.", ' Are you sure you provided the correct contract abi?')
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/santhoshkumar/Supplai/Supllychain-agent/src/actions/sonic_actions.py", line 791, in manage_batch_lifecycle
+    batch_count = sonic_connection.call_contract(count_tx_data)
+  File "/home/santhoshkumar/Supplai/Supllychain-agent/src/connections/sonic_connection.py", line 1067, in call_contract
+    raise SonicConnectionError(f"Method {method} not found on contract") from e
+src.connections.sonic_connection.SonicConnectionError: Method batchCount not found on contract
+2025-03-02 17:20:56,930 - INFO - actions.sonic_actions - Alert would be sent (alerting disabled): action_failure - Batch lifecycle management failed for action unknown, batch 0: Method batchCount not found on contract
+2025-03-02 17:21:02,931 - INFO - actions.sonic_actions - Starting batch sequence management...
+2025-03-02 17:21:02,931 - INFO - actions.sonic_actions - Step 1: Creating new batch for Strawberry
+2025-03-02 17:21:02,931 - INFO - actions.sonic_actions - Managing batch lifecycle...
+2025-03-02 17:21:08,974 - INFO - actions.sonic_actions - Batch creation transaction: {'success': False, 'error': '("The function \'createBatch\' was not found in this contract\'s abi.", \' Are you sure you provided the correct contract abi?\')', 'method': 'createBatch', 'execution_time': 6.043080806732178}
+2025-03-02 17:21:08,982 - ERROR - actions.sonic_actions - Batch lifecycle management failed: Method batchCount not found on contract
+Traceback (most recent call last):
+  File "/home/santhoshkumar/Supplai/Supllychain-agent/src/connections/sonic_connection.py", line 1064, in call_contract
+    contract_function = getattr(contract.functions, method)
+  File "/home/santhoshkumar/.cache/pypoetry/virtualenvs/zerepy-v00vExBy-py3.13/lib/python3.13/site-packages/web3/contract/contract.py", line 421, in __getattr__
+    raise ABIFunctionNotFound(
+    ...<2 lines>...
+    )
+web3.exceptions.ABIFunctionNotFound: ("The function 'batchCount' was not found in this contract's abi.", ' Are you sure you provided the correct contract abi?')
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/santhoshkumar/Supplai/Supllychain-agent/src/actions/sonic_actions.py", line 791, in manage_batch_lifecycle
+    batch_count = sonic_connection.call_contract(count_tx_data)
+  File "/home/santhoshkumar/Supplai/Supllychain-agent/src/connections/sonic_connection.py", line 1067, in call_contract
+    raise SonicConnectionError(f"Method {method} not found on contract") from e
+src.connections.sonic_connection.SonicConnectionError: Method batchCount not found on contract
+2025-03-02 17:21:08,984 - INFO - actions.sonic_actions - Alert would be sent (alerting disabled): action_failure - Batch lifecycle management failed for action create, batch 0: Method batchCount not found on contract
+2025-03-02 17:21:08,984 - ERROR - actions.sonic_actions - Batch sequence management failed: Failed to create batch: Method batchCount not found on contract
+Traceback (most recent call last):
+  File "/home/santhoshkumar/Supplai/Supllychain-agent/src/actions/sonic_actions.py", line 1157, in manage_batch_sequence
+    raise Exception(f"Failed to create batch: {create_result.get('error', 'Unknown error')}")
+Exception: Failed to create batch: Method batchCount not found on contract
+2025-03-02 17:21:08,984 - INFO - actions.sonic_actions - Alert would be sent (alerting disabled): action_failure - Batch sequence management failed: Failed to create batch: Method batchCount not found on contract
+2025-03-02 17:21:14,985 - INFO - actions.sonic_actions - Starting berry temperature monitoring...
+2025-03-02 17:21:14,985 - INFO - actions.sonic_actions - [Batch #0] Using mock temperature data: 4.2°C
+2025-03-02 17:21:14,986 - INFO - actions.sonic_actions - [Batch #0] Auto-determined location: Transport
+2025-03-02 17:21:14,986 - INFO - actions.sonic_actions - [Batch #0] Recording temperature 4.2°C at Transport
+2025-03-02 17:21:21,051 - INFO - actions.sonic_actions - [Batch #0] Temperature recording transaction: {'success': False, 'error': '("The function \'recordTemperature\' was not found in this contract\'s abi.", \' Are you sure you provided the correct contract abi?\')', 'method': 'recordTemperature', 'execution_time': 6.0646748542785645}
+2025-03-02 17:21:21,051 - ERROR - actions.sonic_actions - Berry temperature monitoring failed: unsupported operand type(s) for +=: 'int' and 'dict'
+Traceback (most recent call last):
+  File "/home/santhoshkumar/Supplai/Supllychain-agent/src/actions/sonic_actions.py", line 263, in monitor_berry_temperature
+    update_health_metrics("temperature_breach", True, {
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        "batch_id": batch_id,
+        ^^^^^^^^^^^^^^^^^^^^^
+        "temperature": temperature,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        "breach_severity": breach_severity
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    })
+    ^^
+  File "/home/santhoshkumar/Supplai/Supllychain-agent/src/actions/sonic_actions.py", line 97, in update_health_metrics
+    health_stats["temperature_breaches"] += value
+TypeError: unsupported operand type(s) for +=: 'int' and 'dict'
+2025-03-02 17:21:21,052 - INFO - actions.sonic_actions - Alert would be sent (alerting disabled): action_failure - Temperature monitoring failed for batch 0: unsupported operand type(s) for +=: 'int' and 'dict'
+2025-03-02 17:21:27,053 - INFO - actions.sonic_actions - Managing batch lifecycle...
+2025-03-02 17:21:33,089 - INFO - actions.sonic_actions - Batch creation transaction: {'success': False, 'error': '("The function \'createBatch\' was not found in this contract\'s abi.", \' Are you sure you provided the correct contract abi?\')', 'method': 'createBatch', 'execution_time': 6.036291837692261}
+2025-03-02 17:21:33,098 - ERROR - actions.sonic_actions - Batch lifecycle management failed: Method batchCount not found on contract
+Traceback (most recent call last):
+  File "/home/santhoshkumar/Supplai/Supllychain-agent/src/connections/sonic_connection.py", line 1064, in call_contract
+    contract_function = getattr(contract.functions, method)
+  File "/home/santhoshkumar/.cache/pypoetry/virtualenvs/zerepy-v00vExBy-py3.13/lib/python3.13/site-packages/web3/contract/contract.py", line 421, in __getattr__
+    raise ABIFunctionNotFound(
+    ...<2 lines>...
+    )
+web3.exceptions.ABIFunctionNotFound: ("The function 'batchCount' was not found in this contract's abi.", ' Are you sure you provided the correct contract abi?')
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/santhoshkumar/Supplai/Supllychain-agent/src/actions/sonic_actions.py", line 791, in manage_batch_lifecycle
+    batch_count = sonic_connection.call_contract(count_tx_data)
+  File "/home/santhoshkumar/Supplai/Supllychain-agent/src/connections/sonic_connection.py", line 1067, in call_contract
+    raise SonicConnectionError(f"Method {method} not found on contract") from e
+src.connections.sonic_connection.SonicConnectionError: Method batchCount not found on contract
+2025-03-02 17:21:33,100 - INFO - actions.sonic_actions - Alert would be sent (alerting disabled): action_failure - Batch lifecycle management failed for action unknown, batch 0: Method batchCount not found on contract
+2025-03-02 18:17:42,551 - INFO - actions.sonic_actions - Starting berry temperature monitoring...
+2025-03-02 18:17:42,551 - INFO - actions.sonic_actions - [Batch #0] Using mock temperature data: 2.5°C
+2025-03-02 18:17:42,551 - INFO - actions.sonic_actions - [Batch #0] Auto-determined location: Delivery Center
+2025-03-02 18:17:42,551 - INFO - actions.sonic_actions - [Batch #0] Recording temperature 2.5°C at Delivery Center
+2025-03-02 18:22:15,087 - INFO - actions.sonic_actions - Processing agent recommendations...
+2025-03-02 18:22:15,087 - INFO - actions.sonic_actions - [Batch #0] Quality score not provided, fetching from quality management
+2025-03-02 18:22:15,087 - INFO - actions.sonic_actions - Starting berry quality assessment...
+2025-03-02 18:22:15,105 - ERROR - actions.sonic_actions - Berry quality management failed: Method getTemperatureHistory not found on contract
+Traceback (most recent call last):
+  File "/home/santhoshkumar/Supplai/Supllychain-agent/src/connections/sonic_connection.py", line 1085, in call_contract
+    contract_function = getattr(contract.functions, method)
+  File "/home/santhoshkumar/.cache/pypoetry/virtualenvs/zerepy-v00vExBy-py3.13/lib/python3.13/site-packages/web3/contract/contract.py", line 421, in __getattr__
+    raise ABIFunctionNotFound(
+    ...<2 lines>...
+    )
+web3.exceptions.ABIFunctionNotFound: ("The function 'getTemperatureHistory' was not found in this contract's abi.", ' Are you sure you provided the correct contract abi?')
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/santhoshkumar/Supplai/Supllychain-agent/src/actions/sonic_actions.py", line 426, in manage_berry_quality
+    temp_history = sonic_connection.call_contract(tx_data)
+  File "/home/santhoshkumar/Supplai/Supllychain-agent/src/connections/sonic_connection.py", line 1088, in call_contract
+    raise SonicConnectionError(f"Method {method} not found on contract") from e
+src.connections.sonic_connection.SonicConnectionError: Method getTemperatureHistory not found on contract
+2025-03-02 18:22:15,108 - INFO - actions.sonic_actions - Alert would be sent (alerting disabled): action_failure - Quality assessment failed for batch 0: Method getTemperatureHistory not found on contract
+2025-03-02 18:22:15,108 - INFO - actions.sonic_actions - [Batch #0] Fetched quality score: 80, action: No Action
+2025-03-02 18:22:15,836 - INFO - actions.sonic_actions - [Batch #0] Recommendation processing transaction: {'success': False, 'error': 'No predictions available for this batch', 'batch_id': 0}
+2025-03-02 18:22:15,846 - ERROR - actions.sonic_actions - Process agent recommendations failed: Method getSupplierDetails not found on contract
+Traceback (most recent call last):
+  File "/home/santhoshkumar/Supplai/Supllychain-agent/src/connections/sonic_connection.py", line 1085, in call_contract
+    contract_function = getattr(contract.functions, method)
+  File "/home/santhoshkumar/.cache/pypoetry/virtualenvs/zerepy-v00vExBy-py3.13/lib/python3.13/site-packages/web3/contract/contract.py", line 421, in __getattr__
+    raise ABIFunctionNotFound(
+    ...<2 lines>...
+    )
+web3.exceptions.ABIFunctionNotFound: ("The function 'getSupplierDetails' was not found in this contract's abi.", ' Are you sure you provided the correct contract abi?')
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/santhoshkumar/Supplai/Supllychain-agent/src/actions/sonic_actions.py", line 657, in process_agent_recommendations
+    supplier_details = sonic_connection.call_contract(supplier_tx_data)
+  File "/home/santhoshkumar/Supplai/Supllychain-agent/src/connections/sonic_connection.py", line 1088, in call_contract
+    raise SonicConnectionError(f"Method {method} not found on contract") from e
+src.connections.sonic_connection.SonicConnectionError: Method getSupplierDetails not found on contract
+2025-03-02 18:22:15,847 - INFO - actions.sonic_actions - Alert would be sent (alerting disabled): action_failure - Recommendation processing failed for batch 0: Method getSupplierDetails not found on contract
+2025-03-02 18:22:21,848 - INFO - actions.sonic_actions - Starting berry temperature monitoring...
+2025-03-02 18:22:21,848 - INFO - actions.sonic_actions - [Batch #0] Using mock temperature data: 5.0°C
+2025-03-02 18:22:21,848 - INFO - actions.sonic_actions - [Batch #0] Auto-determined location: Delivery Center
+2025-03-02 18:22:21,848 - INFO - actions.sonic_actions - [Batch #0] Recording temperature 5.0°C at Delivery Center
+2025-03-02 18:22:27,892 - INFO - actions.sonic_actions - [Batch #0] Temperature recording transaction: {'success': False, 'error': '("The function \'recordTemperature\' was not found in this contract\'s abi.", \' Are you sure you provided the correct contract abi?\')', 'method': 'recordTemperature', 'execution_time': 6.043713092803955}
+2025-03-02 18:22:27,893 - ERROR - actions.sonic_actions - Berry temperature monitoring failed: unsupported operand type(s) for +=: 'int' and 'dict'
+Traceback (most recent call last):
+  File "/home/santhoshkumar/Supplai/Supllychain-agent/src/actions/sonic_actions.py", line 263, in monitor_berry_temperature
+    update_health_metrics("temperature_breach", True, {
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        "batch_id": batch_id,
+        ^^^^^^^^^^^^^^^^^^^^^
+        "temperature": temperature,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        "breach_severity": breach_severity
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    })
+    ^^
+  File "/home/santhoshkumar/Supplai/Supllychain-agent/src/actions/sonic_actions.py", line 97, in update_health_metrics
+    health_stats["temperature_breaches"] += value
+TypeError: unsupported operand type(s) for +=: 'int' and 'dict'
+2025-03-02 18:22:27,894 - INFO - actions.sonic_actions - Alert would be sent (alerting disabled): action_failure - Temperature monitoring failed for batch 0: unsupported operand type(s) for +=: 'int' and 'dict'
+2025-03-02 18:23:19,959 - INFO - actions.sonic_actions - Starting berry quality assessment...
+2025-03-02 18:23:21,356 - INFO - actions.sonic_actions - [Batch #0] Berry type: Strawberry
+2025-03-02 18:23:21,356 - INFO - actions.sonic_actions - [Batch #0] Base shelf life for Strawberry: 72 hours
+2025-03-02 18:23:21,356 - INFO - actions.sonic_actions - [Batch #0] Temperature breach statistics: 0/1 readings (0.0%)
+2025-03-02 18:23:21,357 - INFO - actions.sonic_actions - [Batch #0] Quality assessment complete: No Action, Score: 100.0/100, Shelf life: 72.0 hours
+2025-03-02 18:23:27,358 - INFO - actions.sonic_actions - Starting berry quality assessment...
+2025-03-02 18:23:28,700 - INFO - actions.sonic_actions - [Batch #0] Berry type: Strawberry
+2025-03-02 18:23:28,700 - INFO - actions.sonic_actions - [Batch #0] Base shelf life for Strawberry: 72 hours
+2025-03-02 18:23:28,700 - INFO - actions.sonic_actions - [Batch #0] Temperature breach statistics: 0/1 readings (0.0%)
+2025-03-02 18:23:28,700 - INFO - actions.sonic_actions - [Batch #0] Quality assessment complete: No Action, Score: 100.0/100, Shelf life: 72.0 hours
+2025-03-02 18:23:34,701 - INFO - actions.sonic_actions - Managing batch lifecycle...
+2025-03-02 18:23:42,961 - INFO - actions.sonic_actions - Batch creation transaction: {'success': True, 'transaction_hash': '0x9ce0e8366179cabf1416b5d94045795b3f53e4d44ba9a059deed728192b331b0', 'transaction_url': 'https://testnet.sonicscan.org/tx/0x9ce0e8366179cabf1416b5d94045795b3f53e4d44ba9a059deed728192b331b0', 'gas_used': 178917, 'effective_gas_price': 10000000000, 'execution_time': 8.259300708770752}
+2025-03-02 18:23:43,605 - INFO - actions.sonic_actions - Created new batch #2 (Strawberry) in 8.90 seconds
+2025-03-02 18:23:49,606 - INFO - actions.sonic_actions - Starting berry quality assessment...
+2025-03-02 18:23:50,687 - INFO - actions.sonic_actions - [Batch #0] Berry type: Strawberry
+2025-03-02 18:23:50,688 - INFO - actions.sonic_actions - [Batch #0] Base shelf life for Strawberry: 72 hours
+2025-03-02 18:23:50,688 - INFO - actions.sonic_actions - [Batch #0] Temperature breach statistics: 0/1 readings (0.0%)
+2025-03-02 18:23:50,688 - INFO - actions.sonic_actions - [Batch #0] Quality assessment complete: No Action, Score: 100.0/100, Shelf life: 72.0 hours
+2025-03-02 18:23:56,689 - INFO - actions.sonic_actions - Starting berry quality assessment...
+2025-03-02 18:23:58,057 - INFO - actions.sonic_actions - [Batch #0] Berry type: Strawberry
+2025-03-02 18:23:58,057 - INFO - actions.sonic_actions - [Batch #0] Base shelf life for Strawberry: 72 hours
+2025-03-02 18:23:58,057 - INFO - actions.sonic_actions - [Batch #0] Temperature breach statistics: 0/1 readings (0.0%)
+2025-03-02 18:23:58,057 - INFO - actions.sonic_actions - [Batch #0] Quality assessment complete: No Action, Score: 100.0/100, Shelf life: 72.0 hours
+2025-03-02 18:24:04,058 - INFO - actions.sonic_actions - Starting berry quality assessment...
+2025-03-02 18:24:05,692 - INFO - actions.sonic_actions - [Batch #0] Berry type: Strawberry
+2025-03-02 18:24:05,692 - INFO - actions.sonic_actions - [Batch #0] Base shelf life for Strawberry: 72 hours
+2025-03-02 18:24:05,692 - INFO - actions.sonic_actions - [Batch #0] Temperature breach statistics: 0/1 readings (0.0%)
+2025-03-02 18:24:05,692 - INFO - actions.sonic_actions - [Batch #0] Quality assessment complete: No Action, Score: 100.0/100, Shelf life: 72.0 hours
+2025-03-02 18:24:11,693 - INFO - actions.sonic_actions - Starting berry quality assessment...
+2025-03-02 18:24:13,373 - INFO - actions.sonic_actions - [Batch #0] Berry type: Strawberry
+2025-03-02 18:24:13,374 - INFO - actions.sonic_actions - [Batch #0] Base shelf life for Strawberry: 72 hours
+2025-03-02 18:24:13,374 - INFO - actions.sonic_actions - [Batch #0] Temperature breach statistics: 0/1 readings (0.0%)
+2025-03-02 18:24:13,374 - INFO - actions.sonic_actions - [Batch #0] Quality assessment complete: No Action, Score: 100.0/100, Shelf life: 72.0 hours
+2025-03-02 18:24:19,375 - INFO - actions.sonic_actions - Managing batch lifecycle...
+2025-03-02 18:24:27,608 - INFO - actions.sonic_actions - Batch creation transaction: {'success': True, 'transaction_hash': '0x011f26f6e394d6f82fcd8b0544772df890d21e973d5c2d3ed4624724ab49c4b6', 'transaction_url': 'https://testnet.sonicscan.org/tx/0x011f26f6e394d6f82fcd8b0544772df890d21e973d5c2d3ed4624724ab49c4b6', 'gas_used': 178917, 'effective_gas_price': 10000000000, 'execution_time': 8.232742071151733}
+2025-03-02 18:24:28,324 - INFO - actions.sonic_actions - Created new batch #3 (Strawberry) in 8.95 seconds
+2025-03-02 18:24:34,325 - INFO - actions.sonic_actions - Starting berry temperature monitoring...
+2025-03-02 18:24:34,326 - INFO - actions.sonic_actions - [Batch #0] Using mock temperature data: 3.8°C
+2025-03-02 18:24:34,326 - INFO - actions.sonic_actions - [Batch #0] Auto-determined location: Delivery Center
+2025-03-02 18:24:34,326 - INFO - actions.sonic_actions - [Batch #0] Recording temperature 3.8°C at Delivery Center
+2025-03-02 18:24:42,920 - INFO - actions.sonic_actions - [Batch #0] Temperature recording transaction: {'success': False, 'transaction_hash': '0x5032c7601f8d8b7a46c9aea77e9fe3bd2e9b3f1f4dff3bb2008f1e9f3d1c44f8', 'transaction_url': 'https://testnet.sonicscan.org/tx/0x5032c7601f8d8b7a46c9aea77e9fe3bd2e9b3f1f4dff3bb2008f1e9f3d1c44f8', 'gas_used': 300000, 'effective_gas_price': 10000000000, 'execution_time': 8.59395694732666}
+2025-03-02 18:24:42,920 - INFO - actions.sonic_actions - [Batch #0] Temperature monitoring completed in 8.60 seconds
+2025-03-02 18:24:48,921 - INFO - actions.sonic_actions - Starting batch sequence management...
+2025-03-02 18:24:48,922 - INFO - actions.sonic_actions - Step 1: Creating new batch for Strawberry
+2025-03-02 18:24:48,922 - INFO - actions.sonic_actions - Managing batch lifecycle...
+2025-03-02 18:24:58,738 - INFO - actions.sonic_actions - Batch creation transaction: {'success': True, 'transaction_hash': '0xdbe2da42ccfa18fa242beb58b18d3cccdb699d5ba883b36d7f43283f6e7509a0', 'transaction_url': 'https://testnet.sonicscan.org/tx/0xdbe2da42ccfa18fa242beb58b18d3cccdb699d5ba883b36d7f43283f6e7509a0', 'gas_used': 178917, 'effective_gas_price': 10000000000, 'execution_time': 9.81629729270935}
+2025-03-02 18:24:59,278 - INFO - actions.sonic_actions - Created new batch #4 (Strawberry) in 10.36 seconds
+2025-03-02 18:24:59,278 - INFO - actions.sonic_actions - [Batch #4] Successfully created new batch
+2025-03-02 18:24:59,278 - INFO - actions.sonic_actions - [Batch #4] Step 2: Recording temperature sequence
+2025-03-02 18:24:59,278 - INFO - actions.sonic_actions - [Batch #4] Recording temperature 1/6: 2.0°C at Cold Storage
+2025-03-02 18:24:59,278 - INFO - actions.sonic_actions - Starting berry temperature monitoring...
+2025-03-02 18:24:59,279 - INFO - actions.sonic_actions - [Batch #4] Recording temperature 2.0°C at Cold Storage
+2025-03-02 18:25:07,664 - INFO - actions.sonic_actions - [Batch #4] Temperature recording transaction: {'success': False, 'transaction_hash': '0x3a73981d30feb634f5d5ec08667d3963dd59d7ab0b6488af9aacfd6a91c5ef5b', 'transaction_url': 'https://testnet.sonicscan.org/tx/0x3a73981d30feb634f5d5ec08667d3963dd59d7ab0b6488af9aacfd6a91c5ef5b', 'gas_used': 300000, 'effective_gas_price': 10000000000, 'execution_time': 8.38534164428711}
+2025-03-02 18:25:07,665 - INFO - actions.sonic_actions - [Batch #4] Temperature monitoring completed in 8.39 seconds
+2025-03-02 18:25:08,666 - INFO - actions.sonic_actions - [Batch #4] Recording temperature 2/6: 2.5°C at Loading Dock
+2025-03-02 18:25:08,666 - INFO - actions.sonic_actions - Starting berry temperature monitoring...
+2025-03-02 18:25:08,666 - INFO - actions.sonic_actions - [Batch #4] Recording temperature 2.5°C at Loading Dock
+2025-03-02 18:25:19,023 - INFO - actions.sonic_actions - [Batch #4] Temperature recording transaction: {'success': False, 'transaction_hash': '0xcf610df8036fc6407c8e7253351179f39dae6badd55324912e9035b244565b76', 'transaction_url': 'https://testnet.sonicscan.org/tx/0xcf610df8036fc6407c8e7253351179f39dae6badd55324912e9035b244565b76', 'gas_used': 300000, 'effective_gas_price': 10000000000, 'execution_time': 10.356602191925049}
+2025-03-02 18:25:19,023 - INFO - actions.sonic_actions - [Batch #4] Temperature monitoring completed in 10.36 seconds
+2025-03-02 18:25:20,024 - INFO - actions.sonic_actions - [Batch #4] Recording temperature 3/6: 3.0°C at Transport
+2025-03-02 18:25:20,024 - INFO - actions.sonic_actions - Starting berry temperature monitoring...
+2025-03-02 18:25:20,024 - INFO - actions.sonic_actions - [Batch #4] Recording temperature 3.0°C at Transport

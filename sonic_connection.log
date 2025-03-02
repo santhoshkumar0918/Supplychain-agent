@@ -3112,3 +3112,464 @@ web3.exceptions.ABIFunctionNotFound: ("The function 'recordTemperature' was not 
 2025-03-02 12:45:45,013 - INFO - connections.sonic_connection - Account loaded with address: 0x1e43eeB0307bb3466Cd237fE58570E6A3996d8ff
 2025-03-02 12:45:45,441 - INFO - connections.sonic_connection - Account balance: 49.1050636695 Sonic Tokens
 2025-03-02 12:45:45,441 - INFO - connections.sonic_connection - Sonic connection initialization complete
+2025-03-02 12:49:13,968 - INFO - connections.sonic_connection - Initializing Sonic connection...
+2025-03-02 12:49:15,537 - INFO - connections.sonic_connection - Connected to network with chain ID: 57054
+2025-03-02 12:49:15,538 - INFO - connections.sonic_connection - Loaded ABI for BerryTempAgent
+2025-03-02 12:49:15,539 - INFO - connections.sonic_connection - Loaded ABI for BerryManager
+2025-03-02 12:49:15,539 - INFO - connections.sonic_connection - Successfully loaded contract ABIs: BerryTempAgent, BerryManager
+2025-03-02 12:49:15,571 - INFO - connections.sonic_connection - Successfully initialized contract instances: berry_temp_agent, berry_manager
+2025-03-02 12:49:15,577 - INFO - connections.sonic_connection - Account loaded with address: 0x1e43eeB0307bb3466Cd237fE58570E6A3996d8ff
+2025-03-02 12:49:15,854 - INFO - connections.sonic_connection - Account balance: 49.1050636695 Sonic Tokens
+2025-03-02 12:49:15,854 - INFO - connections.sonic_connection - Sonic connection initialization complete
+2025-03-02 12:49:31,588 - INFO - connections.sonic_connection - [TX-1] Preparing transaction: method=createBatch, args=['Strawberry']
+2025-03-02 12:49:31,606 - WARNING - connections.sonic_connection - [TX-1] Transaction attempt 1 failed: ("The function 'createBatch' was not found in this contract's abi.", ' Are you sure you provided the correct contract abi?'). Retrying in 2s...
+2025-03-02 12:49:33,625 - WARNING - connections.sonic_connection - [TX-1] Transaction attempt 2 failed: ("The function 'createBatch' was not found in this contract's abi.", ' Are you sure you provided the correct contract abi?'). Retrying in 4s...
+2025-03-02 12:49:37,636 - ERROR - connections.sonic_connection - [TX-1] All retry attempts failed: ("The function 'createBatch' was not found in this contract's abi.", ' Are you sure you provided the correct contract abi?')
+Traceback (most recent call last):
+  File "/home/santhoshkumar/Supplai/Supllychain-agent/src/connections/sonic_connection.py", line 714, in send_transaction
+    contract_function = getattr(contract.functions, method)
+  File "/home/santhoshkumar/.cache/pypoetry/virtualenvs/zerepy-v00vExBy-py3.13/lib/python3.13/site-packages/web3/contract/contract.py", line 421, in __getattr__
+    raise ABIFunctionNotFound(
+    ...<2 lines>...
+    )
+web3.exceptions.ABIFunctionNotFound: ("The function 'createBatch' was not found in this contract's abi.", ' Are you sure you provided the correct contract abi?')
+2025-03-02 12:49:37,638 - ERROR - connections.sonic_connection - [TX-1] Failed to send transaction after 3 attempts: ("The function 'createBatch' was not found in this contract's abi.", ' Are you sure you provided the correct contract abi?')
+2025-03-02 12:49:37,638 - INFO - connections.sonic_connection - [CALL-1740899977] Calling contract method: batchCount, args: []
+2025-03-02 12:49:37,646 - ERROR - connections.sonic_connection - [CALL-1740899977] Method not found: batchCount
+2025-03-02 12:49:37,646 - ERROR - connections.sonic_connection - [CALL-1740899977] Failed to call contract: Method batchCount not found on contract
+Traceback (most recent call last):
+  File "/home/santhoshkumar/Supplai/Supllychain-agent/src/connections/sonic_connection.py", line 987, in call_contract
+    contract_function = getattr(contract.functions, method)
+  File "/home/santhoshkumar/.cache/pypoetry/virtualenvs/zerepy-v00vExBy-py3.13/lib/python3.13/site-packages/web3/contract/contract.py", line 421, in __getattr__
+    raise ABIFunctionNotFound(
+    ...<2 lines>...
+    )
+web3.exceptions.ABIFunctionNotFound: ("The function 'batchCount' was not found in this contract's abi.", ' Are you sure you provided the correct contract abi?')
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/santhoshkumar/Supplai/Supllychain-agent/src/connections/sonic_connection.py", line 990, in call_contract
+    raise SonicConnectionError(f"Method {method} not found on contract") from e
+src.connections.sonic_connection.SonicConnectionError: Method batchCount not found on contract
+2025-03-02 12:49:43,652 - INFO - connections.sonic_connection - [CALL-1740899983] Calling contract method: getTemperatureHistory, args: [0]
+2025-03-02 12:49:43,660 - ERROR - connections.sonic_connection - [CALL-1740899983] Method not found: getTemperatureHistory
+2025-03-02 12:49:43,660 - ERROR - connections.sonic_connection - [CALL-1740899983] Failed to call contract: Method getTemperatureHistory not found on contract
+Traceback (most recent call last):
+  File "/home/santhoshkumar/Supplai/Supllychain-agent/src/connections/sonic_connection.py", line 987, in call_contract
+    contract_function = getattr(contract.functions, method)
+  File "/home/santhoshkumar/.cache/pypoetry/virtualenvs/zerepy-v00vExBy-py3.13/lib/python3.13/site-packages/web3/contract/contract.py", line 421, in __getattr__
+    raise ABIFunctionNotFound(
+    ...<2 lines>...
+    )
+web3.exceptions.ABIFunctionNotFound: ("The function 'getTemperatureHistory' was not found in this contract's abi.", ' Are you sure you provided the correct contract abi?')
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/santhoshkumar/Supplai/Supllychain-agent/src/connections/sonic_connection.py", line 990, in call_contract
+    raise SonicConnectionError(f"Method {method} not found on contract") from e
+src.connections.sonic_connection.SonicConnectionError: Method getTemperatureHistory not found on contract
+2025-03-02 13:13:03,644 - INFO - connections.sonic_connection - Initializing Sonic connection...
+2025-03-02 13:13:05,166 - INFO - connections.sonic_connection - Connected to network with chain ID: 57054
+2025-03-02 13:13:05,167 - WARNING - connections.sonic_connection - No ABI found in contract artifact: BerryTempAgent
+2025-03-02 13:13:05,168 - ERROR - connections.sonic_connection - Failed to load ABI for BerryManager: Expecting value: line 1 column 1 (char 0)
+2025-03-02 13:13:05,168 - INFO - connections.sonic_connection - Successfully loaded contract ABIs: 
+2025-03-02 13:13:05,168 - WARNING - connections.sonic_connection - Empty ABI for berry_temp_agent, skipping initialization
+2025-03-02 13:13:05,168 - WARNING - connections.sonic_connection - Empty ABI for berry_manager, skipping initialization
+2025-03-02 13:13:05,168 - WARNING - connections.sonic_connection - No contracts were successfully initialized
+2025-03-02 13:13:05,174 - INFO - connections.sonic_connection - Account loaded with address: 0x1e43eeB0307bb3466Cd237fE58570E6A3996d8ff
+2025-03-02 13:13:05,435 - INFO - connections.sonic_connection - Account balance: 49.101514723 Sonic Tokens
+2025-03-02 13:13:05,436 - INFO - connections.sonic_connection - Sonic connection initialization complete
+2025-03-02 17:13:52,421 - INFO - connections.sonic_connection - Initializing Sonic connection...
+2025-03-02 17:13:54,087 - INFO - connections.sonic_connection - Connected to network with chain ID: 57054
+2025-03-02 17:13:54,088 - INFO - connections.sonic_connection - Found ABIs directory at: /home/santhoshkumar/Supplai/Supllychain-agent/abis
+2025-03-02 17:13:54,088 - INFO - connections.sonic_connection - Attempting to load BerryTempAgent ABI from: /home/santhoshkumar/Supplai/Supllychain-agent/abis/BerryTempAgent.json
+2025-03-02 17:13:54,097 - INFO - connections.sonic_connection - Loaded ABI array for BerryTempAgent with 25 entries
+2025-03-02 17:13:54,097 - INFO - connections.sonic_connection - BerryTempAgent ABI contains functions: BREACH_PENALTY, MAX_TEMP, MIN_TEMP, OPTIMAL_TEMP, SHELF_LIFE_BASE, agentPredictions, batchCount, berryBatches, createBatch, getAgentPredictions and more...
+2025-03-02 17:13:54,097 - INFO - connections.sonic_connection - Found required function: createBatch
+2025-03-02 17:13:54,097 - INFO - connections.sonic_connection - Found required function: batchCount
+2025-03-02 17:13:54,097 - INFO - connections.sonic_connection - Found required function: getTemperatureHistory
+2025-03-02 17:13:54,097 - INFO - connections.sonic_connection - Attempting to load BerryManager ABI from: /home/santhoshkumar/Supplai/Supllychain-agent/abis/BerryManager.json
+2025-03-02 17:13:54,098 - ERROR - connections.sonic_connection - JSON parsing error in BerryManager ABI: Expecting value: line 1 column 1 (char 0)
+2025-03-02 17:13:54,098 - INFO - connections.sonic_connection - File does not appear to be valid JSON. First 100 chars: 
+2025-03-02 17:13:54,098 - INFO - connections.sonic_connection - Successfully loaded contract ABIs: BerryTempAgent
+2025-03-02 17:13:54,110 - WARNING - connections.sonic_connection - Empty ABI for berry_manager, skipping initialization
+2025-03-02 17:13:54,110 - INFO - connections.sonic_connection - Successfully initialized contract instances: berry_temp_agent
+2025-03-02 17:13:54,117 - INFO - connections.sonic_connection - Account loaded with address: 0x1e43eeB0307bb3466Cd237fE58570E6A3996d8ff
+2025-03-02 17:13:54,385 - INFO - connections.sonic_connection - Account balance: 49.101514723 Sonic Tokens
+2025-03-02 17:13:54,385 - INFO - connections.sonic_connection - Sonic connection initialization complete
+2025-03-02 17:15:09,375 - INFO - connections.sonic_connection - Initializing Sonic connection...
+2025-03-02 17:15:10,859 - INFO - connections.sonic_connection - Connected to network with chain ID: 57054
+2025-03-02 17:15:10,860 - INFO - connections.sonic_connection - Found ABIs directory at: /home/santhoshkumar/Supplai/Supllychain-agent/abis
+2025-03-02 17:15:10,860 - INFO - connections.sonic_connection - Attempting to load BerryTempAgent ABI from: /home/santhoshkumar/Supplai/Supllychain-agent/abis/BerryTempAgent.json
+2025-03-02 17:15:10,860 - INFO - connections.sonic_connection - Loaded ABI array for BerryTempAgent with 25 entries
+2025-03-02 17:15:10,860 - INFO - connections.sonic_connection - BerryTempAgent ABI contains functions: BREACH_PENALTY, MAX_TEMP, MIN_TEMP, OPTIMAL_TEMP, SHELF_LIFE_BASE, agentPredictions, batchCount, berryBatches, createBatch, getAgentPredictions and more...
+2025-03-02 17:15:10,860 - INFO - connections.sonic_connection - Found required function: createBatch
+2025-03-02 17:15:10,860 - INFO - connections.sonic_connection - Found required function: batchCount
+2025-03-02 17:15:10,860 - INFO - connections.sonic_connection - Found required function: getTemperatureHistory
+2025-03-02 17:15:10,860 - INFO - connections.sonic_connection - Attempting to load BerryManager ABI from: /home/santhoshkumar/Supplai/Supllychain-agent/abis/BerryManager.json
+2025-03-02 17:15:10,861 - INFO - connections.sonic_connection - Loaded ABI array for BerryManager with 21 entries
+2025-03-02 17:15:10,861 - INFO - connections.sonic_connection - BerryManager ABI contains functions: INITIAL_REPUTATION, MAX_REPUTATION, MIN_REPUTATION, berryAgent, getSupplierDetails, getSupplierRecommendations, owner, processAgentRecommendation, registerSupplier, renounceOwnership and more...
+2025-03-02 17:15:10,861 - INFO - connections.sonic_connection - Successfully loaded contract ABIs: BerryTempAgent, BerryManager
+2025-03-02 17:15:10,883 - INFO - connections.sonic_connection - Successfully initialized contract instances: berry_temp_agent, berry_manager
+2025-03-02 17:15:10,889 - INFO - connections.sonic_connection - Account loaded with address: 0x1e43eeB0307bb3466Cd237fE58570E6A3996d8ff
+2025-03-02 17:15:11,260 - INFO - connections.sonic_connection - Account balance: 49.101514723 Sonic Tokens
+2025-03-02 17:15:11,260 - INFO - connections.sonic_connection - Sonic connection initialization complete
+2025-03-02 17:15:36,842 - INFO - connections.sonic_connection - [CALL-1740915936] Calling contract method: getTemperatureHistory, args: [0]
+2025-03-02 17:15:36,857 - ERROR - connections.sonic_connection - [CALL-1740915936] Method not found: getTemperatureHistory
+2025-03-02 17:15:36,857 - ERROR - connections.sonic_connection - [CALL-1740915936] Failed to call contract: Method getTemperatureHistory not found on contract
+Traceback (most recent call last):
+  File "/home/santhoshkumar/Supplai/Supllychain-agent/src/connections/sonic_connection.py", line 1064, in call_contract
+    contract_function = getattr(contract.functions, method)
+  File "/home/santhoshkumar/.cache/pypoetry/virtualenvs/zerepy-v00vExBy-py3.13/lib/python3.13/site-packages/web3/contract/contract.py", line 421, in __getattr__
+    raise ABIFunctionNotFound(
+    ...<2 lines>...
+    )
+web3.exceptions.ABIFunctionNotFound: ("The function 'getTemperatureHistory' was not found in this contract's abi.", ' Are you sure you provided the correct contract abi?')
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/santhoshkumar/Supplai/Supllychain-agent/src/connections/sonic_connection.py", line 1067, in call_contract
+    raise SonicConnectionError(f"Method {method} not found on contract") from e
+src.connections.sonic_connection.SonicConnectionError: Method getTemperatureHistory not found on contract
+2025-03-02 17:15:36,862 - INFO - connections.sonic_connection - [TX-1] Preparing transaction: method=processAgentRecommendation, args=[0]
+2025-03-02 17:15:36,867 - INFO - connections.sonic_connection - [CALL-1740915936] Calling contract method: getAgentPredictions, args: [0]
+2025-03-02 17:15:37,698 - INFO - connections.sonic_connection - [CALL-1740915936] Contract call successful in 0.83s
+2025-03-02 17:15:37,699 - WARNING - connections.sonic_connection - No predictions found for batch 0, skipping processAgentRecommendation
+2025-03-02 17:15:37,699 - INFO - connections.sonic_connection - [CALL-1740915937] Calling contract method: getSupplierDetails, args: ['0x1e43eeB0307bb3466Cd237fE58570E6A3996d8ff']
+2025-03-02 17:15:37,710 - ERROR - connections.sonic_connection - [CALL-1740915937] Method not found: getSupplierDetails
+2025-03-02 17:15:37,710 - ERROR - connections.sonic_connection - [CALL-1740915937] Failed to call contract: Method getSupplierDetails not found on contract
+Traceback (most recent call last):
+  File "/home/santhoshkumar/Supplai/Supllychain-agent/src/connections/sonic_connection.py", line 1064, in call_contract
+    contract_function = getattr(contract.functions, method)
+  File "/home/santhoshkumar/.cache/pypoetry/virtualenvs/zerepy-v00vExBy-py3.13/lib/python3.13/site-packages/web3/contract/contract.py", line 421, in __getattr__
+    raise ABIFunctionNotFound(
+    ...<2 lines>...
+    )
+web3.exceptions.ABIFunctionNotFound: ("The function 'getSupplierDetails' was not found in this contract's abi.", ' Are you sure you provided the correct contract abi?')
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/santhoshkumar/Supplai/Supllychain-agent/src/connections/sonic_connection.py", line 1067, in call_contract
+    raise SonicConnectionError(f"Method {method} not found on contract") from e
+src.connections.sonic_connection.SonicConnectionError: Method getSupplierDetails not found on contract
+2025-03-02 17:15:43,716 - INFO - connections.sonic_connection - [TX-1] Preparing transaction: method=recordTemperature, args=[0, 31, 'Transport']
+2025-03-02 17:15:43,732 - WARNING - connections.sonic_connection - [TX-1] Transaction attempt 1 failed: ("The function 'recordTemperature' was not found in this contract's abi.", ' Are you sure you provided the correct contract abi?'). Retrying in 2s...
+2025-03-02 17:15:45,742 - WARNING - connections.sonic_connection - [TX-1] Transaction attempt 2 failed: ("The function 'recordTemperature' was not found in this contract's abi.", ' Are you sure you provided the correct contract abi?'). Retrying in 4s...
+2025-03-02 17:15:49,756 - ERROR - connections.sonic_connection - [TX-1] All retry attempts failed: ("The function 'recordTemperature' was not found in this contract's abi.", ' Are you sure you provided the correct contract abi?')
+Traceback (most recent call last):
+  File "/home/santhoshkumar/Supplai/Supllychain-agent/src/connections/sonic_connection.py", line 791, in send_transaction
+    contract_function = getattr(contract.functions, method)
+  File "/home/santhoshkumar/.cache/pypoetry/virtualenvs/zerepy-v00vExBy-py3.13/lib/python3.13/site-packages/web3/contract/contract.py", line 421, in __getattr__
+    raise ABIFunctionNotFound(
+    ...<2 lines>...
+    )
+web3.exceptions.ABIFunctionNotFound: ("The function 'recordTemperature' was not found in this contract's abi.", ' Are you sure you provided the correct contract abi?')
+2025-03-02 17:15:49,757 - ERROR - connections.sonic_connection - [TX-1] Failed to send transaction after 3 attempts: ("The function 'recordTemperature' was not found in this contract's abi.", ' Are you sure you provided the correct contract abi?')
+2025-03-02 17:20:36,297 - INFO - connections.sonic_connection - Initializing Sonic connection...
+2025-03-02 17:20:37,953 - INFO - connections.sonic_connection - Connected to network with chain ID: 57054
+2025-03-02 17:20:37,954 - INFO - connections.sonic_connection - Found ABIs directory at: /home/santhoshkumar/Supplai/Supllychain-agent/abis
+2025-03-02 17:20:37,954 - INFO - connections.sonic_connection - Attempting to load BerryTempAgent ABI from: /home/santhoshkumar/Supplai/Supllychain-agent/abis/BerryTempAgent.json
+2025-03-02 17:20:37,954 - INFO - connections.sonic_connection - Loaded ABI array for BerryTempAgent with 25 entries
+2025-03-02 17:20:37,954 - INFO - connections.sonic_connection - BerryTempAgent ABI contains functions: BREACH_PENALTY, MAX_TEMP, MIN_TEMP, OPTIMAL_TEMP, SHELF_LIFE_BASE, agentPredictions, batchCount, berryBatches, createBatch, getAgentPredictions and more...
+2025-03-02 17:20:37,954 - INFO - connections.sonic_connection - Found required function: createBatch
+2025-03-02 17:20:37,954 - INFO - connections.sonic_connection - Found required function: batchCount
+2025-03-02 17:20:37,954 - INFO - connections.sonic_connection - Found required function: getTemperatureHistory
+2025-03-02 17:20:37,954 - INFO - connections.sonic_connection - Attempting to load BerryManager ABI from: /home/santhoshkumar/Supplai/Supllychain-agent/abis/BerryManager.json
+2025-03-02 17:20:37,955 - INFO - connections.sonic_connection - Loaded ABI array for BerryManager with 21 entries
+2025-03-02 17:20:37,955 - INFO - connections.sonic_connection - BerryManager ABI contains functions: INITIAL_REPUTATION, MAX_REPUTATION, MIN_REPUTATION, berryAgent, getSupplierDetails, getSupplierRecommendations, owner, processAgentRecommendation, registerSupplier, renounceOwnership and more...
+2025-03-02 17:20:37,955 - INFO - connections.sonic_connection - Successfully loaded contract ABIs: BerryTempAgent, BerryManager
+2025-03-02 17:20:37,979 - INFO - connections.sonic_connection - Successfully initialized contract instances: berry_temp_agent, berry_manager
+2025-03-02 17:20:37,986 - INFO - connections.sonic_connection - Account loaded with address: 0x1e43eeB0307bb3466Cd237fE58570E6A3996d8ff
+2025-03-02 17:20:38,294 - INFO - connections.sonic_connection - Account balance: 49.101514723 Sonic Tokens
+2025-03-02 17:20:38,294 - INFO - connections.sonic_connection - Sonic connection initialization complete
+2025-03-02 17:20:50,872 - INFO - connections.sonic_connection - [TX-1] Preparing transaction: method=createBatch, args=['Strawberry']
+2025-03-02 17:20:50,883 - WARNING - connections.sonic_connection - [TX-1] Transaction attempt 1 failed: ("The function 'createBatch' was not found in this contract's abi.", ' Are you sure you provided the correct contract abi?'). Retrying in 2s...
+2025-03-02 17:20:52,896 - WARNING - connections.sonic_connection - [TX-1] Transaction attempt 2 failed: ("The function 'createBatch' was not found in this contract's abi.", ' Are you sure you provided the correct contract abi?'). Retrying in 4s...
+2025-03-02 17:20:56,915 - ERROR - connections.sonic_connection - [TX-1] All retry attempts failed: ("The function 'createBatch' was not found in this contract's abi.", ' Are you sure you provided the correct contract abi?')
+Traceback (most recent call last):
+  File "/home/santhoshkumar/Supplai/Supllychain-agent/src/connections/sonic_connection.py", line 791, in send_transaction
+    contract_function = getattr(contract.functions, method)
+  File "/home/santhoshkumar/.cache/pypoetry/virtualenvs/zerepy-v00vExBy-py3.13/lib/python3.13/site-packages/web3/contract/contract.py", line 421, in __getattr__
+    raise ABIFunctionNotFound(
+    ...<2 lines>...
+    )
+web3.exceptions.ABIFunctionNotFound: ("The function 'createBatch' was not found in this contract's abi.", ' Are you sure you provided the correct contract abi?')
+2025-03-02 17:20:56,917 - ERROR - connections.sonic_connection - [TX-1] Failed to send transaction after 3 attempts: ("The function 'createBatch' was not found in this contract's abi.", ' Are you sure you provided the correct contract abi?')
+2025-03-02 17:20:56,917 - INFO - connections.sonic_connection - [CALL-1740916256] Calling contract method: batchCount, args: []
+2025-03-02 17:20:56,925 - ERROR - connections.sonic_connection - [CALL-1740916256] Method not found: batchCount
+2025-03-02 17:20:56,925 - ERROR - connections.sonic_connection - [CALL-1740916256] Failed to call contract: Method batchCount not found on contract
+Traceback (most recent call last):
+  File "/home/santhoshkumar/Supplai/Supllychain-agent/src/connections/sonic_connection.py", line 1064, in call_contract
+    contract_function = getattr(contract.functions, method)
+  File "/home/santhoshkumar/.cache/pypoetry/virtualenvs/zerepy-v00vExBy-py3.13/lib/python3.13/site-packages/web3/contract/contract.py", line 421, in __getattr__
+    raise ABIFunctionNotFound(
+    ...<2 lines>...
+    )
+web3.exceptions.ABIFunctionNotFound: ("The function 'batchCount' was not found in this contract's abi.", ' Are you sure you provided the correct contract abi?')
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/santhoshkumar/Supplai/Supllychain-agent/src/connections/sonic_connection.py", line 1067, in call_contract
+    raise SonicConnectionError(f"Method {method} not found on contract") from e
+src.connections.sonic_connection.SonicConnectionError: Method batchCount not found on contract
+2025-03-02 17:21:02,931 - INFO - connections.sonic_connection - [TX-2] Preparing transaction: method=createBatch, args=['Strawberry']
+2025-03-02 17:21:02,945 - WARNING - connections.sonic_connection - [TX-2] Transaction attempt 1 failed: ("The function 'createBatch' was not found in this contract's abi.", ' Are you sure you provided the correct contract abi?'). Retrying in 2s...
+2025-03-02 17:21:04,963 - WARNING - connections.sonic_connection - [TX-2] Transaction attempt 2 failed: ("The function 'createBatch' was not found in this contract's abi.", ' Are you sure you provided the correct contract abi?'). Retrying in 4s...
+2025-03-02 17:21:08,973 - ERROR - connections.sonic_connection - [TX-2] All retry attempts failed: ("The function 'createBatch' was not found in this contract's abi.", ' Are you sure you provided the correct contract abi?')
+Traceback (most recent call last):
+  File "/home/santhoshkumar/Supplai/Supllychain-agent/src/connections/sonic_connection.py", line 791, in send_transaction
+    contract_function = getattr(contract.functions, method)
+  File "/home/santhoshkumar/.cache/pypoetry/virtualenvs/zerepy-v00vExBy-py3.13/lib/python3.13/site-packages/web3/contract/contract.py", line 421, in __getattr__
+    raise ABIFunctionNotFound(
+    ...<2 lines>...
+    )
+web3.exceptions.ABIFunctionNotFound: ("The function 'createBatch' was not found in this contract's abi.", ' Are you sure you provided the correct contract abi?')
+2025-03-02 17:21:08,974 - ERROR - connections.sonic_connection - [TX-2] Failed to send transaction after 3 attempts: ("The function 'createBatch' was not found in this contract's abi.", ' Are you sure you provided the correct contract abi?')
+2025-03-02 17:21:08,974 - INFO - connections.sonic_connection - [CALL-1740916268] Calling contract method: batchCount, args: []
+2025-03-02 17:21:08,981 - ERROR - connections.sonic_connection - [CALL-1740916268] Method not found: batchCount
+2025-03-02 17:21:08,981 - ERROR - connections.sonic_connection - [CALL-1740916268] Failed to call contract: Method batchCount not found on contract
+Traceback (most recent call last):
+  File "/home/santhoshkumar/Supplai/Supllychain-agent/src/connections/sonic_connection.py", line 1064, in call_contract
+    contract_function = getattr(contract.functions, method)
+  File "/home/santhoshkumar/.cache/pypoetry/virtualenvs/zerepy-v00vExBy-py3.13/lib/python3.13/site-packages/web3/contract/contract.py", line 421, in __getattr__
+    raise ABIFunctionNotFound(
+    ...<2 lines>...
+    )
+web3.exceptions.ABIFunctionNotFound: ("The function 'batchCount' was not found in this contract's abi.", ' Are you sure you provided the correct contract abi?')
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/santhoshkumar/Supplai/Supllychain-agent/src/connections/sonic_connection.py", line 1067, in call_contract
+    raise SonicConnectionError(f"Method {method} not found on contract") from e
+src.connections.sonic_connection.SonicConnectionError: Method batchCount not found on contract
+2025-03-02 17:21:14,986 - INFO - connections.sonic_connection - [TX-3] Preparing transaction: method=recordTemperature, args=[0, 42, 'Transport']
+2025-03-02 17:21:15,008 - WARNING - connections.sonic_connection - [TX-3] Transaction attempt 1 failed: ("The function 'recordTemperature' was not found in this contract's abi.", ' Are you sure you provided the correct contract abi?'). Retrying in 2s...
+2025-03-02 17:21:17,031 - WARNING - connections.sonic_connection - [TX-3] Transaction attempt 2 failed: ("The function 'recordTemperature' was not found in this contract's abi.", ' Are you sure you provided the correct contract abi?'). Retrying in 4s...
+2025-03-02 17:21:21,049 - ERROR - connections.sonic_connection - [TX-3] All retry attempts failed: ("The function 'recordTemperature' was not found in this contract's abi.", ' Are you sure you provided the correct contract abi?')
+Traceback (most recent call last):
+  File "/home/santhoshkumar/Supplai/Supllychain-agent/src/connections/sonic_connection.py", line 791, in send_transaction
+    contract_function = getattr(contract.functions, method)
+  File "/home/santhoshkumar/.cache/pypoetry/virtualenvs/zerepy-v00vExBy-py3.13/lib/python3.13/site-packages/web3/contract/contract.py", line 421, in __getattr__
+    raise ABIFunctionNotFound(
+    ...<2 lines>...
+    )
+web3.exceptions.ABIFunctionNotFound: ("The function 'recordTemperature' was not found in this contract's abi.", ' Are you sure you provided the correct contract abi?')
+2025-03-02 17:21:21,050 - ERROR - connections.sonic_connection - [TX-3] Failed to send transaction after 3 attempts: ("The function 'recordTemperature' was not found in this contract's abi.", ' Are you sure you provided the correct contract abi?')
+2025-03-02 17:21:27,053 - INFO - connections.sonic_connection - [TX-4] Preparing transaction: method=createBatch, args=['Strawberry']
+2025-03-02 17:21:27,065 - WARNING - connections.sonic_connection - [TX-4] Transaction attempt 1 failed: ("The function 'createBatch' was not found in this contract's abi.", ' Are you sure you provided the correct contract abi?'). Retrying in 2s...
+2025-03-02 17:21:29,078 - WARNING - connections.sonic_connection - [TX-4] Transaction attempt 2 failed: ("The function 'createBatch' was not found in this contract's abi.", ' Are you sure you provided the correct contract abi?'). Retrying in 4s...
+2025-03-02 17:21:33,089 - ERROR - connections.sonic_connection - [TX-4] All retry attempts failed: ("The function 'createBatch' was not found in this contract's abi.", ' Are you sure you provided the correct contract abi?')
+Traceback (most recent call last):
+  File "/home/santhoshkumar/Supplai/Supllychain-agent/src/connections/sonic_connection.py", line 791, in send_transaction
+    contract_function = getattr(contract.functions, method)
+  File "/home/santhoshkumar/.cache/pypoetry/virtualenvs/zerepy-v00vExBy-py3.13/lib/python3.13/site-packages/web3/contract/contract.py", line 421, in __getattr__
+    raise ABIFunctionNotFound(
+    ...<2 lines>...
+    )
+web3.exceptions.ABIFunctionNotFound: ("The function 'createBatch' was not found in this contract's abi.", ' Are you sure you provided the correct contract abi?')
+2025-03-02 17:21:33,089 - ERROR - connections.sonic_connection - [TX-4] Failed to send transaction after 3 attempts: ("The function 'createBatch' was not found in this contract's abi.", ' Are you sure you provided the correct contract abi?')
+2025-03-02 17:21:33,089 - INFO - connections.sonic_connection - [CALL-1740916293] Calling contract method: batchCount, args: []
+2025-03-02 17:21:33,096 - ERROR - connections.sonic_connection - [CALL-1740916293] Method not found: batchCount
+2025-03-02 17:21:33,097 - ERROR - connections.sonic_connection - [CALL-1740916293] Failed to call contract: Method batchCount not found on contract
+Traceback (most recent call last):
+  File "/home/santhoshkumar/Supplai/Supllychain-agent/src/connections/sonic_connection.py", line 1064, in call_contract
+    contract_function = getattr(contract.functions, method)
+  File "/home/santhoshkumar/.cache/pypoetry/virtualenvs/zerepy-v00vExBy-py3.13/lib/python3.13/site-packages/web3/contract/contract.py", line 421, in __getattr__
+    raise ABIFunctionNotFound(
+    ...<2 lines>...
+    )
+web3.exceptions.ABIFunctionNotFound: ("The function 'batchCount' was not found in this contract's abi.", ' Are you sure you provided the correct contract abi?')
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/santhoshkumar/Supplai/Supllychain-agent/src/connections/sonic_connection.py", line 1067, in call_contract
+    raise SonicConnectionError(f"Method {method} not found on contract") from e
+src.connections.sonic_connection.SonicConnectionError: Method batchCount not found on contract
+2025-03-02 18:17:13,152 - INFO - connections.sonic_connection - Initializing Sonic connection...
+2025-03-02 18:17:14,659 - INFO - connections.sonic_connection - Connected to network with chain ID: 57054
+2025-03-02 18:17:14,659 - INFO - connections.sonic_connection - Found ABIs directory at: /home/santhoshkumar/Supplai/Supllychain-agent/abis
+2025-03-02 18:17:14,660 - INFO - connections.sonic_connection - Found combined ABIs file: /home/santhoshkumar/Supplai/Supllychain-agent/abis/contract-abis.json
+2025-03-02 18:17:14,661 - INFO - connections.sonic_connection - Attempting to load BerryTempAgent ABI from: /home/santhoshkumar/Supplai/Supllychain-agent/abis/BerryTempAgent.json
+2025-03-02 18:17:14,661 - INFO - connections.sonic_connection - Loaded BerryTempAgent ABI from combined file with 25 entries
+2025-03-02 18:17:14,661 - INFO - connections.sonic_connection - Attempting to load BerryManager ABI from: /home/santhoshkumar/Supplai/Supllychain-agent/abis/BerryManager.json
+2025-03-02 18:17:14,661 - INFO - connections.sonic_connection - Loaded BerryManager ABI from combined file with 21 entries
+2025-03-02 18:17:14,661 - INFO - connections.sonic_connection - Successfully loaded contract ABIs: BerryTempAgent, BerryManager
+2025-03-02 18:17:14,687 - INFO - connections.sonic_connection - Successfully initialized contract instances: berry_temp_agent, berry_manager
+2025-03-02 18:17:14,692 - INFO - connections.sonic_connection - Account loaded with address: 0x1e43eeB0307bb3466Cd237fE58570E6A3996d8ff
+2025-03-02 18:17:14,963 - INFO - connections.sonic_connection - Account balance: 49.101514723 Sonic Tokens
+2025-03-02 18:17:14,963 - INFO - connections.sonic_connection - Sonic connection initialization complete
+2025-03-02 18:17:42,551 - INFO - connections.sonic_connection - [TX-1] Preparing transaction: method=recordTemperature, args=[0, 25, 'Delivery Center']
+2025-03-02 18:17:42,566 - WARNING - connections.sonic_connection - [TX-1] Transaction attempt 1 failed: ("The function 'recordTemperature' was not found in this contract's abi.", ' Are you sure you provided the correct contract abi?'). Retrying in 2s...
+2025-03-02 18:17:44,580 - WARNING - connections.sonic_connection - [TX-1] Transaction attempt 2 failed: ("The function 'recordTemperature' was not found in this contract's abi.", ' Are you sure you provided the correct contract abi?'). Retrying in 4s...
+2025-03-02 18:22:15,087 - INFO - connections.sonic_connection - [CALL-1740919935] Calling contract method: getTemperatureHistory, args: [0]
+2025-03-02 18:22:15,103 - ERROR - connections.sonic_connection - [CALL-1740919935] Method not found: getTemperatureHistory
+2025-03-02 18:22:15,103 - ERROR - connections.sonic_connection - [CALL-1740919935] Failed to call contract: Method getTemperatureHistory not found on contract
+Traceback (most recent call last):
+  File "/home/santhoshkumar/Supplai/Supllychain-agent/src/connections/sonic_connection.py", line 1085, in call_contract
+    contract_function = getattr(contract.functions, method)
+  File "/home/santhoshkumar/.cache/pypoetry/virtualenvs/zerepy-v00vExBy-py3.13/lib/python3.13/site-packages/web3/contract/contract.py", line 421, in __getattr__
+    raise ABIFunctionNotFound(
+    ...<2 lines>...
+    )
+web3.exceptions.ABIFunctionNotFound: ("The function 'getTemperatureHistory' was not found in this contract's abi.", ' Are you sure you provided the correct contract abi?')
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/santhoshkumar/Supplai/Supllychain-agent/src/connections/sonic_connection.py", line 1088, in call_contract
+    raise SonicConnectionError(f"Method {method} not found on contract") from e
+src.connections.sonic_connection.SonicConnectionError: Method getTemperatureHistory not found on contract
+2025-03-02 18:22:15,108 - INFO - connections.sonic_connection - [TX-1] Preparing transaction: method=processAgentRecommendation, args=[0]
+2025-03-02 18:22:15,110 - INFO - connections.sonic_connection - [CALL-1740919935] Calling contract method: getAgentPredictions, args: [0]
+2025-03-02 18:22:15,835 - INFO - connections.sonic_connection - [CALL-1740919935] Contract call successful in 0.73s
+2025-03-02 18:22:15,836 - WARNING - connections.sonic_connection - No predictions found for batch 0, skipping processAgentRecommendation
+2025-03-02 18:22:15,836 - INFO - connections.sonic_connection - [CALL-1740919935] Calling contract method: getSupplierDetails, args: ['0x1e43eeB0307bb3466Cd237fE58570E6A3996d8ff']
+2025-03-02 18:22:15,845 - ERROR - connections.sonic_connection - [CALL-1740919935] Method not found: getSupplierDetails
+2025-03-02 18:22:15,845 - ERROR - connections.sonic_connection - [CALL-1740919935] Failed to call contract: Method getSupplierDetails not found on contract
+Traceback (most recent call last):
+  File "/home/santhoshkumar/Supplai/Supllychain-agent/src/connections/sonic_connection.py", line 1085, in call_contract
+    contract_function = getattr(contract.functions, method)
+  File "/home/santhoshkumar/.cache/pypoetry/virtualenvs/zerepy-v00vExBy-py3.13/lib/python3.13/site-packages/web3/contract/contract.py", line 421, in __getattr__
+    raise ABIFunctionNotFound(
+    ...<2 lines>...
+    )
+web3.exceptions.ABIFunctionNotFound: ("The function 'getSupplierDetails' was not found in this contract's abi.", ' Are you sure you provided the correct contract abi?')
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/santhoshkumar/Supplai/Supllychain-agent/src/connections/sonic_connection.py", line 1088, in call_contract
+    raise SonicConnectionError(f"Method {method} not found on contract") from e
+src.connections.sonic_connection.SonicConnectionError: Method getSupplierDetails not found on contract
+2025-03-02 18:22:21,849 - INFO - connections.sonic_connection - [TX-1] Preparing transaction: method=recordTemperature, args=[0, 50, 'Delivery Center']
+2025-03-02 18:22:21,860 - WARNING - connections.sonic_connection - [TX-1] Transaction attempt 1 failed: ("The function 'recordTemperature' was not found in this contract's abi.", ' Are you sure you provided the correct contract abi?'). Retrying in 2s...
+2025-03-02 18:22:23,879 - WARNING - connections.sonic_connection - [TX-1] Transaction attempt 2 failed: ("The function 'recordTemperature' was not found in this contract's abi.", ' Are you sure you provided the correct contract abi?'). Retrying in 4s...
+2025-03-02 18:22:27,891 - ERROR - connections.sonic_connection - [TX-1] All retry attempts failed: ("The function 'recordTemperature' was not found in this contract's abi.", ' Are you sure you provided the correct contract abi?')
+Traceback (most recent call last):
+  File "/home/santhoshkumar/Supplai/Supllychain-agent/src/connections/sonic_connection.py", line 812, in send_transaction
+    contract_function = getattr(contract.functions, method)
+  File "/home/santhoshkumar/.cache/pypoetry/virtualenvs/zerepy-v00vExBy-py3.13/lib/python3.13/site-packages/web3/contract/contract.py", line 421, in __getattr__
+    raise ABIFunctionNotFound(
+    ...<2 lines>...
+    )
+web3.exceptions.ABIFunctionNotFound: ("The function 'recordTemperature' was not found in this contract's abi.", ' Are you sure you provided the correct contract abi?')
+2025-03-02 18:22:27,892 - ERROR - connections.sonic_connection - [TX-1] Failed to send transaction after 3 attempts: ("The function 'recordTemperature' was not found in this contract's abi.", ' Are you sure you provided the correct contract abi?')
+2025-03-02 18:22:57,587 - INFO - connections.sonic_connection - Initializing Sonic connection...
+2025-03-02 18:22:59,747 - INFO - connections.sonic_connection - Connected to network with chain ID: 57054
+2025-03-02 18:22:59,747 - INFO - connections.sonic_connection - Found ABIs directory at: /home/santhoshkumar/Supplai/Supllychain-agent/abis
+2025-03-02 18:22:59,747 - INFO - connections.sonic_connection - Found combined ABIs file: /home/santhoshkumar/Supplai/Supllychain-agent/abis/contract-abis.json
+2025-03-02 18:22:59,747 - INFO - connections.sonic_connection - Attempting to load BerryTempAgent ABI from: /home/santhoshkumar/Supplai/Supllychain-agent/abis/BerryTempAgent.json
+2025-03-02 18:22:59,747 - INFO - connections.sonic_connection - Loaded BerryTempAgent ABI from combined file with 25 entries
+2025-03-02 18:22:59,747 - INFO - connections.sonic_connection - Attempting to load BerryManager ABI from: /home/santhoshkumar/Supplai/Supllychain-agent/abis/BerryManager.json
+2025-03-02 18:22:59,747 - INFO - connections.sonic_connection - Loaded BerryManager ABI from combined file with 21 entries
+2025-03-02 18:22:59,747 - INFO - connections.sonic_connection - Successfully loaded contract ABIs: BerryTempAgent, BerryManager
+2025-03-02 18:22:59,772 - INFO - connections.sonic_connection - Successfully initialized contract instances: berry_temp_agent, berry_manager
+2025-03-02 18:22:59,779 - INFO - connections.sonic_connection - Account loaded with address: 0x1e43eeB0307bb3466Cd237fE58570E6A3996d8ff
+2025-03-02 18:23:00,063 - INFO - connections.sonic_connection - Account balance: 49.101514723 Sonic Tokens
+2025-03-02 18:23:00,064 - INFO - connections.sonic_connection - Sonic connection initialization complete
+2025-03-02 18:23:19,959 - INFO - connections.sonic_connection - [CALL-1740919999] Calling contract method: getTemperatureHistory, args: [0]
+2025-03-02 18:23:20,639 - INFO - connections.sonic_connection - [CALL-1740919999] Contract call successful in 0.68s
+2025-03-02 18:23:20,639 - INFO - connections.sonic_connection - [CALL-1740920000] Calling contract method: getBatchDetails, args: [0]
+2025-03-02 18:23:21,356 - INFO - connections.sonic_connection - [CALL-1740920000] Contract call successful in 0.72s
+2025-03-02 18:23:27,358 - INFO - connections.sonic_connection - [CALL-1740920007] Calling contract method: getTemperatureHistory, args: [0]
+2025-03-02 18:23:28,171 - INFO - connections.sonic_connection - [CALL-1740920007] Contract call successful in 0.81s
+2025-03-02 18:23:28,171 - INFO - connections.sonic_connection - [CALL-1740920008] Calling contract method: getBatchDetails, args: [0]
+2025-03-02 18:23:28,700 - INFO - connections.sonic_connection - [CALL-1740920008] Contract call successful in 0.53s
+2025-03-02 18:23:34,701 - INFO - connections.sonic_connection - [TX-1] Preparing transaction: method=createBatch, args=['Strawberry']
+2025-03-02 18:23:38,251 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-02 18:23:38,514 - INFO - connections.sonic_connection - Estimated gas: 198556
+2025-03-02 18:23:38,514 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-02 18:23:38,514 - INFO - connections.sonic_connection - Total cost: 0.00198556 Sonic Tokens
+2025-03-02 18:23:38,514 - INFO - connections.sonic_connection - Account balance: 49.101514723 Sonic Tokens
+2025-03-02 18:23:40,938 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-02 18:23:40,939 - INFO - connections.sonic_connection - [TX-1] Sending transaction: method=createBatch, gas=300000, gasPrice=10 gwei
+2025-03-02 18:23:41,553 - INFO - connections.sonic_connection - [TX-1] Waiting for transaction to be mined... (0s elapsed)
+2025-03-02 18:23:42,961 - INFO - connections.sonic_connection - [TX-1] Transaction successful: Gas used: 178917, Cost: 0.00178917 tokens, Time: 8.26s
+2025-03-02 18:23:42,961 - INFO - connections.sonic_connection - [CALL-1740920022] Calling contract method: batchCount, args: []
+2025-03-02 18:23:43,605 - INFO - connections.sonic_connection - [CALL-1740920022] Contract call successful in 0.64s
+2025-03-02 18:23:49,606 - INFO - connections.sonic_connection - [CALL-1740920029] Calling contract method: getTemperatureHistory, args: [0]
+2025-03-02 18:23:50,127 - INFO - connections.sonic_connection - [CALL-1740920029] Contract call successful in 0.52s
+2025-03-02 18:23:50,127 - INFO - connections.sonic_connection - [CALL-1740920030] Calling contract method: getBatchDetails, args: [0]
+2025-03-02 18:23:50,687 - INFO - connections.sonic_connection - [CALL-1740920030] Contract call successful in 0.56s
+2025-03-02 18:23:56,689 - INFO - connections.sonic_connection - [CALL-1740920036] Calling contract method: getTemperatureHistory, args: [0]
+2025-03-02 18:23:57,394 - INFO - connections.sonic_connection - [CALL-1740920036] Contract call successful in 0.70s
+2025-03-02 18:23:57,394 - INFO - connections.sonic_connection - [CALL-1740920037] Calling contract method: getBatchDetails, args: [0]
+2025-03-02 18:23:58,057 - INFO - connections.sonic_connection - [CALL-1740920037] Contract call successful in 0.66s
+2025-03-02 18:24:04,058 - INFO - connections.sonic_connection - [CALL-1740920044] Calling contract method: getTemperatureHistory, args: [0]
+2025-03-02 18:24:04,939 - INFO - connections.sonic_connection - [CALL-1740920044] Contract call successful in 0.88s
+2025-03-02 18:24:04,939 - INFO - connections.sonic_connection - [CALL-1740920044] Calling contract method: getBatchDetails, args: [0]
+2025-03-02 18:24:05,692 - INFO - connections.sonic_connection - [CALL-1740920044] Contract call successful in 0.75s
+2025-03-02 18:24:11,693 - INFO - connections.sonic_connection - [CALL-1740920051] Calling contract method: getTemperatureHistory, args: [0]
+2025-03-02 18:24:12,621 - INFO - connections.sonic_connection - [CALL-1740920051] Contract call successful in 0.93s
+2025-03-02 18:24:12,621 - INFO - connections.sonic_connection - [CALL-1740920052] Calling contract method: getBatchDetails, args: [0]
+2025-03-02 18:24:13,373 - INFO - connections.sonic_connection - [CALL-1740920052] Contract call successful in 0.75s
+2025-03-02 18:24:19,375 - INFO - connections.sonic_connection - [TX-2] Preparing transaction: method=createBatch, args=['Strawberry']
+2025-03-02 18:24:22,747 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-02 18:24:23,195 - INFO - connections.sonic_connection - Estimated gas: 198556
+2025-03-02 18:24:23,195 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-02 18:24:23,195 - INFO - connections.sonic_connection - Total cost: 0.00198556 Sonic Tokens
+2025-03-02 18:24:23,195 - INFO - connections.sonic_connection - Account balance: 49.099725553 Sonic Tokens
+2025-03-02 18:24:25,558 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-02 18:24:25,560 - INFO - connections.sonic_connection - [TX-2] Sending transaction: method=createBatch, gas=300000, gasPrice=10 gwei
+2025-03-02 18:24:26,104 - INFO - connections.sonic_connection - [TX-2] Waiting for transaction to be mined... (0s elapsed)
+2025-03-02 18:24:27,608 - INFO - connections.sonic_connection - [TX-2] Transaction successful: Gas used: 178917, Cost: 0.00178917 tokens, Time: 8.23s
+2025-03-02 18:24:27,608 - INFO - connections.sonic_connection - [CALL-1740920067] Calling contract method: batchCount, args: []
+2025-03-02 18:24:28,324 - INFO - connections.sonic_connection - [CALL-1740920067] Contract call successful in 0.72s
+2025-03-02 18:24:34,326 - INFO - connections.sonic_connection - [TX-3] Preparing transaction: method=recordTemperature, args=[0, 38, 'Delivery Center']
+2025-03-02 18:24:37,421 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-02 18:24:37,847 - INFO - connections.sonic_connection - Estimated gas: 389658
+2025-03-02 18:24:37,847 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-02 18:24:37,847 - INFO - connections.sonic_connection - Total cost: 0.00389658 Sonic Tokens
+2025-03-02 18:24:37,847 - INFO - connections.sonic_connection - Account balance: 49.097936383 Sonic Tokens
+2025-03-02 18:24:40,938 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-02 18:24:40,939 - INFO - connections.sonic_connection - [TX-3] Sending transaction: method=recordTemperature, gas=300000, gasPrice=10 gwei
+2025-03-02 18:24:41,599 - INFO - connections.sonic_connection - [TX-3] Waiting for transaction to be mined... (0s elapsed)
+2025-03-02 18:24:42,920 - WARNING - connections.sonic_connection - [TX-3] Transaction failed on-chain: 0x5032c7601f8d8b7a46c9aea77e9fe3bd2e9b3f1f4dff3bb2008f1e9f3d1c44f8
+2025-03-02 18:24:48,922 - INFO - connections.sonic_connection - [TX-4] Preparing transaction: method=createBatch, args=['Strawberry']
+2025-03-02 18:24:52,753 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-02 18:24:53,013 - INFO - connections.sonic_connection - Estimated gas: 198556
+2025-03-02 18:24:53,013 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-02 18:24:53,013 - INFO - connections.sonic_connection - Total cost: 0.00198556 Sonic Tokens
+2025-03-02 18:24:53,013 - INFO - connections.sonic_connection - Account balance: 49.094936383 Sonic Tokens
+2025-03-02 18:24:56,458 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-02 18:24:56,459 - INFO - connections.sonic_connection - [TX-4] Sending transaction: method=createBatch, gas=300000, gasPrice=10 gwei
+2025-03-02 18:24:57,097 - INFO - connections.sonic_connection - [TX-4] Waiting for transaction to be mined... (0s elapsed)
+2025-03-02 18:24:58,738 - INFO - connections.sonic_connection - [TX-4] Transaction successful: Gas used: 178917, Cost: 0.00178917 tokens, Time: 9.82s
+2025-03-02 18:24:58,738 - INFO - connections.sonic_connection - [CALL-1740920098] Calling contract method: batchCount, args: []
+2025-03-02 18:24:59,278 - INFO - connections.sonic_connection - [CALL-1740920098] Contract call successful in 0.54s
+2025-03-02 18:24:59,279 - INFO - connections.sonic_connection - [TX-5] Preparing transaction: method=recordTemperature, args=[4, 20, 'Cold Storage']
+2025-03-02 18:25:02,729 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-02 18:25:03,015 - INFO - connections.sonic_connection - Estimated gas: 410149
+2025-03-02 18:25:03,015 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-02 18:25:03,016 - INFO - connections.sonic_connection - Total cost: 0.00410149 Sonic Tokens
+2025-03-02 18:25:03,016 - INFO - connections.sonic_connection - Account balance: 49.093147213 Sonic Tokens
+2025-03-02 18:25:05,843 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-02 18:25:05,845 - INFO - connections.sonic_connection - [TX-5] Sending transaction: method=recordTemperature, gas=300000, gasPrice=10 gwei
+2025-03-02 18:25:06,383 - INFO - connections.sonic_connection - [TX-5] Waiting for transaction to be mined... (0s elapsed)
+2025-03-02 18:25:07,664 - WARNING - connections.sonic_connection - [TX-5] Transaction failed on-chain: 0x3a73981d30feb634f5d5ec08667d3963dd59d7ab0b6488af9aacfd6a91c5ef5b
+2025-03-02 18:25:08,667 - INFO - connections.sonic_connection - [TX-6] Preparing transaction: method=recordTemperature, args=[4, 25, 'Loading Dock']
+2025-03-02 18:25:12,142 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-02 18:25:12,458 - INFO - connections.sonic_connection - Estimated gas: 410149
+2025-03-02 18:25:12,459 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-02 18:25:12,459 - INFO - connections.sonic_connection - Total cost: 0.00410149 Sonic Tokens
+2025-03-02 18:25:12,459 - INFO - connections.sonic_connection - Account balance: 49.090147213 Sonic Tokens
+2025-03-02 18:25:16,309 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-02 18:25:16,311 - INFO - connections.sonic_connection - [TX-6] Sending transaction: method=recordTemperature, gas=300000, gasPrice=10 gwei
+2025-03-02 18:25:17,371 - INFO - connections.sonic_connection - [TX-6] Waiting for transaction to be mined... (0s elapsed)
+2025-03-02 18:25:19,023 - WARNING - connections.sonic_connection - [TX-6] Transaction failed on-chain: 0xcf610df8036fc6407c8e7253351179f39dae6badd55324912e9035b244565b76
+2025-03-02 18:25:20,025 - INFO - connections.sonic_connection - [TX-7] Preparing transaction: method=recordTemperature, args=[4, 30, 'Transport']
+2025-03-02 18:25:23,926 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-02 18:25:24,298 - INFO - connections.sonic_connection - Estimated gas: 410106
+2025-03-02 18:25:24,299 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-02 18:25:24,299 - INFO - connections.sonic_connection - Total cost: 0.00410106 Sonic Tokens
+2025-03-02 18:25:24,299 - INFO - connections.sonic_connection - Account balance: 49.087147213 Sonic Tokens
+2025-03-02 18:25:26,896 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-02 18:25:26,897 - INFO - connections.sonic_connection - [TX-7] Sending transaction: method=recordTemperature, gas=300000, gasPrice=10 gwei
+2025-03-02 18:25:27,498 - INFO - connections.sonic_connection - [TX-7] Waiting for transaction to be mined... (0s elapsed)
