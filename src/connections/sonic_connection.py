@@ -20,8 +20,8 @@ file_handler.setFormatter(logging.Formatter("%(asctime)s - %(levelname)s - %(nam
 logger.addHandler(file_handler)
 
 # Contract addresses
-BERRY_TEMP_AGENT_ADDRESS = "0x0670F34eA61de9d6152bD998C98087100CE64090"
-BERRY_MANAGER_ADDRESS = "0x2c6Aa1fEAdE5D65e7f4D2FA597E926f6A19f1545"
+BERRY_TEMP_AGENT_ADDRESS = "0x0ed1e8A5A4133c4e01b19b4D729F52407f7770a9"
+BERRY_MANAGER_ADDRESS = "0x0846E9e3b99d9D605006DB4FD26c255743d307B6"
 
 
 # Transaction history storage
@@ -228,44 +228,142 @@ class SonicConnection(BaseConnection):
             # Get the project root directory
             project_root = os.getcwd()
             
+            # Check if abis directory exists
+            abi_dir = os.path.join(project_root, "abis")
+            if not os.path.exists(abi_dir):
+                logger.warning(f"ABIs directory not found at {abi_dir}")
+                
+                # Try alternative locations
+                alt_locations = [
+                    os.path.join(project_root, "..", "abis"),
+                    os.path.join(project_root, "src", "abis"),
+                    os.path.join(project_root, "contract-abis")
+                ]
+                
+                for loc in alt_locations:
+                    if os.path.exists(loc):
+                        abi_dir = loc
+                        logger.info(f"Found ABIs directory at alternative location: {abi_dir}")
+                        break
+            else:
+                logger.info(f"Found ABIs directory at: {abi_dir}")
+            
             # List of contracts to load
             contracts_to_load = [
                 {
                     "name": "BerryTempAgent",
-                    "path": os.path.join(project_root, "artifacts", "contracts", "core", "BerryTempAgent.json"),
+                    "path": os.path.join(abi_dir, "BerryTempAgent.json"),
                     "address": BERRY_TEMP_AGENT_ADDRESS
                 },
                 {
                     "name": "BerryManager",
-                    "path": os.path.join(project_root, "artifacts", "contracts", "core", "BerryManager.json"),
+                    "path": os.path.join(abi_dir, "BerryManager.json"),
                     "address": BERRY_MANAGER_ADDRESS
                 }
             ]
             
+            # Try to load from combined file first
+            combined_path = os.path.join(abi_dir, "contract-abis.json")
+            combined_abis = None
+            if os.path.exists(combined_path):
+                try:
+                    with open(combined_path, 'r') as f:
+                        combined_abis = json.loads(f.read())
+                    logger.info(f"Found combined ABIs file: {combined_path}")
+                except Exception as e:
+                    logger.warning(f"Error reading combined ABIs file: {e}")
+            
             # Load each contract ABI
             for contract in contracts_to_load:
                 try:
-                    if not os.path.exists(contract["path"]):
-                        logger.warning(f"Contract artifact not found: {contract['path']}")
+                    abi_path = contract["path"]
+                    logger.info(f"Attempting to load {contract['name']} ABI from: {abi_path}")
+                    
+                    # First try to load from combined file if available
+                    if combined_abis and contract["name"] in combined_abis:
+                        self.contract_abis[contract["name"]] = combined_abis[contract["name"]]
+                        logger.info(f"Loaded {contract['name']} ABI from combined file with {len(combined_abis[contract['name']])} entries")
+                        continue
+                    
+                    if not os.path.exists(abi_path):
+                        logger.warning(f"Contract artifact not found: {abi_path}")
                         continue
                         
+                    with open(abi_path, 'r') as f:
+                        abi_content = f.read()
+                        # Debug log the first 100 chars to verify content
+                        logger.debug(f"ABI file content starts with: {abi_content[:100]}...")
+                        
+                        contract_json = json.loads(abi_content)
+                        
+                    # Handle different ABI formats
+                    if isinstance(contract_json, dict) and contract["name"] in contract_json:
+                        # Handle format like {"BerryTempAgent": [...], "BerryManager": [...]}
+                        self.contract_abis[contract["name"]] = contract_json[contract["name"]]
+                        logger.info(f"Loaded ABI for {contract['name']} from named dictionary with {len(contract_json[contract['name']])} entries")
+                    elif isinstance(contract_json, list):
+                        # Direct ABI array
+                        self.contract_abis[contract["name"]] = contract_json
+                        logger.info(f"Loaded ABI array for {contract['name']} with {len(contract_json)} entries")
+                    elif isinstance(contract_json, dict):
+                        # Check for nested ABI structures
+                        if "abi" in contract_json:
+                            self.contract_abis[contract["name"]] = contract_json["abi"]
+                            logger.info(f"Loaded nested ABI for {contract['name']} with {len(contract_json['abi'])} entries")
+                        elif "bytecode" in contract_json or "deployedBytecode" in contract_json:
+                            # This looks like a Hardhat/Truffle artifact but missing ABI
+                            logger.warning(f"{contract['name']} appears to be a contract artifact but missing 'abi' field")
+                            continue
+                        else:
+                            # Try to find any array that might be the ABI
+                            for key, value in contract_json.items():
+                                if isinstance(value, list) and len(value) > 0 and "type" in value[0]:
+                                    self.contract_abis[contract["name"]] = value
+                                    logger.info(f"Found potential ABI in '{key}' for {contract['name']}")
+                                    break
+                            else:
+                                logger.warning(f"Could not identify ABI structure in {contract['name']} JSON")
+                    else:
+                        logger.warning(f"Unknown format for {contract['name']} ABI: {type(contract_json)}")
+                        continue
+                    
+                    # Print available functions for debugging
+                    if contract["name"] in self.contract_abis:
+                        abi = self.contract_abis[contract["name"]]
+                        functions = [item["name"] for item in abi if item.get("type") == "function"]
+                        logger.info(f"{contract['name']} ABI contains functions: {', '.join(functions[:10])}{' and more...' if len(functions) > 10 else ''}")
+                        
+                        # Check for specific functions
+                        if contract["name"] == "BerryTempAgent":
+                            required_functions = ["createBatch", "batchCount", "getTemperatureHistory"]
+                            for func in required_functions:
+                                if func not in functions:
+                                    logger.warning(f"Required function '{func}' not found in {contract['name']} ABI!")
+                                else:
+                                    logger.info(f"Found required function: {func}")
+                        
+                except json.JSONDecodeError as e:
+                    logger.error(f"JSON parsing error in {contract['name']} ABI: {e}")
+                    # Try to identify the issue
                     with open(contract["path"], 'r') as f:
-                        contract_json = json.load(f)
-                        
-                    if "abi" not in contract_json:
-                        logger.warning(f"No ABI found in contract artifact: {contract['name']}")
-                        continue
-                        
-                    self.contract_abis[contract["name"]] = contract_json["abi"]
-                    logger.info(f"Loaded ABI for {contract['name']}")
+                        content = f.read()
+                        if content.strip().startswith('[') and content.strip().endswith(']'):
+                            logger.info("File appears to be a JSON array, but has syntax errors")
+                        elif content.strip().startswith('{') and content.strip().endswith('}'):
+                            logger.info("File appears to be a JSON object, but has syntax errors")
+                        else:
+                            logger.info(f"File does not appear to be valid JSON. First 100 chars: {content[:100]}")
                 except Exception as e:
                     logger.error(f"Failed to load ABI for {contract['name']}: {e}")
-            
+                
             # Set named ABI variables for backward compatibility
             self.BERRY_TEMP_AGENT_ABI = self.contract_abis.get("BerryTempAgent", [])
             self.BERRY_MANAGER_ABI = self.contract_abis.get("BerryManager", [])
             
-            logger.info(f"Successfully loaded contract ABIs: {', '.join(self.contract_abis.keys())}")
+            if self.contract_abis:
+                logger.info(f"Successfully loaded contract ABIs: {', '.join(self.contract_abis.keys())}")
+            else:
+                logger.warning("No contract ABIs were successfully loaded")
             
         except Exception as e:
             logger.error(f"Failed to load contract ABIs: {e}", exc_info=True)
@@ -535,7 +633,7 @@ class SonicConnection(BaseConnection):
                     ActionParameter("to_address", True, str, "Recipient address"),
                     ActionParameter("amount", True, float, "Amount to transfer"),
                     ActionParameter("token_address", False, str, "Optional token address")
-                ],
+                    ],
                 description="Send $S or tokens"
             ),
             "swap": Action(
@@ -881,7 +979,7 @@ class SonicConnection(BaseConnection):
         
         logger.error(f"{tx_tag} Failed to send transaction after {max_retries} attempts: {last_error}")
         return error_result
-
+    
     def call_contract(self, tx_data: Dict[str, Any]) -> Any:
         """Call a contract method (read-only) with improved error handling"""
         # Generate a tag for tracing this call
@@ -895,19 +993,19 @@ class SonicConnection(BaseConnection):
             batch_id = tx_data.get("args", [0])[0] if tx_data.get("args") else 0
             
             if method == "getTemperatureHistory":
-            # Create batch-specific temperature history
-             mock_history = []
-             for reading in self.mock_data["temperature_history"]:
-                 if reading["batchId"] == batch_id:
-            # Convert to list format expected by the contract
-                    mock_history.append([
-                    reading["timestamp"],
-                    reading["temperature"],
-                    reading["location"],
-                    reading["temperature"] > 40 or reading["temperature"] < 0,  # isBreached
-                    5 if (reading["temperature"] > 40 or reading["temperature"] < 0) else 0  # predictedImpact
-            ])
-             return mock_history
+                # Create batch-specific temperature history
+                mock_history = []
+                for reading in self.mock_data["temperature_history"]:
+                    if reading["batchId"] == batch_id:
+                        # Convert to list format expected by the contract
+                        mock_history.append([
+                            reading["timestamp"],
+                            reading["temperature"],
+                            reading["location"],
+                            reading["temperature"] > 40 or reading["temperature"] < 0,  # isBreached
+                            5 if (reading["temperature"] > 40 or reading["temperature"] < 0) else 0  # predictedImpact
+                        ])
+                return mock_history
             
             elif method == "getBatchDetails":
                 # Mock batch details
@@ -1126,57 +1224,58 @@ class SonicConnection(BaseConnection):
                 "temperature": temperature,
                 "location": location
             }
+    
     def get_batch_details(self, batch_id: int) -> Dict[str, Any]:
-            """Get details for a berry batch"""
-            if self.use_mock_mode:
-                logger.info(f"MOCK MODE: Getting details for batch {batch_id}")
-                return {
-                    "batchId": batch_id,
-                    "berryType": "Strawberry",
-                    "startTime": int(datetime.now().timestamp()) - 86400,
-                    "endTime": 0,
-                    "isActive": True,
-                    "status": 1,  # 1 = InTransit
-                    "qualityScore": 85,
-                    "predictedShelfLife": 60 * 60 * 60  # 60 hours in seconds
-                }
+        """Get details for a berry batch"""
+        if self.use_mock_mode:
+            logger.info(f"MOCK MODE: Getting details for batch {batch_id}")
+            return {
+                "batchId": batch_id,
+                "berryType": "Strawberry",
+                "startTime": int(datetime.now().timestamp()) - 86400,
+                "endTime": 0,
+                "isActive": True,
+                "status": 1,  # 1 = InTransit
+                "qualityScore": 85,
+                "predictedShelfLife": 60 * 60 * 60  # 60 hours in seconds
+            }
                 
-            try:
-                if not self.berry_temp_agent:
-                    raise SonicConnectionError("BerryTempAgent contract not initialized")
+        try:
+            if not self.berry_temp_agent:
+                raise SonicConnectionError("BerryTempAgent contract not initialized")
                 
-                # Use call_contract method
-                tx_data = {
-                    "contract_address": BERRY_TEMP_AGENT_ADDRESS,
-                    "method": "getBatchDetails",
-                    "args": [batch_id]
-                }
+            # Use call_contract method
+            tx_data = {
+                "contract_address": BERRY_TEMP_AGENT_ADDRESS,
+                "method": "getBatchDetails",
+                "args": [batch_id]
+            }
                 
-                batch = self.call_contract(tx_data)
+            batch = self.call_contract(tx_data)
                 
-                # Format batch data
-                batch_data = {
-                    "batchId": batch[0],
-                    "berryType": batch[1],
-                    "startTime": batch[2],
-                    "endTime": batch[3],
-                    "isActive": batch[4],
-                    "status": batch[5],
-                    "qualityScore": batch[6],
-                    "predictedShelfLife": batch[7]
-                }
+            # Format batch data
+            batch_data = {
+                "batchId": batch[0],
+                "berryType": batch[1],
+                "startTime": batch[2],
+                "endTime": batch[3],
+                "isActive": batch[4],
+                "status": batch[5],
+                "qualityScore": batch[6],
+                "predictedShelfLife": batch[7]
+            }
                 
-                return batch_data
+            return batch_data
                 
-            except Exception as e:
-                logger.error(f"Failed to get batch details: {e}")
-                return {
-                    "error": str(e),
-                    "batchId": batch_id,
-                    "berryType": "Unknown",
-                    "isActive": False,
-                    "qualityScore": 0
-                }
+        except Exception as e:
+            logger.error(f"Failed to get batch details: {e}")
+            return {
+                "error": str(e),
+                "batchId": batch_id,
+                "berryType": "Unknown",
+                "isActive": False,
+                "qualityScore": 0
+            }
 
     def get_temperature_history(self, batch_id: int) -> List[Dict[str, Any]]:
         """Get temperature history for a berry batch"""
@@ -1627,7 +1726,7 @@ class SonicConnection(BaseConnection):
             if batch_id == 0 and "batch_id" not in kwargs:
                 create_result = self.create_batch(berry_type)
                 if not create_result.get("success", False):
-                    return create_result
+                    raise Exception(f"Failed to create batch: {create_result.get('error', 'Unknown error')}")
                 
                 batch_id = create_result.get("batch_id", 0)
             
@@ -1746,4 +1845,4 @@ class SonicConnection(BaseConnection):
                     "error": str(e)
                 }
         
-        return stats
+        return stats        

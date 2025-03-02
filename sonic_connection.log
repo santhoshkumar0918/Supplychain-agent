@@ -3573,3 +3573,50 @@ web3.exceptions.ABIFunctionNotFound: ("The function 'recordTemperature' was not 
 2025-03-02 18:25:26,896 - INFO - connections.sonic_connection - Using gas price: 10 gwei
 2025-03-02 18:25:26,897 - INFO - connections.sonic_connection - [TX-7] Sending transaction: method=recordTemperature, gas=300000, gasPrice=10 gwei
 2025-03-02 18:25:27,498 - INFO - connections.sonic_connection - [TX-7] Waiting for transaction to be mined... (0s elapsed)
+2025-03-02 18:25:28,971 - WARNING - connections.sonic_connection - [TX-7] Transaction failed on-chain: 0x5fd9f72e76d734db1eb7e0b4ca7b766bbc3a2c1a43d0e183ffe5d49763fa4b97
+2025-03-02 18:25:29,972 - INFO - connections.sonic_connection - [TX-8] Preparing transaction: method=recordTemperature, args=[4, 35, 'Transport']
+2025-03-02 18:25:33,311 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-02 18:25:33,627 - INFO - connections.sonic_connection - Estimated gas: 410106
+2025-03-02 18:25:33,627 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-02 18:25:33,627 - INFO - connections.sonic_connection - Total cost: 0.00410106 Sonic Tokens
+2025-03-02 18:25:33,627 - INFO - connections.sonic_connection - Account balance: 49.084147213 Sonic Tokens
+2025-03-02 18:25:36,241 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-02 18:25:36,242 - INFO - connections.sonic_connection - [TX-8] Sending transaction: method=recordTemperature, gas=300000, gasPrice=10 gwei
+2025-03-02 18:25:37,133 - INFO - connections.sonic_connection - [TX-8] Waiting for transaction to be mined... (0s elapsed)
+2025-03-02 18:25:38,594 - WARNING - connections.sonic_connection - [TX-8] Transaction failed on-chain: 0xa24df4f0b21df0d88fb6f9e18f827851237b26c684aa73172fef29fd02f6ce25
+2025-03-02 18:25:39,596 - INFO - connections.sonic_connection - [TX-9] Preparing transaction: method=recordTemperature, args=[4, 28, 'Transport']
+2025-03-02 18:25:43,179 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-02 18:25:43,439 - INFO - connections.sonic_connection - Estimated gas: 410106
+2025-03-02 18:25:43,439 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-02 18:25:43,440 - INFO - connections.sonic_connection - Total cost: 0.00410106 Sonic Tokens
+2025-03-02 18:25:43,440 - INFO - connections.sonic_connection - Account balance: 49.081147213 Sonic Tokens
+2025-03-02 18:25:45,906 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-02 18:25:45,908 - INFO - connections.sonic_connection - [TX-9] Sending transaction: method=recordTemperature, gas=300000, gasPrice=10 gwei
+2025-03-02 18:25:46,533 - INFO - connections.sonic_connection - [TX-9] Waiting for transaction to be mined... (0s elapsed)
+2025-03-02 18:25:47,994 - WARNING - connections.sonic_connection - [TX-9] Transaction failed on-chain: 0x33c55804afb4a0b7f7171e62fe051336d23c956e9687036ddd1100ccefefdbea
+2025-03-02 18:25:48,996 - INFO - connections.sonic_connection - [TX-10] Preparing transaction: method=recordTemperature, args=[4, 22, 'Delivery Center']
+2025-03-02 18:25:52,360 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-02 18:25:52,624 - INFO - connections.sonic_connection - Estimated gas: 410192
+2025-03-02 18:25:52,624 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-02 18:25:52,624 - INFO - connections.sonic_connection - Total cost: 0.00410192 Sonic Tokens
+2025-03-02 18:25:52,624 - INFO - connections.sonic_connection - Account balance: 49.078147213 Sonic Tokens
+2025-03-02 18:25:55,342 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-02 18:25:55,343 - INFO - connections.sonic_connection - [TX-10] Sending transaction: method=recordTemperature, gas=300000, gasPrice=10 gwei
+2025-03-02 18:25:56,023 - INFO - connections.sonic_connection - [TX-10] Waiting for transaction to be mined... (0s elapsed)
+2025-03-02 18:25:57,315 - WARNING - connections.sonic_connection - [TX-10] Transaction failed on-chain: 0x6d18374b05e103d963882e6ac1f452c621d9cba4b73c09e50f71e4f9d509a2fc
+2025-03-02 18:25:58,317 - INFO - connections.sonic_connection - [CALL-1740920158] Calling contract method: getTemperatureHistory, args: [4]
+2025-03-02 18:25:59,034 - INFO - connections.sonic_connection - [CALL-1740920158] Contract call successful in 0.72s
+2025-03-02 18:25:59,034 - INFO - connections.sonic_connection - [CALL-1740920159] Calling contract method: getBatchDetails, args: [4]
+2025-03-02 18:25:59,661 - INFO - connections.sonic_connection - [CALL-1740920159] Contract call successful in 0.63s
+2025-03-02 18:25:59,662 - INFO - connections.sonic_connection - [TX-11] Preparing transaction: method=processAgentRecommendation, args=[4]
+2025-03-02 18:25:59,667 - INFO - connections.sonic_connection - [CALL-1740920159] Calling contract method: getAgentPredictions, args: [4]
+2025-03-02 18:26:00,440 - INFO - connections.sonic_connection - [CALL-1740920159] Contract call successful in 0.77s
+2025-03-02 18:26:00,440 - WARNING - connections.sonic_connection - No predictions found for batch 4, skipping processAgentRecommendation
+2025-03-02 18:26:00,441 - INFO - connections.sonic_connection - [CALL-1740920160] Calling contract method: getSupplierDetails, args: ['0x1e43eeB0307bb3466Cd237fE58570E6A3996d8ff']
+2025-03-02 18:26:01,261 - INFO - connections.sonic_connection - [CALL-1740920160] Contract call successful in 0.82s
+2025-03-02 18:26:01,262 - INFO - connections.sonic_connection - [CALL-1740920161] Calling contract method: getBatchDetails, args: [4]
+2025-03-02 18:26:01,898 - INFO - connections.sonic_connection - [CALL-1740920161] Contract call successful in 0.64s
+2025-03-02 18:26:01,898 - INFO - connections.sonic_connection - [CALL-1740920161] Calling contract method: getTemperatureHistory, args: [4]
+2025-03-02 18:26:02,736 - INFO - connections.sonic_connection - [CALL-1740920161] Contract call successful in 0.84s
+2025-03-02 18:26:02,736 - INFO - connections.sonic_connection - [CALL-1740920162] Calling contract method: getAgentPredictions, args: [4]
+2025-03-02 18:26:03,514 - INFO - connections.sonic_connection - [CALL-1740920162] Contract call successful in 0.78s
