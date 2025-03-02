@@ -20,8 +20,8 @@ file_handler.setFormatter(logging.Formatter("%(asctime)s - %(levelname)s - %(nam
 logger.addHandler(file_handler)
 
 # Contract addresses
-BERRY_TEMP_AGENT_ADDRESS = "0x0ed1e8A5A4133c4e01b19b4D729F52407f7770a9"
-BERRY_MANAGER_ADDRESS = "0x0846E9e3b99d9D605006DB4FD26c255743d307B6"
+BERRY_TEMP_AGENT_ADDRESS = "0x39D85a2d6f485D521d008a5711F6ffE02b591b6E"
+BERRY_MANAGER_ADDRESS = "0x8BBD24387E3F6b842C16a35F2F52A5bB1835948A"
 
 
 # Transaction history storage
