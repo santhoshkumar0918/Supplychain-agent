@@ -263,7 +263,7 @@ class SonicConnection(BaseConnection):
             ]
             
             # Try to load from combined file first
-            combined_path = os.path.join(abi_dir, "contract-abis.json")
+            combined_path = os.path.join(project_root, "contract-abis.json")
             combined_abis = None
             if os.path.exists(combined_path):
                 try:
@@ -457,6 +457,9 @@ class SonicConnection(BaseConnection):
                if "processAgentRecommendation" in method_name:
                    logger.info(f"Using high gas limit (500000) for {method_name} due to known issues")
                    return 500000
+               elif "recordTemperature" in method_name:
+                   logger.info(f"Using high gas limit (450000) for {method_name} due to known issues")
+                   return 450000
                elif "create" in method_name.lower():
                    return 200000
                elif "process" in method_name.lower():
@@ -491,7 +494,9 @@ class SonicConnection(BaseConnection):
                     method_name = contract_func.__name__ if hasattr(contract_func, "__name__") else "unknown"
                     
                     # Set default gas limits based on method
-                    if "create" in method_name.lower():
+                    if "recordTemperature" in method_name:
+                        estimated_gas = 450000  # Higher gas limit for recordTemperature
+                    elif "create" in method_name.lower():
                         estimated_gas = 200000
                     elif "process" in method_name.lower():
                         estimated_gas = 300000
@@ -626,7 +631,7 @@ class SonicConnection(BaseConnection):
                     ActionParameter("token_address", False, str, "Optional token address")
                 ],
                 description="Get $S or token balance"
-            ),
+                ),
             "transfer": Action(
                 name="transfer",
                 parameters=[
@@ -1198,12 +1203,12 @@ class SonicConnection(BaseConnection):
             if not self.berry_temp_agent:
                 raise SonicConnectionError("BerryTempAgent contract not initialized")
             
-            # Use send_transaction method with proper gas handling
+            # Use send_transaction method with increased gas limit
             tx_data = {
                 "contract_address": BERRY_TEMP_AGENT_ADDRESS,
                 "method": "recordTemperature",
                 "args": [batch_id, temperature, location],
-                "gas_limit": 450000
+                "gas_limit": 500000  # Increased from 300000 to 450000
             }
             
             result = self.send_transaction(tx_data)
@@ -1276,573 +1281,44 @@ class SonicConnection(BaseConnection):
                 "isActive": False,
                 "qualityScore": 0
             }
-
-    def get_temperature_history(self, batch_id: int) -> List[Dict[str, Any]]:
-        """Get temperature history for a berry batch"""
-        if self.use_mock_mode:
-            logger.info(f"MOCK MODE: Getting temperature history for batch {batch_id}")
-            # Mock temperature history
-            mock_history = []
-            base_time = datetime.now() - timedelta(hours=12)
             
-            for i in range(6):
-                # Generate varying temperatures
-                if i == 3:  # Create a breach in the middle
-                    temp = 5.2
-                else:
-                    temp = 2.0 + (i % 3)
-                
-                # Generate locations
-                locations = ["Cold Storage", "Loading Dock", "Transport", "Transport", "Transport", "Delivery Center"]
-                
-                mock_history.append({
-                    "timestamp": int((base_time + timedelta(hours=i*2)).timestamp()),
-                    "temperature": int(temp * 10),
-                    "location": locations[i],
-                    "isBreached": temp > 4.0 or temp < 0.0,
-                    "predictedImpact": 5 if (temp > 4.0 or temp < 0.0) else 0
-                })
+def get_agent_predictions(self, batch_id: int) -> List[Dict[str, Any]]:
+    """Get agent predictions for a berry batch"""
+    if self.use_mock_mode:
+        logger.info(f"MOCK MODE: Getting agent predictions for batch {batch_id}")
+        return [{
+            "timestamp": int(datetime.now().timestamp()) - 1800,
+            "predictedQuality": 85,
+            "recommendedAction": 3,
+            "actionDescription": "Monitor closely. Continue with standard delivery procedures."
+        }]
             
-            return mock_history
-            
-        try:
-            if not self.berry_temp_agent:
-                raise SonicConnectionError("BerryTempAgent contract not initialized")
-            
-            # Use call_contract method
-            tx_data = {
-                "contract_address": BERRY_TEMP_AGENT_ADDRESS,
-                "method": "getTemperatureHistory",
-                "args": [batch_id]
-            }
-            
-            history = self.call_contract(tx_data)
-            
-            # Format temperature readings
-            formatted_history = []
-            for reading in history:
-                formatted_history.append({
-                    "timestamp": reading[0],
-                    "temperature": reading[1],
-                    "location": reading[2],
-                    "isBreached": reading[3],
-                    "predictedImpact": reading[4]
-                })
-                
-            return formatted_history
-            
-        except Exception as e:
-            logger.error(f"Failed to get temperature history: {e}")
-            return []
-
-    def get_agent_predictions(self, batch_id: int) -> List[Dict[str, Any]]:
-        """Get agent predictions for a berry batch"""
-        if self.use_mock_mode:
-            logger.info(f"MOCK MODE: Getting agent predictions for batch {batch_id}")
-            return [{
-                "timestamp": int(datetime.now().timestamp()) - 1800,
-                "predictedQuality": 85,
-                "recommendedAction": 3,
-                "actionDescription": "Monitor closely. Continue with standard delivery procedures."
-            }]
-            
-        try:
-            if not self.berry_temp_agent:
-                raise SonicConnectionError("BerryTempAgent contract not initialized")
-            
-            # Use call_contract method
-            tx_data = {
-                "contract_address": BERRY_TEMP_AGENT_ADDRESS,
-                "method": "getAgentPredictions",
-                "args": [batch_id]
-            }
-            
-            predictions = self.call_contract(tx_data)
-            
-            # Format predictions
-            formatted_predictions = []
-            for prediction in predictions:
-                formatted_predictions.append({
-                    "timestamp": prediction[0],
-                    "predictedQuality": prediction[1],
-                    "recommendedAction": prediction[2],
-                    "actionDescription": prediction[3]
-                })
-                
-            return formatted_predictions
-            
-        except Exception as e:
-            logger.error(f"Failed to get agent predictions: {e}")
-            return []
-
-    def register_supplier(self) -> Dict[str, Any]:
-        """Register as a supplier"""
-        if self.use_mock_mode:
-            logger.info("MOCK MODE: Registering supplier")
-            return {
-                "success": True,
-                "transaction_hash": "0x" + "0" * 64,
-                "transaction_url": "#mock-transaction",
-                "supplier": "0x" + "1" * 40,
-                "mock": True
-            }
-            
-        try:
-            if not self.berry_manager:
-                raise SonicConnectionError("BerryManager contract not initialized")
-            
-            # Use send_transaction method with proper gas handling
-            tx_data = {
-                "contract_address": BERRY_MANAGER_ADDRESS,
-                "method": "registerSupplier",
-                "args": [],
-                "gas_limit": 200000
-            }
-            
-            result = self.send_transaction(tx_data)
-            
-            if result.get("success", False) and self.account:
-                result["supplier"] = self.account.address
-            
-            return result
-            
-        except Exception as e:
-            logger.error(f"Failed to register supplier: {e}")
-            return {
-                "success": False,
-                "error": str(e)
-            }
-
-    def process_agent_recommendation(self, batch_id: int) -> Dict[str, Any]:
-        """Process agent recommendation for a batch"""
-        if self.use_mock_mode:
-            logger.info(f"MOCK MODE: Processing agent recommendation for batch {batch_id}")
-            return {
-                "success": True,
-                "transaction_hash": "0x" + "0" * 64,
-                "transaction_url": "#mock-transaction",
-                "batch_id": batch_id,
-                "mock": True
-            }
-            
-        try:
-            if not self.berry_manager:
-                raise SonicConnectionError("BerryManager contract not initialized")
-            
-            # Check if supplier is registered first
-            supplier_details = self.get_supplier_details()
-            if not supplier_details.get("isRegistered", False):
-                logger.warning("Supplier not registered, attempting to register first")
-                register_result = self.register_supplier()
-                if not register_result.get("success", False):
-                    raise SonicConnectionError("Failed to register supplier before processing recommendation")
-            
-            # Check if batch has predictions before proceeding
-            predictions = self.get_agent_predictions(batch_id)
-            if not predictions:
-                logger.warning(f"No predictions found for batch {batch_id}, skipping processAgentRecommendation")
-                return {
-                    "success": False,
-                    "error": "No predictions available for this batch",
-                    "batch_id": batch_id
-                }
-            
-            # Use send_transaction method with proper gas handling
-            tx_data = {
-                "contract_address": BERRY_MANAGER_ADDRESS,
-                "method": "processAgentRecommendation",
-                "args": [batch_id],
-                "gas_limit": 500000
-            }
-            
-            result = self.send_transaction(tx_data)
-            
-            if result.get("success", False):
-                result["batch_id"] = batch_id
-            
-            return result
-            
-        except Exception as e:
-            logger.error(f"Failed to process agent recommendation: {e}")
-            return {
-                "success": False,
-                "error": str(e),
-                "batch_id": batch_id
-            }
-
-    def get_supplier_details(self, supplier_address: Optional[str] = None) -> Dict[str, Any]:
-        """Get supplier details"""
-        if self.use_mock_mode:
-            logger.info("MOCK MODE: Getting supplier details")
-            return {
-                "account": supplier_address or "0x" + "1" * 40,
-                "isRegistered": True,
-                "reputation": 85,
-                "totalBatches": 12,
-                "successfulBatches": 10,
-                "lastActionTime": int(datetime.now().timestamp()) - 3600
-            }
-            
-        try:
-            if not self.berry_manager:
-                raise SonicConnectionError("BerryManager contract not initialized")
-            
-            if not supplier_address and self.account:
-                supplier_address = self.account.address
-            elif not supplier_address:
-                private_key = os.getenv('SONIC_PRIVATE_KEY')
-                account = self._web3.eth.account.from_key(private_key)
-                supplier_address = account.address
-            
-            # Use call_contract method
-            tx_data = {
-                "contract_address": BERRY_MANAGER_ADDRESS,
-                "method": "getSupplierDetails",
-                "args": [supplier_address]
-            }
-            
-            details = self.call_contract(tx_data)
-            
-            # Format supplier data
-            supplier_data = {
-                "account": details[0],
-                "isRegistered": details[1],
-                "reputation": details[2],
-                "totalBatches": details[3],
-                "successfulBatches": details[4],
-                "lastActionTime": details[5]
-            }
-            
-            return supplier_data
-            
-        except Exception as e:
-            logger.error(f"Failed to get supplier details: {e}")
-            return {
-                "account": supplier_address or "Unknown",
-                "isRegistered": False,
-                "reputation": 0,
-                "error": str(e)
-            }
-
-    def complete_shipment(self, batch_id: int) -> Dict[str, Any]:
-        """Complete a shipment"""
-        if self.use_mock_mode:
-            logger.info(f"MOCK MODE: Completing shipment for batch {batch_id}")
-            return {
-                "success": True,
-                "transaction_hash": "0x" + "0" * 64,
-                "transaction_url": "#mock-transaction",
-                "batch_id": batch_id,
-                "mock": True
-            }
-            
-        try:
-            if not self.berry_manager:
-                raise SonicConnectionError("BerryManager contract not initialized")
-            
-            # Use send_transaction method with proper gas handling
-            tx_data = {
-                "contract_address": BERRY_MANAGER_ADDRESS,
-                "method": "completeShipment",
-                "args": [batch_id],
-                "gas_limit": 400000
-            }
-            
-            result = self.send_transaction(tx_data)
-            
-            if result.get("success", False):
-                result["batch_id"] = batch_id
-            
-            return result
-            
-        except Exception as e:
-            logger.error(f"Failed to complete shipment: {e}")
-            return {
-                "success": False,
-                "error": str(e),
-                "batch_id": batch_id
-            }
-   
-    # Action handler methods with improved error handling
-    def monitor_berry_temperature(self, **kwargs) -> Dict[str, Any]:
-        """Monitor and analyze temperature data for berry shipments"""
-        try:
-            batch_id = kwargs.get("batch_id", 0)
-            temperature = kwargs.get("temperature", 2.5)
-            location = kwargs.get("location", "Unknown")
-            
-            # Convert temperature to integer with 1 decimal precision (* 10)
-            temp_int = int(temperature * 10)
-            
-            logger.info(f"Monitoring temperature for batch {batch_id}: {temperature}°C at {location}")
-            
-            # Check account balance before proceeding (if not in mock mode)
-            if not self.use_mock_mode and self.account:
-                try:
-                    balance = self._web3.eth.get_balance(self.account.address)
-                    logger.info(f"Current balance: {self._web3.from_wei(balance, 'ether')} Sonic Tokens")
-                    
-                    if balance == 0:
-                        logger.warning("Account has zero balance! Transaction likely to fail.")
-                except Exception as e:
-                    logger.warning(f"Could not check balance: {e}")
-            
-            # Record temperature
-            return self.record_temperature(batch_id, temp_int, location)
-            
-        except Exception as e:
-            logger.error(f"Berry temperature monitoring failed: {e}")
-            return {
-                "success": False,
-                "error": str(e),
-                "batch_id": kwargs.get("batch_id", 0),
-                "temperature": kwargs.get("temperature", 0),
-                "location": kwargs.get("location", "")
-            }
-    
-    def manage_berry_quality(self, **kwargs) -> Dict[str, Any]:
-        """Assess and predict berry quality based on temperature history"""
-        try:
-            batch_id = kwargs.get("batch_id", 0)
-            
-            # Get batch details
-            batch_details = self.get_batch_details(batch_id)
-            
-            # Get temperature history
-            temp_history = self.get_temperature_history(batch_id)
-            
-            # Get agent predictions
-            predictions = self.get_agent_predictions(batch_id)
-            
-            return {
-                "batch_details": batch_details,
-                "temperature_history": temp_history,
-                "predictions": predictions
-            }
-        except Exception as e:
-            logger.error(f"Berry quality management failed: {e}")
-            return {
-                "success": False,
-                "error": str(e),
-                "batch_id": kwargs.get("batch_id", 0)
-            }
-    
-    def process_agent_recommendations(self, **kwargs) -> Dict[str, Any]:
-        """Process agent recommendations and update supplier reputation"""
-        try:
-            batch_id = kwargs.get("batch_id")
-            return self.process_agent_recommendation(batch_id)
-        except Exception as e:
-            logger.error(f"Processing agent recommendations failed: {e}")
-            return {
-                "success": False,
-                "error": str(e),
-                "batch_id": kwargs.get("batch_id", 0)
-            }
-    
-    def manage_batch_lifecycle(self, **kwargs) -> Dict[str, Any]:
-        """Manage berry batch lifecycle from creation to delivery"""
-        try:
-            action = kwargs.get("action")
-            batch_id = kwargs.get("batch_id", 0)
-            berry_type = kwargs.get("berry_type", "Strawberry")
-            
-            if action == "create":
-                return self.create_batch(berry_type)
-            elif action == "complete":
-                return self.complete_shipment(batch_id)
-            elif action == "status":
-                return self.get_batch_details(batch_id)
-            elif action == "report":
-                # Get batch details and temperature history for a comprehensive report
-                batch_details = self.get_batch_details(batch_id)
-                temp_history = self.get_temperature_history(batch_id)
-                predictions = self.get_agent_predictions(batch_id)
-                
-                return {
-                    "success": True,
-                    "batch_id": batch_id,
-                    "batch_details": batch_details,
-                    "temperature_history": temp_history,
-                    "predictions": predictions
-                }
-            else:
-                raise ValueError(f"Unknown action: {action}")
-        except Exception as e:
-            logger.error(f"Batch lifecycle management failed: {e}")
-            return {
-                "success": False,
-                "error": str(e),
-                "action": kwargs.get("action", ""),
-                "batch_id": kwargs.get("batch_id", 0)
-            }
-    
-    def system_health_check(self, **kwargs) -> Dict[str, Any]:
-        """Perform system health check"""
-        try:
-            # Check blockchain connection
-            is_connected = self._web3.is_connected() if not self.use_mock_mode else True
-            
-            # Check account balance
-            balance = 0
-            if self.account and not self.use_mock_mode:
-                balance = self._web3.eth.get_balance(self.account.address)
-            
-            # Check contract accessibility
-            contract_accessible = False
-            try:
-                if self.berry_temp_agent:
-                    batch_count = self.berry_temp_agent.functions.batchCount().call()
-                    contract_accessible = True
-            except Exception:
-                pass
-            
-            # Generate health report
-            return {
-                "success": True,
-                "is_connected": is_connected,
-                "contract_accessible": contract_accessible,
-                "account_balance": balance,
-                "account_balance_formatted": str(self._web3.from_wei(balance, 'ether')) if balance > 0 else "0",
-                "transaction_stats": self.transaction_stats,
-                "mock_mode": self.use_mock_mode
-            }
-        except Exception as e:
-            logger.error(f"Health check failed: {e}")
-            return {
-                "success": False,
-                "error": str(e)
-            }
-    
-    def manage_batch_sequence(self, **kwargs) -> Dict[str, Any]:
-        """Execute a batch sequence of operations"""
-        try:
-            # This function would orchestrate a sequence of operations
-            # Create batch, record temperatures, assess quality, etc.
-            batch_id = kwargs.get("batch_id", 0)
-            berry_type = kwargs.get("berry_type", "Strawberry")
-            
-            # Start with creating a batch if no batch_id provided
-            if batch_id == 0 and "batch_id" not in kwargs:
-                create_result = self.create_batch(berry_type)
-                if not create_result.get("success", False):
-                    raise Exception(f"Failed to create batch: {create_result.get('error', 'Unknown error')}")
-                
-                batch_id = create_result.get("batch_id", 0)
-            
-            # Record a temperature
-            temp = kwargs.get("temperature", 2.5)
-            location = kwargs.get("location", "Transport")
-            temp_result = self.record_temperature(batch_id, int(temp * 10), location)
-            
-            # Get batch details
-            batch_details = self.get_batch_details(batch_id)
-            
-            return {
-                "success": True,
-                "batch_id": batch_id,
-                "temperature_recorded": temp_result.get("success", False),
-                "batch_details": batch_details
-            }
-            
-        except Exception as e:
-            logger.error(f"Batch sequence management failed: {e}")
-            return {
-                "success": False,
-                "error": str(e)
-            }
-
-    def perform_action(self, action_name: str, kwargs) -> Any:
-        """Execute a Sonic action with validation"""
-        if action_name not in self.actions:
-            return {
-                "success": False,
-                "error": f"Unknown action: {action_name}"
-            }
-
-        load_dotenv()
+    try:
+        if not self.berry_temp_agent:
+            raise SonicConnectionError("BerryTempAgent contract not initialized")
         
-        if not self.is_configured(verbose=True) and not self.use_mock_mode:
-            return {
-                "success": False,
-                "error": "Sonic is not properly configured"
-            }
-
-        # Log action details for debugging
-        logger.info(f"Executing action '{action_name}' with parameters: {kwargs}")
-        
-        # Check account balance before proceeding with any action
-        if self.account and not self.use_mock_mode:
-            try:
-                balance = self._web3.eth.get_balance(self.account.address)
-                logger.info(f"Current account balance: {self._web3.from_wei(balance, 'ether')} Sonic Tokens")
-                
-                if balance == 0:
-                    logger.warning("Account has zero balance! Transactions likely to fail.")
-            except Exception as e:
-                logger.warning(f"Could not check balance: {e}")
-
-        action = self.actions[action_name]
-        errors = action.validate_params(kwargs)
-        if errors:
-            return {
-                "success": False,
-                "error": f"Invalid parameters: {', '.join(errors)}"
-            }
-
-        method_name = action_name.replace('-', '_')
-        method = getattr(self, method_name)
-        
-        try:
-            result = method(**kwargs)
-            logger.info(f"Action '{action_name}' completed successfully")
-            return result
-        except Exception as e:
-            logger.error(f"Action '{action_name}' failed: {e}", exc_info=True)
-            # Return error information instead of raising
-            return {
-                "success": False,
-                "error": str(e),
-                "action": action_name,
-                "parameters": kwargs
-            }
-    
-    def get_transaction_history(self, limit: int = 10) -> List[Dict[str, Any]]:
-        """Get recent transaction history"""
-        if limit > MAX_TRANSACTION_HISTORY:
-            limit = MAX_TRANSACTION_HISTORY
-            
-        return transaction_history[-limit:]
-    
-    def get_statistics(self) -> Dict[str, Any]:
-        """Get connection statistics"""
-        stats = {
-            "transactions": self.transaction_stats,
-            "connection": {
-                "network": self.network_name,
-                "mock_mode": self.use_mock_mode,
-                "is_connected": self._web3.is_connected() if not self.use_mock_mode else True,
-                "contracts_loaded": len(self.contract_instances)
-            }
+        # Use call_contract method
+        tx_data = {
+            "contract_address": BERRY_TEMP_AGENT_ADDRESS,
+            "method": "getAgentPredictions",
+            "args": [batch_id]
         }
         
-        # Add account stats if available
-        if self.account:
-            try:
-                balance = 0
-                if not self.use_mock_mode:
-                    balance = self._web3.eth.get_balance(self.account.address)
-                    
-                stats["account"] = {
-                    "address": self.account.address,
-                    "balance": str(self._web3.from_wei(balance, 'ether')),
-                    "balance_wei": str(balance)
-                }
-            except Exception as e:
-                logger.warning(f"Could not get account stats: {e}")
-                stats["account"] = {
-                    "address": self.account.address,
-                    "error": str(e)
-                }
+        predictions = self.call_contract(tx_data)
         
-        return stats        
+        # Format predictions
+        formatted_predictions = []
+        for prediction in predictions:
+            formatted_predictions.append({
+                "timestamp": prediction[0],
+                "predictedQuality": prediction[1],
+                "recommendedAction": prediction[2],
+                "actionDescription": prediction[3]
+            })
+                
+        return formatted_predictions
+            
+    except Exception as e:
+        logger.error(f"Failed to get agent predictions: {e}")
+        return []            
+            

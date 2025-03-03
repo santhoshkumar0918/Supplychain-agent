@@ -3888,3 +3888,1223 @@ web3.exceptions.ABIFunctionNotFound: ("The function 'recordTemperature' was not 
 2025-03-02 20:38:48,720 - INFO - connections.sonic_connection - Account loaded with address: 0x1e43eeB0307bb3466Cd237fE58570E6A3996d8ff
 2025-03-02 20:38:48,983 - INFO - connections.sonic_connection - Account balance: 49.0224787192 Sonic Tokens
 2025-03-02 20:38:48,983 - INFO - connections.sonic_connection - Sonic connection initialization complete
+2025-03-03 19:43:41,907 - INFO - connections.sonic_connection - Initializing Sonic connection...
+2025-03-03 19:43:43,632 - INFO - connections.sonic_connection - Connected to network with chain ID: 57054
+2025-03-03 19:43:43,632 - INFO - connections.sonic_connection - Found ABIs directory at: /home/santhoshkumar/Supplai/Supllychain-agent/abis
+2025-03-03 19:43:43,632 - INFO - connections.sonic_connection - Attempting to load BerryTempAgent ABI from: /home/santhoshkumar/Supplai/Supllychain-agent/abis/BerryTempAgent.json
+2025-03-03 19:43:43,633 - INFO - connections.sonic_connection - Loaded ABI array for BerryTempAgent with 25 entries
+2025-03-03 19:43:43,633 - INFO - connections.sonic_connection - BerryTempAgent ABI contains functions: BREACH_PENALTY, MAX_TEMP, MIN_TEMP, OPTIMAL_TEMP, SHELF_LIFE_BASE, agentPredictions, batchCount, berryBatches, createBatch, getAgentPredictions and more...
+2025-03-03 19:43:43,633 - INFO - connections.sonic_connection - Found required function: createBatch
+2025-03-03 19:43:43,633 - INFO - connections.sonic_connection - Found required function: batchCount
+2025-03-03 19:43:43,633 - INFO - connections.sonic_connection - Found required function: getTemperatureHistory
+2025-03-03 19:43:43,634 - INFO - connections.sonic_connection - Attempting to load BerryManager ABI from: /home/santhoshkumar/Supplai/Supllychain-agent/abis/BerryManager.json
+2025-03-03 19:43:43,634 - INFO - connections.sonic_connection - Loaded ABI array for BerryManager with 21 entries
+2025-03-03 19:43:43,634 - INFO - connections.sonic_connection - BerryManager ABI contains functions: INITIAL_REPUTATION, MAX_REPUTATION, MIN_REPUTATION, berryAgent, getSupplierDetails, getSupplierRecommendations, owner, processAgentRecommendation, registerSupplier, renounceOwnership and more...
+2025-03-03 19:43:43,634 - INFO - connections.sonic_connection - Successfully loaded contract ABIs: BerryTempAgent, BerryManager
+2025-03-03 19:43:43,668 - INFO - connections.sonic_connection - Successfully initialized contract instances: berry_temp_agent, berry_manager
+2025-03-03 19:43:43,678 - INFO - connections.sonic_connection - Account loaded with address: 0x1e43eeB0307bb3466Cd237fE58570E6A3996d8ff
+2025-03-03 19:43:43,948 - INFO - connections.sonic_connection - Account balance: 49.0224787192 Sonic Tokens
+2025-03-03 19:43:43,948 - INFO - connections.sonic_connection - Sonic connection initialization complete
+2025-03-03 19:43:56,549 - INFO - connections.sonic_connection - [TX-1] Preparing transaction: method=recordTemperature, args=[0, 42, 'Delivery Center']
+2025-03-03 19:44:01,249 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 19:44:01,713 - INFO - connections.sonic_connection - Estimated gas: 377686
+2025-03-03 19:44:01,713 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-03 19:44:01,713 - INFO - connections.sonic_connection - Total cost: 0.00377686 Sonic Tokens
+2025-03-03 19:44:01,713 - INFO - connections.sonic_connection - Account balance: 49.0224787192 Sonic Tokens
+2025-03-03 19:44:05,373 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 19:44:05,375 - INFO - connections.sonic_connection - [TX-1] Sending transaction: method=recordTemperature, gas=300000, gasPrice=10 gwei
+2025-03-03 19:44:06,402 - INFO - connections.sonic_connection - [TX-1] Waiting for transaction to be mined... (0s elapsed)
+2025-03-03 19:44:07,876 - WARNING - connections.sonic_connection - [TX-1] Transaction failed on-chain: 0xc22230c75523a345141e868da7e259f7a101f9b0b4574b3227ac9ca54049c6be
+2025-03-03 19:44:13,879 - INFO - connections.sonic_connection - [TX-2] Preparing transaction: method=recordTemperature, args=[0, 31, 'Delivery Center']
+2025-03-03 19:44:18,949 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 19:44:19,355 - INFO - connections.sonic_connection - Estimated gas: 377919
+2025-03-03 19:44:19,355 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-03 19:44:19,356 - INFO - connections.sonic_connection - Total cost: 0.00377919 Sonic Tokens
+2025-03-03 19:44:19,356 - INFO - connections.sonic_connection - Account balance: 49.0194787192 Sonic Tokens
+2025-03-03 19:44:22,914 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 19:44:22,916 - INFO - connections.sonic_connection - [TX-2] Sending transaction: method=recordTemperature, gas=300000, gasPrice=10 gwei
+2025-03-03 19:44:23,694 - INFO - connections.sonic_connection - [TX-2] Waiting for transaction to be mined... (0s elapsed)
+2025-03-03 19:44:25,211 - WARNING - connections.sonic_connection - [TX-2] Transaction failed on-chain: 0xcacaa32e70825e3bfd37a1caa3fe1efe95791c765b711eed88eb3bbe3c55cf26
+2025-03-03 19:44:31,212 - INFO - connections.sonic_connection - [TX-3] Preparing transaction: method=createBatch, args=['Strawberry']
+2025-03-03 19:44:35,642 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 19:44:36,114 - INFO - connections.sonic_connection - Estimated gas: 198556
+2025-03-03 19:44:36,114 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-03 19:44:36,114 - INFO - connections.sonic_connection - Total cost: 0.00198556 Sonic Tokens
+2025-03-03 19:44:36,114 - INFO - connections.sonic_connection - Account balance: 49.0164787192 Sonic Tokens
+2025-03-03 19:44:39,726 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 19:44:39,726 - INFO - connections.sonic_connection - [TX-3] Sending transaction: method=createBatch, gas=300000, gasPrice=10 gwei
+2025-03-03 19:44:40,859 - INFO - connections.sonic_connection - [TX-3] Waiting for transaction to be mined... (0s elapsed)
+2025-03-03 19:44:42,378 - INFO - connections.sonic_connection - [TX-3] Transaction successful: Gas used: 178917, Cost: 0.00178917 tokens, Time: 11.17s
+2025-03-03 19:44:42,378 - INFO - connections.sonic_connection - [CALL-1741011282] Calling contract method: batchCount, args: []
+2025-03-03 19:44:43,201 - INFO - connections.sonic_connection - [CALL-1741011282] Contract call successful in 0.82s
+2025-03-03 19:44:49,202 - INFO - connections.sonic_connection - [CALL-1741011289] Calling contract method: getTemperatureHistory, args: [0]
+2025-03-03 19:44:51,058 - INFO - connections.sonic_connection - [CALL-1741011289] Contract call successful in 1.86s
+2025-03-03 19:44:51,059 - INFO - connections.sonic_connection - [CALL-1741011291] Calling contract method: getBatchDetails, args: [0]
+2025-03-03 19:44:54,041 - INFO - connections.sonic_connection - [CALL-1741011291] Contract call successful in 2.98s
+2025-03-03 19:45:00,042 - INFO - connections.sonic_connection - [TX-4] Preparing transaction: method=createBatch, args=['Strawberry']
+2025-03-03 19:45:04,597 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 19:45:04,979 - INFO - connections.sonic_connection - Estimated gas: 198556
+2025-03-03 19:45:04,979 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-03 19:45:04,979 - INFO - connections.sonic_connection - Total cost: 0.00198556 Sonic Tokens
+2025-03-03 19:45:04,979 - INFO - connections.sonic_connection - Account balance: 49.0146895492 Sonic Tokens
+2025-03-03 19:45:08,312 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 19:45:08,313 - INFO - connections.sonic_connection - [TX-4] Sending transaction: method=createBatch, gas=300000, gasPrice=10 gwei
+2025-03-03 19:45:10,225 - INFO - connections.sonic_connection - [TX-4] Waiting for transaction to be mined... (0s elapsed)
+2025-03-03 19:45:11,692 - INFO - connections.sonic_connection - [TX-4] Transaction successful: Gas used: 178917, Cost: 0.00178917 tokens, Time: 11.65s
+2025-03-03 19:45:11,692 - INFO - connections.sonic_connection - [CALL-1741011311] Calling contract method: batchCount, args: []
+2025-03-03 19:45:12,632 - INFO - connections.sonic_connection - [CALL-1741011311] Contract call successful in 0.94s
+2025-03-03 19:45:12,633 - INFO - connections.sonic_connection - [TX-5] Preparing transaction: method=recordTemperature, args=[3, 20, 'Cold Storage']
+2025-03-03 19:45:18,010 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 19:45:18,509 - INFO - connections.sonic_connection - Estimated gas: 398410
+2025-03-03 19:45:18,510 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-03 19:45:18,510 - INFO - connections.sonic_connection - Total cost: 0.0039841 Sonic Tokens
+2025-03-03 19:45:18,510 - INFO - connections.sonic_connection - Account balance: 49.0129003792 Sonic Tokens
+2025-03-03 19:45:22,287 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 19:45:22,288 - INFO - connections.sonic_connection - [TX-5] Sending transaction: method=recordTemperature, gas=300000, gasPrice=10 gwei
+2025-03-03 19:45:23,250 - INFO - connections.sonic_connection - [TX-5] Waiting for transaction to be mined... (0s elapsed)
+2025-03-03 19:45:24,710 - WARNING - connections.sonic_connection - [TX-5] Transaction failed on-chain: 0x652f403dc79d208b27ef95b143665be1cdd4c6b6cdb82c7929a704858a707c15
+2025-03-03 19:45:25,712 - INFO - connections.sonic_connection - [TX-6] Preparing transaction: method=recordTemperature, args=[3, 25, 'Loading Dock']
+2025-03-03 19:45:30,767 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 19:45:31,232 - INFO - connections.sonic_connection - Estimated gas: 398410
+2025-03-03 19:45:31,232 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-03 19:45:31,233 - INFO - connections.sonic_connection - Total cost: 0.0039841 Sonic Tokens
+2025-03-03 19:45:31,233 - INFO - connections.sonic_connection - Account balance: 49.0099003792 Sonic Tokens
+2025-03-03 19:45:34,949 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 19:45:34,950 - INFO - connections.sonic_connection - [TX-6] Sending transaction: method=recordTemperature, gas=300000, gasPrice=10 gwei
+2025-03-03 19:45:35,950 - INFO - connections.sonic_connection - [TX-6] Waiting for transaction to be mined... (0s elapsed)
+2025-03-03 19:45:37,434 - WARNING - connections.sonic_connection - [TX-6] Transaction failed on-chain: 0xc03f5e72cf1fa436970948d966d6940c31d9e1418a141932f6dc3467c7a4936c
+2025-03-03 19:45:38,436 - INFO - connections.sonic_connection - [TX-7] Preparing transaction: method=recordTemperature, args=[3, 30, 'Transport']
+2025-03-03 19:45:43,153 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 19:45:43,630 - INFO - connections.sonic_connection - Estimated gas: 398367
+2025-03-03 19:45:43,630 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-03 19:45:43,631 - INFO - connections.sonic_connection - Total cost: 0.00398367 Sonic Tokens
+2025-03-03 19:45:43,631 - INFO - connections.sonic_connection - Account balance: 49.0069003792 Sonic Tokens
+2025-03-03 19:45:47,171 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 19:45:47,172 - INFO - connections.sonic_connection - [TX-7] Sending transaction: method=recordTemperature, gas=300000, gasPrice=10 gwei
+2025-03-03 19:45:47,952 - INFO - connections.sonic_connection - [TX-7] Waiting for transaction to be mined... (0s elapsed)
+2025-03-03 19:45:49,423 - WARNING - connections.sonic_connection - [TX-7] Transaction failed on-chain: 0x8717f5a6fb2d2cfff570cb0a01f3ab0db5f33f412b014363ff9ae64f1d3424c5
+2025-03-03 19:45:50,424 - INFO - connections.sonic_connection - [TX-8] Preparing transaction: method=recordTemperature, args=[3, 35, 'Transport']
+2025-03-03 19:45:55,059 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 19:45:55,645 - INFO - connections.sonic_connection - Estimated gas: 398367
+2025-03-03 19:45:55,645 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-03 19:45:55,645 - INFO - connections.sonic_connection - Total cost: 0.00398367 Sonic Tokens
+2025-03-03 19:45:55,645 - INFO - connections.sonic_connection - Account balance: 49.0039003792 Sonic Tokens
+2025-03-03 19:45:59,681 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 19:45:59,682 - INFO - connections.sonic_connection - [TX-8] Sending transaction: method=recordTemperature, gas=300000, gasPrice=10 gwei
+2025-03-03 19:46:00,640 - INFO - connections.sonic_connection - [TX-8] Waiting for transaction to be mined... (0s elapsed)
+2025-03-03 19:46:02,162 - WARNING - connections.sonic_connection - [TX-8] Transaction failed on-chain: 0xcf5b455ad609700939210fc87c8cc1dc93882a87748c705a13b26bb8fa31d380
+2025-03-03 19:46:03,163 - INFO - connections.sonic_connection - [TX-9] Preparing transaction: method=recordTemperature, args=[3, 28, 'Transport']
+2025-03-03 19:46:08,472 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 19:46:08,902 - INFO - connections.sonic_connection - Estimated gas: 398367
+2025-03-03 19:46:08,902 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-03 19:46:08,902 - INFO - connections.sonic_connection - Total cost: 0.00398367 Sonic Tokens
+2025-03-03 19:46:08,902 - INFO - connections.sonic_connection - Account balance: 49.0009003792 Sonic Tokens
+2025-03-03 19:46:13,019 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 19:46:13,020 - INFO - connections.sonic_connection - [TX-9] Sending transaction: method=recordTemperature, gas=300000, gasPrice=10 gwei
+2025-03-03 19:46:14,032 - INFO - connections.sonic_connection - [TX-9] Waiting for transaction to be mined... (0s elapsed)
+2025-03-03 19:46:15,669 - WARNING - connections.sonic_connection - [TX-9] Transaction failed on-chain: 0x9c92157c0c10b5b7578ee29b3dc2f33665c44b436bdf564ed9453be1ada64b69
+2025-03-03 19:46:16,671 - INFO - connections.sonic_connection - [TX-10] Preparing transaction: method=recordTemperature, args=[3, 22, 'Delivery Center']
+2025-03-03 19:46:22,554 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 19:46:23,039 - INFO - connections.sonic_connection - Estimated gas: 398454
+2025-03-03 19:46:23,039 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-03 19:46:23,039 - INFO - connections.sonic_connection - Total cost: 0.00398454 Sonic Tokens
+2025-03-03 19:46:23,040 - INFO - connections.sonic_connection - Account balance: 48.9979003792 Sonic Tokens
+2025-03-03 19:46:27,141 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 19:46:27,142 - INFO - connections.sonic_connection - [TX-10] Sending transaction: method=recordTemperature, gas=300000, gasPrice=10 gwei
+2025-03-03 19:46:27,982 - INFO - connections.sonic_connection - [TX-10] Waiting for transaction to be mined... (0s elapsed)
+2025-03-03 19:46:29,471 - WARNING - connections.sonic_connection - [TX-10] Transaction failed on-chain: 0x302b762d8d1a4f3c9bb62042cc4c006ddadb8c04d4900a135a452ad30799b175
+2025-03-03 19:46:30,472 - INFO - connections.sonic_connection - [CALL-1741011390] Calling contract method: getTemperatureHistory, args: [3]
+2025-03-03 19:46:31,249 - INFO - connections.sonic_connection - [CALL-1741011390] Contract call successful in 0.78s
+2025-03-03 19:46:31,250 - INFO - connections.sonic_connection - [CALL-1741011391] Calling contract method: getBatchDetails, args: [3]
+2025-03-03 19:46:32,235 - INFO - connections.sonic_connection - [CALL-1741011391] Contract call successful in 0.99s
+2025-03-03 19:46:32,235 - INFO - connections.sonic_connection - [TX-11] Preparing transaction: method=processAgentRecommendation, args=[3]
+2025-03-03 19:46:32,238 - WARNING - connections.sonic_connection - Could not check predictions: 'SonicConnection' object has no attribute 'get_agent_predictions'
+2025-03-03 19:46:37,098 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 19:46:37,614 - INFO - connections.sonic_connection - Estimated gas: 62983
+2025-03-03 19:46:37,614 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-03 19:46:37,614 - INFO - connections.sonic_connection - Total cost: 0.00062983 Sonic Tokens
+2025-03-03 19:46:37,614 - INFO - connections.sonic_connection - Account balance: 48.9949003792 Sonic Tokens
+2025-03-03 19:46:41,255 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 19:46:41,256 - INFO - connections.sonic_connection - [TX-11] Sending transaction: method=processAgentRecommendation, gas=500000, gasPrice=10 gwei
+2025-03-03 19:46:42,411 - INFO - connections.sonic_connection - [TX-11] Waiting for transaction to be mined... (0s elapsed)
+2025-03-03 19:46:43,889 - INFO - connections.sonic_connection - [TX-11] Transaction successful: Gas used: 97237, Cost: 0.00097237 tokens, Time: 11.65s
+2025-03-03 19:46:43,890 - INFO - connections.sonic_connection - [CALL-1741011403] Calling contract method: getSupplierDetails, args: ['0x1e43eeB0307bb3466Cd237fE58570E6A3996d8ff']
+2025-03-03 19:46:44,771 - INFO - connections.sonic_connection - [CALL-1741011403] Contract call successful in 0.88s
+2025-03-03 19:46:44,771 - INFO - connections.sonic_connection - [CALL-1741011404] Calling contract method: getBatchDetails, args: [3]
+2025-03-03 19:46:45,641 - INFO - connections.sonic_connection - [CALL-1741011404] Contract call successful in 0.87s
+2025-03-03 19:46:45,641 - INFO - connections.sonic_connection - [CALL-1741011405] Calling contract method: getTemperatureHistory, args: [3]
+2025-03-03 19:46:46,865 - INFO - connections.sonic_connection - [CALL-1741011405] Contract call successful in 1.22s
+2025-03-03 19:46:46,865 - INFO - connections.sonic_connection - [CALL-1741011406] Calling contract method: getAgentPredictions, args: [3]
+2025-03-03 19:46:48,200 - INFO - connections.sonic_connection - [CALL-1741011406] Contract call successful in 1.33s
+2025-03-03 19:46:54,201 - INFO - connections.sonic_connection - [CALL-1741011414] Calling contract method: getTemperatureHistory, args: [0]
+2025-03-03 19:46:55,970 - INFO - connections.sonic_connection - [CALL-1741011414] Contract call successful in 1.77s
+2025-03-03 19:46:55,970 - INFO - connections.sonic_connection - [CALL-1741011415] Calling contract method: getBatchDetails, args: [0]
+2025-03-03 19:46:57,654 - INFO - connections.sonic_connection - [CALL-1741011415] Contract call successful in 1.68s
+2025-03-03 19:47:03,656 - INFO - connections.sonic_connection - [CALL-1741011423] Calling contract method: getTemperatureHistory, args: [0]
+2025-03-03 19:47:05,089 - INFO - connections.sonic_connection - [CALL-1741011423] Contract call successful in 1.43s
+2025-03-03 19:47:05,089 - INFO - connections.sonic_connection - [CALL-1741011425] Calling contract method: getBatchDetails, args: [0]
+2025-03-03 19:47:06,066 - INFO - connections.sonic_connection - [CALL-1741011425] Contract call successful in 0.98s
+2025-03-03 19:47:06,067 - INFO - connections.sonic_connection - [TX-12] Preparing transaction: method=processAgentRecommendation, args=[0]
+2025-03-03 19:47:06,070 - WARNING - connections.sonic_connection - Could not check predictions: 'SonicConnection' object has no attribute 'get_agent_predictions'
+2025-03-03 19:47:11,074 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 19:47:11,500 - INFO - connections.sonic_connection - Estimated gas: 62968
+2025-03-03 19:47:11,500 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-03 19:47:11,500 - INFO - connections.sonic_connection - Total cost: 0.00062968 Sonic Tokens
+2025-03-03 19:47:11,500 - INFO - connections.sonic_connection - Account balance: 48.9939280092 Sonic Tokens
+2025-03-03 19:47:15,755 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 19:47:15,755 - INFO - connections.sonic_connection - [TX-12] Sending transaction: method=processAgentRecommendation, gas=500000, gasPrice=10 gwei
+2025-03-03 19:47:16,594 - INFO - connections.sonic_connection - [TX-12] Waiting for transaction to be mined... (0s elapsed)
+2025-03-03 19:47:18,099 - INFO - connections.sonic_connection - [TX-12] Transaction successful: Gas used: 97226, Cost: 0.00097226 tokens, Time: 12.03s
+2025-03-03 19:47:18,099 - INFO - connections.sonic_connection - [CALL-1741011438] Calling contract method: getSupplierDetails, args: ['0x1e43eeB0307bb3466Cd237fE58570E6A3996d8ff']
+2025-03-03 19:47:19,066 - INFO - connections.sonic_connection - [CALL-1741011438] Contract call successful in 0.97s
+2025-03-03 19:47:25,067 - INFO - connections.sonic_connection - [CALL-1741011445] Calling contract method: getTemperatureHistory, args: [0]
+2025-03-03 19:47:26,815 - INFO - connections.sonic_connection - [CALL-1741011445] Contract call successful in 1.75s
+2025-03-03 19:47:26,815 - INFO - connections.sonic_connection - [CALL-1741011446] Calling contract method: getBatchDetails, args: [0]
+2025-03-03 19:47:27,871 - INFO - connections.sonic_connection - [CALL-1741011446] Contract call successful in 1.06s
+2025-03-03 19:47:27,872 - INFO - connections.sonic_connection - [TX-13] Preparing transaction: method=processAgentRecommendation, args=[0]
+2025-03-03 19:47:27,874 - WARNING - connections.sonic_connection - Could not check predictions: 'SonicConnection' object has no attribute 'get_agent_predictions'
+2025-03-03 19:47:32,661 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 19:47:33,134 - INFO - connections.sonic_connection - Estimated gas: 62968
+2025-03-03 19:47:33,134 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-03 19:47:33,134 - INFO - connections.sonic_connection - Total cost: 0.00062968 Sonic Tokens
+2025-03-03 19:47:33,134 - INFO - connections.sonic_connection - Account balance: 48.9929557492 Sonic Tokens
+2025-03-03 19:47:37,011 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 19:47:37,012 - INFO - connections.sonic_connection - [TX-13] Sending transaction: method=processAgentRecommendation, gas=500000, gasPrice=10 gwei
+2025-03-03 19:47:37,960 - INFO - connections.sonic_connection - [TX-13] Waiting for transaction to be mined... (0s elapsed)
+2025-03-03 19:47:39,430 - INFO - connections.sonic_connection - [TX-13] Transaction successful: Gas used: 97226, Cost: 0.00097226 tokens, Time: 11.56s
+2025-03-03 19:47:39,430 - INFO - connections.sonic_connection - [CALL-1741011459] Calling contract method: getSupplierDetails, args: ['0x1e43eeB0307bb3466Cd237fE58570E6A3996d8ff']
+2025-03-03 19:47:40,206 - INFO - connections.sonic_connection - [CALL-1741011459] Contract call successful in 0.78s
+2025-03-03 19:47:46,207 - INFO - connections.sonic_connection - [CALL-1741011466] Calling contract method: getTemperatureHistory, args: [0]
+2025-03-03 19:47:47,152 - INFO - connections.sonic_connection - [CALL-1741011466] Contract call successful in 0.94s
+2025-03-03 19:47:47,152 - INFO - connections.sonic_connection - [CALL-1741011467] Calling contract method: getBatchDetails, args: [0]
+2025-03-03 19:47:47,998 - INFO - connections.sonic_connection - [CALL-1741011467] Contract call successful in 0.85s
+2025-03-03 19:47:47,999 - INFO - connections.sonic_connection - [TX-14] Preparing transaction: method=processAgentRecommendation, args=[0]
+2025-03-03 19:47:48,001 - WARNING - connections.sonic_connection - Could not check predictions: 'SonicConnection' object has no attribute 'get_agent_predictions'
+2025-03-03 19:47:52,446 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 19:47:52,916 - INFO - connections.sonic_connection - Estimated gas: 62968
+2025-03-03 19:47:52,916 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-03 19:47:52,916 - INFO - connections.sonic_connection - Total cost: 0.00062968 Sonic Tokens
+2025-03-03 19:47:52,916 - INFO - connections.sonic_connection - Account balance: 48.9919834892 Sonic Tokens
+2025-03-03 19:47:57,102 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 19:47:57,103 - INFO - connections.sonic_connection - [TX-14] Sending transaction: method=processAgentRecommendation, gas=500000, gasPrice=10 gwei
+2025-03-03 19:47:58,364 - INFO - connections.sonic_connection - [TX-14] Waiting for transaction to be mined... (0s elapsed)
+2025-03-03 19:47:59,922 - INFO - connections.sonic_connection - [TX-14] Transaction successful: Gas used: 97226, Cost: 0.00097226 tokens, Time: 11.92s
+2025-03-03 19:47:59,922 - INFO - connections.sonic_connection - [CALL-1741011479] Calling contract method: getSupplierDetails, args: ['0x1e43eeB0307bb3466Cd237fE58570E6A3996d8ff']
+2025-03-03 19:48:00,857 - INFO - connections.sonic_connection - [CALL-1741011479] Contract call successful in 0.93s
+2025-03-03 19:48:06,858 - INFO - connections.sonic_connection - [CALL-1741011486] Calling contract method: getTemperatureHistory, args: [0]
+2025-03-03 19:48:07,818 - INFO - connections.sonic_connection - [CALL-1741011486] Contract call successful in 0.96s
+2025-03-03 19:48:07,818 - INFO - connections.sonic_connection - [CALL-1741011487] Calling contract method: getBatchDetails, args: [0]
+2025-03-03 19:48:08,766 - INFO - connections.sonic_connection - [CALL-1741011487] Contract call successful in 0.95s
+2025-03-03 19:48:14,768 - INFO - connections.sonic_connection - [TX-15] Preparing transaction: method=createBatch, args=['Strawberry']
+2025-03-03 19:48:19,810 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 19:48:20,378 - INFO - connections.sonic_connection - Estimated gas: 198556
+2025-03-03 19:48:20,378 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-03 19:48:20,378 - INFO - connections.sonic_connection - Total cost: 0.00198556 Sonic Tokens
+2025-03-03 19:48:20,378 - INFO - connections.sonic_connection - Account balance: 48.9910112292 Sonic Tokens
+2025-03-03 19:48:25,342 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 19:48:25,343 - INFO - connections.sonic_connection - [TX-15] Sending transaction: method=createBatch, gas=300000, gasPrice=10 gwei
+2025-03-03 19:48:27,385 - INFO - connections.sonic_connection - [TX-15] Transaction successful: Gas used: 178917, Cost: 0.00178917 tokens, Time: 12.62s
+2025-03-03 19:48:27,386 - INFO - connections.sonic_connection - [CALL-1741011507] Calling contract method: batchCount, args: []
+2025-03-03 19:48:30,338 - INFO - connections.sonic_connection - [CALL-1741011507] Contract call successful in 2.95s
+2025-03-03 19:48:36,339 - INFO - connections.sonic_connection - [TX-16] Preparing transaction: method=createBatch, args=['Strawberry']
+2025-03-03 19:48:51,018 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 19:48:51,497 - INFO - connections.sonic_connection - Estimated gas: 198556
+2025-03-03 19:48:51,497 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-03 19:48:51,497 - INFO - connections.sonic_connection - Total cost: 0.00198556 Sonic Tokens
+2025-03-03 19:48:51,497 - INFO - connections.sonic_connection - Account balance: 48.9892220592 Sonic Tokens
+2025-03-03 19:48:55,221 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 19:48:55,222 - INFO - connections.sonic_connection - [TX-16] Sending transaction: method=createBatch, gas=300000, gasPrice=10 gwei
+2025-03-03 19:48:56,209 - INFO - connections.sonic_connection - [TX-16] Waiting for transaction to be mined... (0s elapsed)
+2025-03-03 19:48:57,852 - INFO - connections.sonic_connection - [TX-16] Transaction successful: Gas used: 178917, Cost: 0.00178917 tokens, Time: 21.51s
+2025-03-03 19:48:57,852 - INFO - connections.sonic_connection - [CALL-1741011537] Calling contract method: batchCount, args: []
+2025-03-03 19:48:59,149 - INFO - connections.sonic_connection - [CALL-1741011537] Contract call successful in 1.30s
+2025-03-03 19:48:59,149 - INFO - connections.sonic_connection - [TX-17] Preparing transaction: method=recordTemperature, args=[5, 20, 'Cold Storage']
+2025-03-03 19:49:05,836 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 19:49:06,448 - INFO - connections.sonic_connection - Estimated gas: 398410
+2025-03-03 19:49:06,448 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-03 19:49:06,448 - INFO - connections.sonic_connection - Total cost: 0.0039841 Sonic Tokens
+2025-03-03 19:49:06,449 - INFO - connections.sonic_connection - Account balance: 48.9874328892 Sonic Tokens
+2025-03-03 19:49:10,412 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 19:49:10,413 - INFO - connections.sonic_connection - [TX-17] Sending transaction: method=recordTemperature, gas=300000, gasPrice=10 gwei
+2025-03-03 19:49:11,544 - INFO - connections.sonic_connection - [TX-17] Waiting for transaction to be mined... (0s elapsed)
+2025-03-03 19:49:13,214 - WARNING - connections.sonic_connection - [TX-17] Transaction failed on-chain: 0xbdafd8daa4a04bd43e67f3aa6dcd2fc255dff6b734d80523e66b8656594dceb4
+2025-03-03 19:49:14,216 - INFO - connections.sonic_connection - [TX-18] Preparing transaction: method=recordTemperature, args=[5, 25, 'Loading Dock']
+2025-03-03 19:49:19,154 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 19:49:20,177 - INFO - connections.sonic_connection - Estimated gas: 398410
+2025-03-03 19:49:20,177 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-03 19:49:20,177 - INFO - connections.sonic_connection - Total cost: 0.0039841 Sonic Tokens
+2025-03-03 19:49:20,177 - INFO - connections.sonic_connection - Account balance: 48.9844328892 Sonic Tokens
+2025-03-03 19:49:27,244 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 19:49:27,245 - INFO - connections.sonic_connection - [TX-18] Sending transaction: method=recordTemperature, gas=300000, gasPrice=10 gwei
+2025-03-03 19:50:14,775 - INFO - connections.sonic_connection - [CALL-1741011614] Calling contract method: getTemperatureHistory, args: [0]
+2025-03-03 19:50:15,709 - INFO - connections.sonic_connection - [CALL-1741011614] Contract call successful in 0.93s
+2025-03-03 19:50:15,709 - INFO - connections.sonic_connection - [CALL-1741011615] Calling contract method: getBatchDetails, args: [0]
+2025-03-03 19:50:16,674 - INFO - connections.sonic_connection - [CALL-1741011615] Contract call successful in 0.96s
+2025-03-03 19:50:22,675 - INFO - connections.sonic_connection - [CALL-1741011622] Calling contract method: getTemperatureHistory, args: [0]
+2025-03-03 19:50:23,666 - INFO - connections.sonic_connection - [CALL-1741011622] Contract call successful in 0.99s
+2025-03-03 19:50:23,666 - INFO - connections.sonic_connection - [CALL-1741011623] Calling contract method: getBatchDetails, args: [0]
+2025-03-03 19:50:24,542 - INFO - connections.sonic_connection - [CALL-1741011623] Contract call successful in 0.88s
+2025-03-03 19:50:30,543 - INFO - connections.sonic_connection - [TX-18] Preparing transaction: method=createBatch, args=['Strawberry']
+2025-03-03 19:50:35,239 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 19:50:35,734 - INFO - connections.sonic_connection - Estimated gas: 198556
+2025-03-03 19:50:35,734 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-03 19:50:35,735 - INFO - connections.sonic_connection - Total cost: 0.00198556 Sonic Tokens
+2025-03-03 19:50:35,735 - INFO - connections.sonic_connection - Account balance: 48.9814328892 Sonic Tokens
+2025-03-03 19:50:39,868 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 19:50:39,869 - INFO - connections.sonic_connection - [TX-18] Sending transaction: method=createBatch, gas=300000, gasPrice=10 gwei
+2025-03-03 19:50:40,900 - INFO - connections.sonic_connection - [TX-18] Waiting for transaction to be mined... (0s elapsed)
+2025-03-03 19:50:42,218 - INFO - connections.sonic_connection - [TX-18] Transaction successful: Gas used: 178917, Cost: 0.00178917 tokens, Time: 11.67s
+2025-03-03 19:50:42,218 - INFO - connections.sonic_connection - [CALL-1741011642] Calling contract method: batchCount, args: []
+2025-03-03 19:50:43,155 - INFO - connections.sonic_connection - [CALL-1741011642] Contract call successful in 0.94s
+2025-03-03 19:50:49,155 - INFO - connections.sonic_connection - [TX-19] Preparing transaction: method=createBatch, args=['Strawberry']
+2025-03-03 19:50:53,852 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 19:50:54,196 - INFO - connections.sonic_connection - Estimated gas: 198556
+2025-03-03 19:50:54,196 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-03 19:50:54,196 - INFO - connections.sonic_connection - Total cost: 0.00198556 Sonic Tokens
+2025-03-03 19:50:54,196 - INFO - connections.sonic_connection - Account balance: 48.9796437192 Sonic Tokens
+2025-03-03 19:50:57,760 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 19:50:57,760 - INFO - connections.sonic_connection - [TX-19] Sending transaction: method=createBatch, gas=300000, gasPrice=10 gwei
+2025-03-03 19:50:58,670 - INFO - connections.sonic_connection - [TX-19] Waiting for transaction to be mined... (0s elapsed)
+2025-03-03 19:51:00,255 - INFO - connections.sonic_connection - [TX-19] Transaction successful: Gas used: 178917, Cost: 0.00178917 tokens, Time: 11.10s
+2025-03-03 19:51:00,255 - INFO - connections.sonic_connection - [CALL-1741011660] Calling contract method: batchCount, args: []
+2025-03-03 19:51:01,245 - INFO - connections.sonic_connection - [CALL-1741011660] Contract call successful in 0.99s
+2025-03-03 19:51:07,247 - INFO - connections.sonic_connection - [TX-20] Preparing transaction: method=createBatch, args=['Strawberry']
+2025-03-03 19:51:11,850 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 19:51:12,324 - INFO - connections.sonic_connection - Estimated gas: 198556
+2025-03-03 19:51:12,325 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-03 19:51:12,325 - INFO - connections.sonic_connection - Total cost: 0.00198556 Sonic Tokens
+2025-03-03 19:51:12,325 - INFO - connections.sonic_connection - Account balance: 48.9778545492 Sonic Tokens
+2025-03-03 19:51:16,180 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 19:51:16,180 - INFO - connections.sonic_connection - [TX-20] Sending transaction: method=createBatch, gas=300000, gasPrice=10 gwei
+2025-03-03 19:51:17,082 - INFO - connections.sonic_connection - [TX-20] Waiting for transaction to be mined... (0s elapsed)
+2025-03-03 19:51:18,398 - INFO - connections.sonic_connection - [TX-20] Transaction successful: Gas used: 178917, Cost: 0.00178917 tokens, Time: 11.15s
+2025-03-03 19:51:18,398 - INFO - connections.sonic_connection - [CALL-1741011678] Calling contract method: batchCount, args: []
+2025-03-03 19:51:19,166 - INFO - connections.sonic_connection - [CALL-1741011678] Contract call successful in 0.77s
+2025-03-03 19:51:25,167 - INFO - connections.sonic_connection - [TX-21] Preparing transaction: method=createBatch, args=['Strawberry']
+2025-03-03 19:51:29,721 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 19:51:30,187 - INFO - connections.sonic_connection - Estimated gas: 198556
+2025-03-03 19:51:30,187 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-03 19:51:30,187 - INFO - connections.sonic_connection - Total cost: 0.00198556 Sonic Tokens
+2025-03-03 19:51:30,187 - INFO - connections.sonic_connection - Account balance: 48.9760653792 Sonic Tokens
+2025-03-03 19:51:33,576 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 19:51:33,578 - INFO - connections.sonic_connection - [TX-21] Sending transaction: method=createBatch, gas=300000, gasPrice=10 gwei
+2025-03-03 19:51:34,521 - INFO - connections.sonic_connection - [TX-21] Waiting for transaction to be mined... (0s elapsed)
+2025-03-03 19:51:35,989 - INFO - connections.sonic_connection - [TX-21] Transaction successful: Gas used: 178917, Cost: 0.00178917 tokens, Time: 10.82s
+2025-03-03 19:51:35,989 - INFO - connections.sonic_connection - [CALL-1741011695] Calling contract method: batchCount, args: []
+2025-03-03 19:51:36,916 - INFO - connections.sonic_connection - [CALL-1741011695] Contract call successful in 0.93s
+2025-03-03 19:51:42,918 - INFO - connections.sonic_connection - [TX-22] Preparing transaction: method=recordTemperature, args=[0, 25, 'Delivery Center']
+2025-03-03 19:51:47,317 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 19:51:47,790 - INFO - connections.sonic_connection - Estimated gas: 377919
+2025-03-03 19:51:47,790 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-03 19:51:47,790 - INFO - connections.sonic_connection - Total cost: 0.00377919 Sonic Tokens
+2025-03-03 19:51:47,790 - INFO - connections.sonic_connection - Account balance: 48.9742762092 Sonic Tokens
+2025-03-03 19:51:51,442 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 19:51:51,443 - INFO - connections.sonic_connection - [TX-22] Sending transaction: method=recordTemperature, gas=300000, gasPrice=10 gwei
+2025-03-03 19:51:52,423 - INFO - connections.sonic_connection - [TX-22] Waiting for transaction to be mined... (0s elapsed)
+2025-03-03 19:51:53,857 - WARNING - connections.sonic_connection - [TX-22] Transaction failed on-chain: 0xd7a62c813e68541c69c393b0c6ae0df5702bd3c8e63bcedbbffbcedd0c338204
+2025-03-03 19:51:59,858 - INFO - connections.sonic_connection - [TX-23] Preparing transaction: method=createBatch, args=['Strawberry']
+2025-03-03 19:52:04,522 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 19:52:05,041 - INFO - connections.sonic_connection - Estimated gas: 198556
+2025-03-03 19:52:05,041 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-03 19:52:05,041 - INFO - connections.sonic_connection - Total cost: 0.00198556 Sonic Tokens
+2025-03-03 19:52:05,042 - INFO - connections.sonic_connection - Account balance: 48.9712762092 Sonic Tokens
+2025-03-03 19:52:08,862 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 19:52:08,862 - INFO - connections.sonic_connection - [TX-23] Sending transaction: method=createBatch, gas=300000, gasPrice=10 gwei
+2025-03-03 19:52:09,828 - INFO - connections.sonic_connection - [TX-23] Waiting for transaction to be mined... (0s elapsed)
+2025-03-03 19:52:11,391 - INFO - connections.sonic_connection - [TX-23] Transaction successful: Gas used: 178917, Cost: 0.00178917 tokens, Time: 11.53s
+2025-03-03 19:52:11,391 - INFO - connections.sonic_connection - [CALL-1741011731] Calling contract method: batchCount, args: []
+2025-03-03 19:52:12,327 - INFO - connections.sonic_connection - [CALL-1741011731] Contract call successful in 0.94s
+2025-03-03 19:52:18,329 - INFO - connections.sonic_connection - [TX-24] Preparing transaction: method=recordTemperature, args=[0, 25, 'Delivery Center']
+2025-03-03 19:52:23,997 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 19:52:24,709 - INFO - connections.sonic_connection - Estimated gas: 377919
+2025-03-03 19:52:24,709 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-03 19:52:24,709 - INFO - connections.sonic_connection - Total cost: 0.00377919 Sonic Tokens
+2025-03-03 19:52:24,709 - INFO - connections.sonic_connection - Account balance: 48.9694870392 Sonic Tokens
+2025-03-03 19:52:29,269 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 19:52:29,270 - INFO - connections.sonic_connection - [TX-24] Sending transaction: method=recordTemperature, gas=300000, gasPrice=10 gwei
+2025-03-03 19:52:30,217 - INFO - connections.sonic_connection - [TX-24] Waiting for transaction to be mined... (0s elapsed)
+2025-03-03 19:52:31,694 - WARNING - connections.sonic_connection - [TX-24] Transaction failed on-chain: 0xd3b5d268bf8f22f11ffd1d133a4d313d77090ba8b983ae51fbdc2700e202417b
+2025-03-03 19:52:37,695 - INFO - connections.sonic_connection - [CALL-1741011757] Calling contract method: getTemperatureHistory, args: [0]
+2025-03-03 19:52:38,965 - INFO - connections.sonic_connection - [CALL-1741011757] Contract call successful in 1.27s
+2025-03-03 19:52:38,965 - INFO - connections.sonic_connection - [CALL-1741011758] Calling contract method: getBatchDetails, args: [0]
+2025-03-03 19:52:39,959 - INFO - connections.sonic_connection - [CALL-1741011758] Contract call successful in 0.99s
+2025-03-03 19:52:45,960 - INFO - connections.sonic_connection - [TX-25] Preparing transaction: method=createBatch, args=['Strawberry']
+2025-03-03 19:52:51,246 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 19:52:51,738 - INFO - connections.sonic_connection - Estimated gas: 198556
+2025-03-03 19:52:51,738 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-03 19:52:51,738 - INFO - connections.sonic_connection - Total cost: 0.00198556 Sonic Tokens
+2025-03-03 19:52:51,738 - INFO - connections.sonic_connection - Account balance: 48.9664870392 Sonic Tokens
+2025-03-03 19:52:55,743 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 19:52:55,743 - INFO - connections.sonic_connection - [TX-25] Sending transaction: method=createBatch, gas=300000, gasPrice=10 gwei
+2025-03-03 19:52:56,768 - INFO - connections.sonic_connection - [TX-25] Waiting for transaction to be mined... (0s elapsed)
+2025-03-03 19:52:58,174 - INFO - connections.sonic_connection - [TX-25] Transaction successful: Gas used: 178917, Cost: 0.00178917 tokens, Time: 12.21s
+2025-03-03 19:52:58,174 - INFO - connections.sonic_connection - [CALL-1741011778] Calling contract method: batchCount, args: []
+2025-03-03 19:52:58,994 - INFO - connections.sonic_connection - [CALL-1741011778] Contract call successful in 0.82s
+2025-03-03 19:53:04,995 - INFO - connections.sonic_connection - [CALL-1741011784] Calling contract method: getTemperatureHistory, args: [0]
+2025-03-03 19:53:05,943 - INFO - connections.sonic_connection - [CALL-1741011784] Contract call successful in 0.95s
+2025-03-03 19:53:05,943 - INFO - connections.sonic_connection - [CALL-1741011785] Calling contract method: getBatchDetails, args: [0]
+2025-03-03 19:53:06,914 - INFO - connections.sonic_connection - [CALL-1741011785] Contract call successful in 0.97s
+2025-03-03 19:53:12,915 - INFO - connections.sonic_connection - [TX-26] Preparing transaction: method=recordTemperature, args=[0, 25, 'Delivery Center']
+2025-03-03 19:53:17,758 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 19:53:18,280 - INFO - connections.sonic_connection - Estimated gas: 377919
+2025-03-03 19:53:18,280 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-03 19:53:18,280 - INFO - connections.sonic_connection - Total cost: 0.00377919 Sonic Tokens
+2025-03-03 19:53:18,280 - INFO - connections.sonic_connection - Account balance: 48.9646978692 Sonic Tokens
+2025-03-03 19:53:22,068 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 19:53:22,070 - INFO - connections.sonic_connection - [TX-26] Sending transaction: method=recordTemperature, gas=300000, gasPrice=10 gwei
+2025-03-03 19:53:23,034 - INFO - connections.sonic_connection - [TX-26] Waiting for transaction to be mined... (0s elapsed)
+2025-03-03 19:53:24,704 - WARNING - connections.sonic_connection - [TX-26] Transaction failed on-chain: 0xfa835ec642df78075cb60190207ba1e8fbfe0786cdfd7d399318d77fa86c8345
+2025-03-03 20:27:46,007 - INFO - connections.sonic_connection - Initializing Sonic connection...
+2025-03-03 20:27:47,886 - INFO - connections.sonic_connection - Connected to network with chain ID: 57054
+2025-03-03 20:27:47,886 - INFO - connections.sonic_connection - Found ABIs directory at: /home/santhoshkumar/Supplai/Supllychain-agent/abis
+2025-03-03 20:27:47,895 - INFO - connections.sonic_connection - Found combined ABIs file: /home/santhoshkumar/Supplai/Supllychain-agent/abis/contract-abis.json
+2025-03-03 20:27:47,895 - INFO - connections.sonic_connection - Attempting to load BerryTempAgent ABI from: /home/santhoshkumar/Supplai/Supllychain-agent/abis/BerryTempAgent.json
+2025-03-03 20:27:47,895 - INFO - connections.sonic_connection - Loaded BerryTempAgent ABI from combined file with 25 entries
+2025-03-03 20:27:47,895 - INFO - connections.sonic_connection - Attempting to load BerryManager ABI from: /home/santhoshkumar/Supplai/Supllychain-agent/abis/BerryManager.json
+2025-03-03 20:27:47,895 - INFO - connections.sonic_connection - Loaded BerryManager ABI from combined file with 21 entries
+2025-03-03 20:27:47,895 - INFO - connections.sonic_connection - Successfully loaded contract ABIs: BerryTempAgent, BerryManager
+2025-03-03 20:27:47,925 - INFO - connections.sonic_connection - Successfully initialized contract instances: berry_temp_agent, berry_manager
+2025-03-03 20:27:47,931 - INFO - connections.sonic_connection - Account loaded with address: 0x1e43eeB0307bb3466Cd237fE58570E6A3996d8ff
+2025-03-03 20:27:48,201 - INFO - connections.sonic_connection - Account balance: 48.9616978692 Sonic Tokens
+2025-03-03 20:27:48,201 - INFO - connections.sonic_connection - Sonic connection initialization complete
+2025-03-03 20:27:59,289 - INFO - connections.sonic_connection - [TX-1] Preparing transaction: method=createBatch, args=['Strawberry']
+2025-03-03 20:28:04,081 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 20:28:04,512 - INFO - connections.sonic_connection - Estimated gas: 198556
+2025-03-03 20:28:04,512 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-03 20:28:04,513 - INFO - connections.sonic_connection - Total cost: 0.00198556 Sonic Tokens
+2025-03-03 20:28:04,513 - INFO - connections.sonic_connection - Account balance: 48.9616978692 Sonic Tokens
+2025-03-03 20:28:08,304 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 20:28:08,305 - INFO - connections.sonic_connection - [TX-1] Sending transaction: method=createBatch, gas=300000, gasPrice=10 gwei
+2025-03-03 20:28:09,264 - INFO - connections.sonic_connection - [TX-1] Waiting for transaction to be mined... (0s elapsed)
+2025-03-03 20:28:10,614 - INFO - connections.sonic_connection - [TX-1] Transaction successful: Gas used: 178917, Cost: 0.00178917 tokens, Time: 11.32s
+2025-03-03 20:28:10,614 - INFO - connections.sonic_connection - [CALL-1741013890] Calling contract method: batchCount, args: []
+2025-03-03 20:28:11,568 - INFO - connections.sonic_connection - [CALL-1741013890] Contract call successful in 0.95s
+2025-03-03 20:28:11,568 - INFO - connections.sonic_connection - [TX-2] Preparing transaction: method=recordTemperature, args=[12, 20, 'Cold Storage']
+2025-03-03 20:28:16,299 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 20:28:16,767 - INFO - connections.sonic_connection - Estimated gas: 398410
+2025-03-03 20:28:16,768 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-03 20:28:16,768 - INFO - connections.sonic_connection - Total cost: 0.0039841 Sonic Tokens
+2025-03-03 20:28:16,768 - INFO - connections.sonic_connection - Account balance: 48.9599086992 Sonic Tokens
+2025-03-03 20:28:20,517 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 20:28:20,518 - INFO - connections.sonic_connection - [TX-2] Sending transaction: method=recordTemperature, gas=500000, gasPrice=10 gwei
+2025-03-03 20:28:21,286 - INFO - connections.sonic_connection - [TX-2] Waiting for transaction to be mined... (0s elapsed)
+2025-03-03 20:28:22,773 - INFO - connections.sonic_connection - [TX-2] Transaction successful: Gas used: 348808, Cost: 0.00348808 tokens, Time: 11.20s
+2025-03-03 20:28:23,775 - INFO - connections.sonic_connection - [TX-3] Preparing transaction: method=recordTemperature, args=[12, 25, 'Loading Dock']
+2025-03-03 20:28:28,294 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 20:28:28,812 - INFO - connections.sonic_connection - Estimated gas: 357138
+2025-03-03 20:28:28,812 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-03 20:28:28,812 - INFO - connections.sonic_connection - Total cost: 0.00357138 Sonic Tokens
+2025-03-03 20:28:28,812 - INFO - connections.sonic_connection - Account balance: 48.9564206192 Sonic Tokens
+2025-03-03 20:28:32,633 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 20:28:32,635 - INFO - connections.sonic_connection - [TX-3] Sending transaction: method=recordTemperature, gas=500000, gasPrice=10 gwei
+2025-03-03 20:28:33,586 - INFO - connections.sonic_connection - [TX-3] Waiting for transaction to be mined... (0s elapsed)
+2025-03-03 20:28:34,927 - INFO - connections.sonic_connection - [TX-3] Transaction successful: Gas used: 313053, Cost: 0.00313053 tokens, Time: 11.15s
+2025-03-03 20:28:35,929 - INFO - connections.sonic_connection - [TX-4] Preparing transaction: method=recordTemperature, args=[12, 30, 'Transport']
+2025-03-03 20:28:40,193 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 20:31:05,829 - INFO - connections.sonic_connection - Initializing Sonic connection...
+2025-03-03 20:31:07,871 - INFO - connections.sonic_connection - Connected to network with chain ID: 57054
+2025-03-03 20:31:07,871 - INFO - connections.sonic_connection - Found ABIs directory at: /home/santhoshkumar/Supplai/Supllychain-agent/abis
+2025-03-03 20:31:07,871 - INFO - connections.sonic_connection - Attempting to load BerryTempAgent ABI from: /home/santhoshkumar/Supplai/Supllychain-agent/abis/BerryTempAgent.json
+2025-03-03 20:31:07,872 - INFO - connections.sonic_connection - Loaded ABI array for BerryTempAgent with 25 entries
+2025-03-03 20:31:07,872 - INFO - connections.sonic_connection - BerryTempAgent ABI contains functions: BREACH_PENALTY, MAX_TEMP, MIN_TEMP, OPTIMAL_TEMP, SHELF_LIFE_BASE, agentPredictions, batchCount, berryBatches, createBatch, getAgentPredictions and more...
+2025-03-03 20:31:07,872 - INFO - connections.sonic_connection - Found required function: createBatch
+2025-03-03 20:31:07,872 - INFO - connections.sonic_connection - Found required function: batchCount
+2025-03-03 20:31:07,872 - INFO - connections.sonic_connection - Found required function: getTemperatureHistory
+2025-03-03 20:31:07,872 - INFO - connections.sonic_connection - Attempting to load BerryManager ABI from: /home/santhoshkumar/Supplai/Supllychain-agent/abis/BerryManager.json
+2025-03-03 20:31:07,872 - INFO - connections.sonic_connection - Loaded ABI array for BerryManager with 21 entries
+2025-03-03 20:31:07,872 - INFO - connections.sonic_connection - BerryManager ABI contains functions: INITIAL_REPUTATION, MAX_REPUTATION, MIN_REPUTATION, berryAgent, getSupplierDetails, getSupplierRecommendations, owner, processAgentRecommendation, registerSupplier, renounceOwnership and more...
+2025-03-03 20:31:07,873 - INFO - connections.sonic_connection - Successfully loaded contract ABIs: BerryTempAgent, BerryManager
+2025-03-03 20:31:07,901 - INFO - connections.sonic_connection - Successfully initialized contract instances: berry_temp_agent, berry_manager
+2025-03-03 20:31:07,908 - INFO - connections.sonic_connection - Account loaded with address: 0x1e43eeB0307bb3466Cd237fE58570E6A3996d8ff
+2025-03-03 20:31:08,178 - INFO - connections.sonic_connection - Account balance: 48.9532900892 Sonic Tokens
+2025-03-03 20:31:08,178 - INFO - connections.sonic_connection - Sonic connection initialization complete
+2025-03-03 20:31:19,766 - INFO - connections.sonic_connection - [TX-1] Preparing transaction: method=recordTemperature, args=[0, 31, 'Delivery Center']
+2025-03-03 20:31:24,038 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 20:31:24,302 - INFO - connections.sonic_connection - Estimated gas: 377919
+2025-03-03 20:31:24,302 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-03 20:31:24,302 - INFO - connections.sonic_connection - Total cost: 0.00377919 Sonic Tokens
+2025-03-03 20:31:24,302 - INFO - connections.sonic_connection - Account balance: 48.9532900892 Sonic Tokens
+2025-03-03 20:31:27,605 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 20:31:27,606 - INFO - connections.sonic_connection - [TX-1] Sending transaction: method=recordTemperature, gas=500000, gasPrice=10 gwei
+2025-03-03 20:31:28,171 - INFO - connections.sonic_connection - [TX-1] Waiting for transaction to be mined... (0s elapsed)
+2025-03-03 20:31:29,654 - INFO - connections.sonic_connection - [TX-1] Transaction successful: Gas used: 333439, Cost: 0.00333439 tokens, Time: 9.89s
+2025-03-03 20:31:35,655 - INFO - connections.sonic_connection - [CALL-1741014095] Calling contract method: getTemperatureHistory, args: [0]
+2025-03-03 20:31:36,562 - INFO - connections.sonic_connection - [CALL-1741014095] Contract call successful in 0.91s
+2025-03-03 20:31:36,562 - INFO - connections.sonic_connection - [CALL-1741014096] Calling contract method: getBatchDetails, args: [0]
+2025-03-03 20:31:37,521 - INFO - connections.sonic_connection - [CALL-1741014096] Contract call successful in 0.96s
+2025-03-03 21:10:53,297 - INFO - connections.sonic_connection - [TX-2] Preparing transaction: method=createBatch, args=['Strawberry']
+2025-03-03 21:10:56,999 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:10:57,466 - INFO - connections.sonic_connection - Estimated gas: 198556
+2025-03-03 21:10:57,466 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-03 21:10:57,466 - INFO - connections.sonic_connection - Total cost: 0.00198556 Sonic Tokens
+2025-03-03 21:10:57,466 - INFO - connections.sonic_connection - Account balance: 48.9499556992 Sonic Tokens
+2025-03-03 21:11:00,939 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:11:00,939 - INFO - connections.sonic_connection - [TX-2] Sending transaction: method=createBatch, gas=300000, gasPrice=10 gwei
+2025-03-03 21:11:01,697 - INFO - connections.sonic_connection - [TX-2] Waiting for transaction to be mined... (0s elapsed)
+2025-03-03 21:11:03,006 - INFO - connections.sonic_connection - [TX-2] Transaction successful: Gas used: 178917, Cost: 0.00178917 tokens, Time: 9.71s
+2025-03-03 21:11:03,006 - INFO - connections.sonic_connection - [CALL-1741016463] Calling contract method: batchCount, args: []
+2025-03-03 21:11:03,754 - INFO - connections.sonic_connection - [CALL-1741016463] Contract call successful in 0.75s
+2025-03-03 21:11:09,756 - INFO - connections.sonic_connection - [CALL-1741016469] Calling contract method: getTemperatureHistory, args: [0]
+2025-03-03 21:11:11,011 - INFO - connections.sonic_connection - [CALL-1741016469] Contract call successful in 1.26s
+2025-03-03 21:11:11,011 - INFO - connections.sonic_connection - [CALL-1741016471] Calling contract method: getBatchDetails, args: [0]
+2025-03-03 21:11:11,734 - INFO - connections.sonic_connection - [CALL-1741016471] Contract call successful in 0.72s
+2025-03-03 21:11:17,735 - INFO - connections.sonic_connection - [CALL-1741016477] Calling contract method: getTemperatureHistory, args: [0]
+2025-03-03 21:11:18,635 - INFO - connections.sonic_connection - [CALL-1741016477] Contract call successful in 0.90s
+2025-03-03 21:11:18,635 - INFO - connections.sonic_connection - [CALL-1741016478] Calling contract method: getBatchDetails, args: [0]
+2025-03-03 21:11:19,214 - INFO - connections.sonic_connection - [CALL-1741016478] Contract call successful in 0.58s
+2025-03-03 21:11:25,216 - INFO - connections.sonic_connection - [TX-3] Preparing transaction: method=createBatch, args=['Strawberry']
+2025-03-03 21:11:28,905 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:11:29,179 - INFO - connections.sonic_connection - Estimated gas: 198556
+2025-03-03 21:11:29,179 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-03 21:11:29,179 - INFO - connections.sonic_connection - Total cost: 0.00198556 Sonic Tokens
+2025-03-03 21:11:29,179 - INFO - connections.sonic_connection - Account balance: 48.9481665292 Sonic Tokens
+2025-03-03 21:11:32,477 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:11:32,478 - INFO - connections.sonic_connection - [TX-3] Sending transaction: method=createBatch, gas=300000, gasPrice=10 gwei
+2025-03-03 21:11:33,197 - INFO - connections.sonic_connection - [TX-3] Waiting for transaction to be mined... (0s elapsed)
+2025-03-03 21:11:34,578 - INFO - connections.sonic_connection - [TX-3] Transaction successful: Gas used: 178917, Cost: 0.00178917 tokens, Time: 9.36s
+2025-03-03 21:11:34,578 - INFO - connections.sonic_connection - [CALL-1741016494] Calling contract method: batchCount, args: []
+2025-03-03 21:11:35,591 - INFO - connections.sonic_connection - [CALL-1741016494] Contract call successful in 1.01s
+2025-03-03 21:11:35,591 - INFO - connections.sonic_connection - [TX-4] Preparing transaction: method=recordTemperature, args=[14, 20, 'Cold Storage']
+2025-03-03 21:11:39,258 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:11:39,858 - INFO - connections.sonic_connection - Estimated gas: 398410
+2025-03-03 21:11:39,858 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-03 21:11:39,858 - INFO - connections.sonic_connection - Total cost: 0.0039841 Sonic Tokens
+2025-03-03 21:11:39,858 - INFO - connections.sonic_connection - Account balance: 48.9463773592 Sonic Tokens
+2025-03-03 21:11:42,633 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:11:42,633 - INFO - connections.sonic_connection - [TX-4] Sending transaction: method=recordTemperature, gas=500000, gasPrice=10 gwei
+2025-03-03 21:11:43,547 - INFO - connections.sonic_connection - [TX-4] Waiting for transaction to be mined... (0s elapsed)
+2025-03-03 21:11:44,825 - INFO - connections.sonic_connection - [TX-4] Transaction successful: Gas used: 348808, Cost: 0.00348808 tokens, Time: 9.23s
+2025-03-03 21:11:45,827 - INFO - connections.sonic_connection - [TX-5] Preparing transaction: method=recordTemperature, args=[14, 25, 'Loading Dock']
+2025-03-03 21:11:49,257 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:11:49,746 - INFO - connections.sonic_connection - Estimated gas: 357138
+2025-03-03 21:11:49,746 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-03 21:11:49,746 - INFO - connections.sonic_connection - Total cost: 0.00357138 Sonic Tokens
+2025-03-03 21:11:49,746 - INFO - connections.sonic_connection - Account balance: 48.9428892792 Sonic Tokens
+2025-03-03 21:11:52,554 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:11:52,555 - INFO - connections.sonic_connection - [TX-5] Sending transaction: method=recordTemperature, gas=500000, gasPrice=10 gwei
+2025-03-03 21:11:53,354 - INFO - connections.sonic_connection - [TX-5] Waiting for transaction to be mined... (0s elapsed)
+2025-03-03 21:11:54,712 - INFO - connections.sonic_connection - [TX-5] Transaction successful: Gas used: 313053, Cost: 0.00313053 tokens, Time: 8.88s
+2025-03-03 21:11:55,714 - INFO - connections.sonic_connection - [TX-6] Preparing transaction: method=recordTemperature, args=[14, 30, 'Transport']
+2025-03-03 21:11:59,847 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:12:00,121 - INFO - connections.sonic_connection - Estimated gas: 353734
+2025-03-03 21:12:00,121 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-03 21:12:00,121 - INFO - connections.sonic_connection - Total cost: 0.00353734 Sonic Tokens
+2025-03-03 21:12:00,122 - INFO - connections.sonic_connection - Account balance: 48.9397587492 Sonic Tokens
+2025-03-03 21:12:03,273 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:12:03,273 - INFO - connections.sonic_connection - [TX-6] Sending transaction: method=recordTemperature, gas=500000, gasPrice=10 gwei
+2025-03-03 21:12:04,104 - INFO - connections.sonic_connection - [TX-6] Waiting for transaction to be mined... (0s elapsed)
+2025-03-03 21:12:05,465 - INFO - connections.sonic_connection - [TX-6] Transaction successful: Gas used: 315301, Cost: 0.00315301 tokens, Time: 9.75s
+2025-03-03 21:12:06,467 - INFO - connections.sonic_connection - [TX-7] Preparing transaction: method=recordTemperature, args=[14, 35, 'Transport']
+2025-03-03 21:12:09,929 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:12:10,232 - INFO - connections.sonic_connection - Estimated gas: 353734
+2025-03-03 21:12:10,232 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-03 21:12:10,232 - INFO - connections.sonic_connection - Total cost: 0.00353734 Sonic Tokens
+2025-03-03 21:12:10,232 - INFO - connections.sonic_connection - Account balance: 48.9366057392 Sonic Tokens
+2025-03-03 21:12:13,137 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:12:13,139 - INFO - connections.sonic_connection - [TX-7] Sending transaction: method=recordTemperature, gas=500000, gasPrice=10 gwei
+2025-03-03 21:12:13,783 - INFO - connections.sonic_connection - [TX-7] Waiting for transaction to be mined... (0s elapsed)
+2025-03-03 21:12:15,130 - INFO - connections.sonic_connection - [TX-7] Transaction successful: Gas used: 315301, Cost: 0.00315301 tokens, Time: 8.66s
+2025-03-03 21:12:16,131 - INFO - connections.sonic_connection - [TX-8] Preparing transaction: method=recordTemperature, args=[14, 28, 'Transport']
+2025-03-03 21:12:20,300 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:12:20,695 - INFO - connections.sonic_connection - Estimated gas: 353746
+2025-03-03 21:12:20,695 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-03 21:12:20,695 - INFO - connections.sonic_connection - Total cost: 0.00353746 Sonic Tokens
+2025-03-03 21:12:20,695 - INFO - connections.sonic_connection - Account balance: 48.9334527292 Sonic Tokens
+2025-03-03 21:12:24,070 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:12:24,071 - INFO - connections.sonic_connection - [TX-8] Sending transaction: method=recordTemperature, gas=500000, gasPrice=10 gwei
+2025-03-03 21:12:24,713 - INFO - connections.sonic_connection - [TX-8] Waiting for transaction to be mined... (0s elapsed)
+2025-03-03 21:12:26,049 - INFO - connections.sonic_connection - [TX-8] Transaction successful: Gas used: 315310, Cost: 0.0031531 tokens, Time: 9.92s
+2025-03-03 21:12:27,051 - INFO - connections.sonic_connection - [TX-9] Preparing transaction: method=recordTemperature, args=[14, 22, 'Delivery Center']
+2025-03-03 21:12:30,820 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:12:31,271 - INFO - connections.sonic_connection - Estimated gas: 353833
+2025-03-03 21:12:31,271 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-03 21:12:31,271 - INFO - connections.sonic_connection - Total cost: 0.00353833 Sonic Tokens
+2025-03-03 21:12:31,271 - INFO - connections.sonic_connection - Account balance: 48.9302996292 Sonic Tokens
+2025-03-03 21:12:34,283 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:12:34,284 - INFO - connections.sonic_connection - [TX-9] Sending transaction: method=recordTemperature, gas=500000, gasPrice=10 gwei
+2025-03-03 21:12:35,056 - INFO - connections.sonic_connection - [TX-9] Waiting for transaction to be mined... (0s elapsed)
+2025-03-03 21:12:36,326 - INFO - connections.sonic_connection - [TX-9] Transaction successful: Gas used: 315374, Cost: 0.00315374 tokens, Time: 9.27s
+2025-03-03 21:12:37,327 - INFO - connections.sonic_connection - [CALL-1741016557] Calling contract method: getTemperatureHistory, args: [14]
+2025-03-03 21:12:38,434 - INFO - connections.sonic_connection - [CALL-1741016557] Contract call successful in 1.11s
+2025-03-03 21:12:38,435 - INFO - connections.sonic_connection - [CALL-1741016558] Calling contract method: getBatchDetails, args: [14]
+2025-03-03 21:12:39,129 - INFO - connections.sonic_connection - [CALL-1741016558] Contract call successful in 0.69s
+2025-03-03 21:12:39,130 - INFO - connections.sonic_connection - [TX-10] Preparing transaction: method=processAgentRecommendation, args=[14]
+2025-03-03 21:12:39,134 - WARNING - connections.sonic_connection - Could not check predictions: 'SonicConnection' object has no attribute 'get_agent_predictions'
+2025-03-03 21:12:43,031 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:12:43,522 - INFO - connections.sonic_connection - Estimated gas: 364070
+2025-03-03 21:12:43,523 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-03 21:12:43,523 - INFO - connections.sonic_connection - Total cost: 0.0036407 Sonic Tokens
+2025-03-03 21:12:43,523 - INFO - connections.sonic_connection - Account balance: 48.9271458892 Sonic Tokens
+2025-03-03 21:12:46,578 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:12:46,579 - INFO - connections.sonic_connection - [TX-10] Sending transaction: method=processAgentRecommendation, gas=500000, gasPrice=10 gwei
+2025-03-03 21:12:47,274 - INFO - connections.sonic_connection - [TX-10] Waiting for transaction to be mined... (0s elapsed)
+2025-03-03 21:12:48,578 - INFO - connections.sonic_connection - [TX-10] Transaction successful: Gas used: 323052, Cost: 0.00323052 tokens, Time: 9.45s
+2025-03-03 21:12:48,579 - INFO - connections.sonic_connection - [CALL-1741016568] Calling contract method: getSupplierDetails, args: ['0x1e43eeB0307bb3466Cd237fE58570E6A3996d8ff']
+2025-03-03 21:12:49,139 - INFO - connections.sonic_connection - [CALL-1741016568] Contract call successful in 0.56s
+2025-03-03 21:12:49,139 - INFO - connections.sonic_connection - [CALL-1741016569] Calling contract method: getBatchDetails, args: [14]
+2025-03-03 21:12:50,211 - INFO - connections.sonic_connection - [CALL-1741016569] Contract call successful in 1.07s
+2025-03-03 21:12:50,211 - INFO - connections.sonic_connection - [CALL-1741016570] Calling contract method: getTemperatureHistory, args: [14]
+2025-03-03 21:12:50,739 - INFO - connections.sonic_connection - [CALL-1741016570] Contract call successful in 0.53s
+2025-03-03 21:12:50,739 - INFO - connections.sonic_connection - [CALL-1741016570] Calling contract method: getAgentPredictions, args: [14]
+2025-03-03 21:12:51,517 - INFO - connections.sonic_connection - [CALL-1741016570] Contract call successful in 0.78s
+2025-03-03 21:12:57,519 - INFO - connections.sonic_connection - [TX-11] Preparing transaction: method=recordTemperature, args=[0, 50, 'Delivery Center']
+2025-03-03 21:13:01,333 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:13:01,602 - INFO - connections.sonic_connection - Estimated gas: 357166
+2025-03-03 21:13:01,602 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-03 21:13:01,602 - INFO - connections.sonic_connection - Total cost: 0.00357166 Sonic Tokens
+2025-03-03 21:13:01,602 - INFO - connections.sonic_connection - Account balance: 48.9239153692 Sonic Tokens
+2025-03-03 21:13:04,842 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:13:04,844 - INFO - connections.sonic_connection - [TX-11] Sending transaction: method=recordTemperature, gas=500000, gasPrice=10 gwei
+2025-03-03 21:13:05,855 - INFO - connections.sonic_connection - [TX-11] Waiting for transaction to be mined... (0s elapsed)
+2025-03-03 21:13:07,296 - INFO - connections.sonic_connection - [TX-11] Transaction successful: Gas used: 313075, Cost: 0.00313075 tokens, Time: 9.78s
+2025-03-03 21:13:13,299 - INFO - connections.sonic_connection - [TX-12] Preparing transaction: method=createBatch, args=['Strawberry']
+2025-03-03 21:13:17,615 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:13:17,898 - INFO - connections.sonic_connection - Estimated gas: 198556
+2025-03-03 21:13:17,898 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-03 21:13:17,898 - INFO - connections.sonic_connection - Total cost: 0.00198556 Sonic Tokens
+2025-03-03 21:13:17,898 - INFO - connections.sonic_connection - Account balance: 48.9207846192 Sonic Tokens
+2025-03-03 21:13:21,359 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:13:21,360 - INFO - connections.sonic_connection - [TX-12] Sending transaction: method=createBatch, gas=300000, gasPrice=10 gwei
+2025-03-03 21:13:22,125 - INFO - connections.sonic_connection - [TX-12] Waiting for transaction to be mined... (0s elapsed)
+2025-03-03 21:13:23,445 - INFO - connections.sonic_connection - [TX-12] Transaction successful: Gas used: 178917, Cost: 0.00178917 tokens, Time: 10.15s
+2025-03-03 21:13:23,446 - INFO - connections.sonic_connection - [CALL-1741016603] Calling contract method: batchCount, args: []
+2025-03-03 21:13:24,304 - INFO - connections.sonic_connection - [CALL-1741016603] Contract call successful in 0.86s
+2025-03-03 21:13:30,305 - INFO - connections.sonic_connection - [TX-13] Preparing transaction: method=recordTemperature, args=[0, 25, 'Delivery Center']
+2025-03-03 21:13:33,677 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:13:34,153 - INFO - connections.sonic_connection - Estimated gas: 353806
+2025-03-03 21:13:34,153 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-03 21:13:34,153 - INFO - connections.sonic_connection - Total cost: 0.00353806 Sonic Tokens
+2025-03-03 21:13:34,153 - INFO - connections.sonic_connection - Account balance: 48.9189954492 Sonic Tokens
+2025-03-03 21:13:37,074 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:13:37,074 - INFO - connections.sonic_connection - [TX-13] Sending transaction: method=recordTemperature, gas=500000, gasPrice=10 gwei
+2025-03-03 21:13:38,055 - INFO - connections.sonic_connection - [TX-13] Waiting for transaction to be mined... (0s elapsed)
+2025-03-03 21:13:39,482 - INFO - connections.sonic_connection - [TX-13] Transaction successful: Gas used: 315355, Cost: 0.00315355 tokens, Time: 9.18s
+2025-03-03 21:13:45,483 - INFO - connections.sonic_connection - [TX-14] Preparing transaction: method=recordTemperature, args=[0, 50, 'Delivery Center']
+2025-03-03 21:13:49,306 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:13:49,798 - INFO - connections.sonic_connection - Estimated gas: 353806
+2025-03-03 21:13:49,798 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-03 21:13:49,798 - INFO - connections.sonic_connection - Total cost: 0.00353806 Sonic Tokens
+2025-03-03 21:13:49,798 - INFO - connections.sonic_connection - Account balance: 48.9158418992 Sonic Tokens
+2025-03-03 21:13:52,935 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:13:52,935 - INFO - connections.sonic_connection - [TX-14] Sending transaction: method=recordTemperature, gas=500000, gasPrice=10 gwei
+2025-03-03 21:13:53,814 - INFO - connections.sonic_connection - [TX-14] Waiting for transaction to be mined... (0s elapsed)
+2025-03-03 21:13:55,084 - INFO - connections.sonic_connection - [TX-14] Transaction successful: Gas used: 315355, Cost: 0.00315355 tokens, Time: 9.60s
+2025-03-03 21:14:01,085 - INFO - connections.sonic_connection - [CALL-1741016641] Calling contract method: getTemperatureHistory, args: [0]
+2025-03-03 21:14:02,112 - INFO - connections.sonic_connection - [CALL-1741016641] Contract call successful in 1.03s
+2025-03-03 21:14:02,112 - INFO - connections.sonic_connection - [CALL-1741016642] Calling contract method: getBatchDetails, args: [0]
+2025-03-03 21:14:02,940 - INFO - connections.sonic_connection - [CALL-1741016642] Contract call successful in 0.83s
+2025-03-03 21:14:08,941 - INFO - connections.sonic_connection - [CALL-1741016648] Calling contract method: getTemperatureHistory, args: [0]
+2025-03-03 21:14:09,836 - INFO - connections.sonic_connection - [CALL-1741016648] Contract call successful in 0.90s
+2025-03-03 21:14:09,837 - INFO - connections.sonic_connection - [CALL-1741016649] Calling contract method: getBatchDetails, args: [0]
+2025-03-03 21:14:10,529 - INFO - connections.sonic_connection - [CALL-1741016649] Contract call successful in 0.69s
+2025-03-03 21:14:10,530 - INFO - connections.sonic_connection - [TX-15] Preparing transaction: method=processAgentRecommendation, args=[0]
+2025-03-03 21:14:10,531 - WARNING - connections.sonic_connection - Could not check predictions: 'SonicConnection' object has no attribute 'get_agent_predictions'
+2025-03-03 21:14:14,483 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:14:14,786 - INFO - connections.sonic_connection - Estimated gas: 283610
+2025-03-03 21:14:14,786 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-03 21:14:14,786 - INFO - connections.sonic_connection - Total cost: 0.0028361 Sonic Tokens
+2025-03-03 21:14:14,786 - INFO - connections.sonic_connection - Account balance: 48.9126883492 Sonic Tokens
+2025-03-03 21:14:17,617 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:14:17,618 - INFO - connections.sonic_connection - [TX-15] Sending transaction: method=processAgentRecommendation, gas=500000, gasPrice=10 gwei
+2025-03-03 21:14:18,313 - INFO - connections.sonic_connection - [TX-15] Waiting for transaction to be mined... (0s elapsed)
+2025-03-03 21:14:19,805 - INFO - connections.sonic_connection - [TX-15] Transaction successful: Gas used: 262707, Cost: 0.00262707 tokens, Time: 9.28s
+2025-03-03 21:14:19,805 - INFO - connections.sonic_connection - [CALL-1741016659] Calling contract method: getSupplierDetails, args: ['0x1e43eeB0307bb3466Cd237fE58570E6A3996d8ff']
+2025-03-03 21:14:20,530 - INFO - connections.sonic_connection - [CALL-1741016659] Contract call successful in 0.72s
+2025-03-03 21:14:26,531 - INFO - connections.sonic_connection - [TX-16] Preparing transaction: method=createBatch, args=['Strawberry']
+2025-03-03 21:14:30,597 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:14:30,872 - INFO - connections.sonic_connection - Estimated gas: 198556
+2025-03-03 21:14:30,873 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-03 21:14:30,873 - INFO - connections.sonic_connection - Total cost: 0.00198556 Sonic Tokens
+2025-03-03 21:14:30,873 - INFO - connections.sonic_connection - Account balance: 48.9100612792 Sonic Tokens
+2025-03-03 21:14:33,628 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:14:33,630 - INFO - connections.sonic_connection - [TX-16] Sending transaction: method=createBatch, gas=300000, gasPrice=10 gwei
+2025-03-03 21:14:34,379 - INFO - connections.sonic_connection - [TX-16] Waiting for transaction to be mined... (0s elapsed)
+2025-03-03 21:14:35,913 - INFO - connections.sonic_connection - [TX-16] Transaction successful: Gas used: 178917, Cost: 0.00178917 tokens, Time: 9.38s
+2025-03-03 21:14:35,913 - INFO - connections.sonic_connection - [CALL-1741016675] Calling contract method: batchCount, args: []
+2025-03-03 21:14:36,619 - INFO - connections.sonic_connection - [CALL-1741016675] Contract call successful in 0.71s
+2025-03-03 21:14:42,620 - INFO - connections.sonic_connection - [CALL-1741016682] Calling contract method: getTemperatureHistory, args: [0]
+2025-03-03 21:14:43,367 - INFO - connections.sonic_connection - [CALL-1741016682] Contract call successful in 0.75s
+2025-03-03 21:14:43,367 - INFO - connections.sonic_connection - [CALL-1741016683] Calling contract method: getBatchDetails, args: [0]
+2025-03-03 21:14:43,976 - INFO - connections.sonic_connection - [CALL-1741016683] Contract call successful in 0.61s
+2025-03-03 21:14:49,977 - INFO - connections.sonic_connection - [CALL-1741016689] Calling contract method: getTemperatureHistory, args: [0]
+2025-03-03 21:14:50,714 - INFO - connections.sonic_connection - [CALL-1741016689] Contract call successful in 0.74s
+2025-03-03 21:14:50,714 - INFO - connections.sonic_connection - [CALL-1741016690] Calling contract method: getBatchDetails, args: [0]
+2025-03-03 21:14:51,584 - INFO - connections.sonic_connection - [CALL-1741016690] Contract call successful in 0.87s
+2025-03-03 21:14:51,585 - INFO - connections.sonic_connection - [TX-17] Preparing transaction: method=processAgentRecommendation, args=[0]
+2025-03-03 21:14:51,592 - WARNING - connections.sonic_connection - Could not check predictions: 'SonicConnection' object has no attribute 'get_agent_predictions'
+2025-03-03 21:14:55,650 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:14:55,998 - INFO - connections.sonic_connection - Estimated gas: 283610
+2025-03-03 21:14:55,998 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-03 21:14:55,998 - INFO - connections.sonic_connection - Total cost: 0.0028361 Sonic Tokens
+2025-03-03 21:14:55,998 - INFO - connections.sonic_connection - Account balance: 48.9082721092 Sonic Tokens
+2025-03-03 21:14:59,180 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:14:59,181 - INFO - connections.sonic_connection - [TX-17] Sending transaction: method=processAgentRecommendation, gas=500000, gasPrice=10 gwei
+2025-03-03 21:14:59,879 - INFO - connections.sonic_connection - [TX-17] Waiting for transaction to be mined... (0s elapsed)
+2025-03-03 21:15:01,286 - INFO - connections.sonic_connection - [TX-17] Transaction successful: Gas used: 262707, Cost: 0.00262707 tokens, Time: 9.70s
+2025-03-03 21:15:01,286 - INFO - connections.sonic_connection - [CALL-1741016701] Calling contract method: getSupplierDetails, args: ['0x1e43eeB0307bb3466Cd237fE58570E6A3996d8ff']
+2025-03-03 21:15:01,872 - INFO - connections.sonic_connection - [CALL-1741016701] Contract call successful in 0.59s
+2025-03-03 21:15:07,873 - INFO - connections.sonic_connection - [CALL-1741016707] Calling contract method: getTemperatureHistory, args: [0]
+2025-03-03 21:15:08,552 - INFO - connections.sonic_connection - [CALL-1741016707] Contract call successful in 0.68s
+2025-03-03 21:15:08,552 - INFO - connections.sonic_connection - [CALL-1741016708] Calling contract method: getBatchDetails, args: [0]
+2025-03-03 21:15:09,452 - INFO - connections.sonic_connection - [CALL-1741016708] Contract call successful in 0.90s
+2025-03-03 21:15:15,452 - INFO - connections.sonic_connection - [TX-18] Preparing transaction: method=createBatch, args=['Strawberry']
+2025-03-03 21:15:18,634 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:15:19,000 - INFO - connections.sonic_connection - Estimated gas: 198556
+2025-03-03 21:15:19,000 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-03 21:15:19,000 - INFO - connections.sonic_connection - Total cost: 0.00198556 Sonic Tokens
+2025-03-03 21:15:19,001 - INFO - connections.sonic_connection - Account balance: 48.9056450392 Sonic Tokens
+2025-03-03 21:15:21,820 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:15:21,822 - INFO - connections.sonic_connection - [TX-18] Sending transaction: method=createBatch, gas=300000, gasPrice=10 gwei
+2025-03-03 21:15:22,792 - INFO - connections.sonic_connection - [TX-18] Waiting for transaction to be mined... (0s elapsed)
+2025-03-03 21:15:24,233 - INFO - connections.sonic_connection - [TX-18] Transaction successful: Gas used: 178917, Cost: 0.00178917 tokens, Time: 8.78s
+2025-03-03 21:15:24,233 - INFO - connections.sonic_connection - [CALL-1741016724] Calling contract method: batchCount, args: []
+2025-03-03 21:15:24,802 - INFO - connections.sonic_connection - [CALL-1741016724] Contract call successful in 0.57s
+2025-03-03 21:15:24,803 - INFO - connections.sonic_connection - [TX-19] Preparing transaction: method=recordTemperature, args=[17, 20, 'Cold Storage']
+2025-03-03 21:15:29,321 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:15:30,070 - INFO - connections.sonic_connection - Estimated gas: 398410
+2025-03-03 21:15:30,070 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-03 21:15:30,070 - INFO - connections.sonic_connection - Total cost: 0.0039841 Sonic Tokens
+2025-03-03 21:15:30,070 - INFO - connections.sonic_connection - Account balance: 48.9038558692 Sonic Tokens
+2025-03-03 21:15:33,494 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:15:33,494 - INFO - connections.sonic_connection - [TX-19] Sending transaction: method=recordTemperature, gas=500000, gasPrice=10 gwei
+2025-03-03 21:15:34,465 - INFO - connections.sonic_connection - [TX-19] Waiting for transaction to be mined... (0s elapsed)
+2025-03-03 21:15:35,775 - INFO - connections.sonic_connection - [TX-19] Transaction successful: Gas used: 348808, Cost: 0.00348808 tokens, Time: 10.97s
+2025-03-03 21:15:36,777 - INFO - connections.sonic_connection - [TX-20] Preparing transaction: method=recordTemperature, args=[17, 25, 'Loading Dock']
+2025-03-03 21:15:41,416 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:15:41,678 - INFO - connections.sonic_connection - Estimated gas: 357138
+2025-03-03 21:15:41,679 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-03 21:15:41,679 - INFO - connections.sonic_connection - Total cost: 0.00357138 Sonic Tokens
+2025-03-03 21:15:41,679 - INFO - connections.sonic_connection - Account balance: 48.9003677892 Sonic Tokens
+2025-03-03 21:15:44,462 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:15:44,464 - INFO - connections.sonic_connection - [TX-20] Sending transaction: method=recordTemperature, gas=500000, gasPrice=10 gwei
+2025-03-03 21:15:45,229 - INFO - connections.sonic_connection - [TX-20] Waiting for transaction to be mined... (0s elapsed)
+2025-03-03 21:15:46,496 - INFO - connections.sonic_connection - [TX-20] Transaction successful: Gas used: 313053, Cost: 0.00313053 tokens, Time: 9.72s
+2025-03-03 21:15:47,498 - INFO - connections.sonic_connection - [TX-21] Preparing transaction: method=recordTemperature, args=[17, 30, 'Transport']
+2025-03-03 21:15:50,806 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:15:51,116 - INFO - connections.sonic_connection - Estimated gas: 353734
+2025-03-03 21:15:51,116 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-03 21:15:51,116 - INFO - connections.sonic_connection - Total cost: 0.00353734 Sonic Tokens
+2025-03-03 21:15:51,116 - INFO - connections.sonic_connection - Account balance: 48.8972372592 Sonic Tokens
+2025-03-03 21:15:53,676 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:15:53,676 - INFO - connections.sonic_connection - [TX-21] Sending transaction: method=recordTemperature, gas=500000, gasPrice=10 gwei
+2025-03-03 21:15:54,484 - INFO - connections.sonic_connection - [TX-21] Waiting for transaction to be mined... (0s elapsed)
+2025-03-03 21:15:56,058 - INFO - connections.sonic_connection - [TX-21] Transaction successful: Gas used: 315301, Cost: 0.00315301 tokens, Time: 8.56s
+2025-03-03 21:15:57,060 - INFO - connections.sonic_connection - [TX-22] Preparing transaction: method=recordTemperature, args=[17, 35, 'Transport']
+2025-03-03 21:16:00,734 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:16:01,003 - INFO - connections.sonic_connection - Estimated gas: 353734
+2025-03-03 21:16:01,004 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-03 21:16:01,004 - INFO - connections.sonic_connection - Total cost: 0.00353734 Sonic Tokens
+2025-03-03 21:16:01,004 - INFO - connections.sonic_connection - Account balance: 48.8940842492 Sonic Tokens
+2025-03-03 21:16:03,851 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:16:03,853 - INFO - connections.sonic_connection - [TX-22] Sending transaction: method=recordTemperature, gas=500000, gasPrice=10 gwei
+2025-03-03 21:16:04,494 - INFO - connections.sonic_connection - [TX-22] Waiting for transaction to be mined... (0s elapsed)
+2025-03-03 21:16:05,975 - INFO - connections.sonic_connection - [TX-22] Transaction successful: Gas used: 315301, Cost: 0.00315301 tokens, Time: 8.92s
+2025-03-03 21:16:06,977 - INFO - connections.sonic_connection - [TX-23] Preparing transaction: method=recordTemperature, args=[17, 28, 'Transport']
+2025-03-03 21:16:10,979 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:16:11,275 - INFO - connections.sonic_connection - Estimated gas: 353746
+2025-03-03 21:16:11,275 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-03 21:16:11,275 - INFO - connections.sonic_connection - Total cost: 0.00353746 Sonic Tokens
+2025-03-03 21:16:11,275 - INFO - connections.sonic_connection - Account balance: 48.8909312392 Sonic Tokens
+2025-03-03 21:16:14,311 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:16:14,312 - INFO - connections.sonic_connection - [TX-23] Sending transaction: method=recordTemperature, gas=500000, gasPrice=10 gwei
+2025-03-03 21:16:15,278 - INFO - connections.sonic_connection - [TX-23] Waiting for transaction to be mined... (0s elapsed)
+2025-03-03 21:16:16,701 - INFO - connections.sonic_connection - [TX-23] Transaction successful: Gas used: 315310, Cost: 0.0031531 tokens, Time: 9.72s
+2025-03-03 21:16:17,702 - INFO - connections.sonic_connection - [TX-24] Preparing transaction: method=recordTemperature, args=[17, 22, 'Delivery Center']
+2025-03-03 21:16:22,078 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:16:22,384 - INFO - connections.sonic_connection - Estimated gas: 353833
+2025-03-03 21:16:22,384 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-03 21:16:22,384 - INFO - connections.sonic_connection - Total cost: 0.00353833 Sonic Tokens
+2025-03-03 21:16:22,384 - INFO - connections.sonic_connection - Account balance: 48.8877781392 Sonic Tokens
+2025-03-03 21:16:25,102 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:16:25,103 - INFO - connections.sonic_connection - [TX-24] Sending transaction: method=recordTemperature, gas=500000, gasPrice=10 gwei
+2025-03-03 21:16:26,159 - INFO - connections.sonic_connection - [TX-24] Waiting for transaction to be mined... (0s elapsed)
+2025-03-03 21:16:27,818 - INFO - connections.sonic_connection - [TX-24] Transaction successful: Gas used: 315374, Cost: 0.00315374 tokens, Time: 10.12s
+2025-03-03 21:16:28,820 - INFO - connections.sonic_connection - [CALL-1741016788] Calling contract method: getTemperatureHistory, args: [17]
+2025-03-03 21:16:29,761 - INFO - connections.sonic_connection - [CALL-1741016788] Contract call successful in 0.94s
+2025-03-03 21:16:29,761 - INFO - connections.sonic_connection - [CALL-1741016789] Calling contract method: getBatchDetails, args: [17]
+2025-03-03 21:16:30,481 - INFO - connections.sonic_connection - [CALL-1741016789] Contract call successful in 0.72s
+2025-03-03 21:16:30,482 - INFO - connections.sonic_connection - [TX-25] Preparing transaction: method=processAgentRecommendation, args=[17]
+2025-03-03 21:16:30,488 - WARNING - connections.sonic_connection - Could not check predictions: 'SonicConnection' object has no attribute 'get_agent_predictions'
+2025-03-03 21:16:33,837 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:16:34,574 - INFO - connections.sonic_connection - Estimated gas: 343550
+2025-03-03 21:16:34,574 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-03 21:16:34,574 - INFO - connections.sonic_connection - Total cost: 0.0034355 Sonic Tokens
+2025-03-03 21:16:34,574 - INFO - connections.sonic_connection - Account balance: 48.8846243992 Sonic Tokens
+2025-03-03 21:16:37,951 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:16:37,952 - INFO - connections.sonic_connection - [TX-25] Sending transaction: method=processAgentRecommendation, gas=500000, gasPrice=10 gwei
+2025-03-03 21:16:38,503 - INFO - connections.sonic_connection - [TX-25] Waiting for transaction to be mined... (0s elapsed)
+2025-03-03 21:16:40,093 - INFO - connections.sonic_connection - [TX-25] Transaction successful: Gas used: 307662, Cost: 0.00307662 tokens, Time: 9.61s
+2025-03-03 21:16:40,094 - INFO - connections.sonic_connection - [CALL-1741016800] Calling contract method: getSupplierDetails, args: ['0x1e43eeB0307bb3466Cd237fE58570E6A3996d8ff']
+2025-03-03 21:16:40,723 - INFO - connections.sonic_connection - [CALL-1741016800] Contract call successful in 0.63s
+2025-03-03 21:16:40,724 - INFO - connections.sonic_connection - [CALL-1741016800] Calling contract method: getBatchDetails, args: [17]
+2025-03-03 21:16:41,294 - INFO - connections.sonic_connection - [CALL-1741016800] Contract call successful in 0.57s
+2025-03-03 21:16:41,294 - INFO - connections.sonic_connection - [CALL-1741016801] Calling contract method: getTemperatureHistory, args: [17]
+2025-03-03 21:16:42,164 - INFO - connections.sonic_connection - [CALL-1741016801] Contract call successful in 0.87s
+2025-03-03 21:16:42,164 - INFO - connections.sonic_connection - [CALL-1741016802] Calling contract method: getAgentPredictions, args: [17]
+2025-03-03 21:16:43,393 - INFO - connections.sonic_connection - [CALL-1741016802] Contract call successful in 1.23s
+2025-03-03 21:16:49,395 - INFO - connections.sonic_connection - [TX-26] Preparing transaction: method=createBatch, args=['Strawberry']
+2025-03-03 21:16:53,046 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:16:53,413 - INFO - connections.sonic_connection - Estimated gas: 198556
+2025-03-03 21:16:53,413 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-03 21:16:53,413 - INFO - connections.sonic_connection - Total cost: 0.00198556 Sonic Tokens
+2025-03-03 21:16:53,414 - INFO - connections.sonic_connection - Account balance: 48.8815477792 Sonic Tokens
+2025-03-03 21:16:56,477 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:16:56,477 - INFO - connections.sonic_connection - [TX-26] Sending transaction: method=createBatch, gas=300000, gasPrice=10 gwei
+2025-03-03 21:16:57,212 - INFO - connections.sonic_connection - [TX-26] Waiting for transaction to be mined... (0s elapsed)
+2025-03-03 21:16:58,729 - INFO - connections.sonic_connection - [TX-26] Transaction successful: Gas used: 178917, Cost: 0.00178917 tokens, Time: 9.33s
+2025-03-03 21:16:58,729 - INFO - connections.sonic_connection - [CALL-1741016818] Calling contract method: batchCount, args: []
+2025-03-03 21:16:59,373 - INFO - connections.sonic_connection - [CALL-1741016818] Contract call successful in 0.64s
+2025-03-03 21:17:05,374 - INFO - connections.sonic_connection - [TX-27] Preparing transaction: method=recordTemperature, args=[0, 29, 'Delivery Center']
+2025-03-03 21:17:09,898 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:17:10,160 - INFO - connections.sonic_connection - Estimated gas: 353818
+2025-03-03 21:17:10,160 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-03 21:17:10,160 - INFO - connections.sonic_connection - Total cost: 0.00353818 Sonic Tokens
+2025-03-03 21:17:10,160 - INFO - connections.sonic_connection - Account balance: 48.8797586092 Sonic Tokens
+2025-03-03 21:17:12,971 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:17:12,972 - INFO - connections.sonic_connection - [TX-27] Sending transaction: method=recordTemperature, gas=500000, gasPrice=10 gwei
+2025-03-03 21:17:13,679 - INFO - connections.sonic_connection - [TX-27] Waiting for transaction to be mined... (0s elapsed)
+2025-03-03 21:17:15,226 - INFO - connections.sonic_connection - [TX-27] Transaction successful: Gas used: 315364, Cost: 0.00315364 tokens, Time: 9.85s
+2025-03-03 21:17:21,228 - INFO - connections.sonic_connection - [TX-28] Preparing transaction: method=createBatch, args=['Strawberry']
+2025-03-03 21:17:24,499 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:17:24,759 - INFO - connections.sonic_connection - Estimated gas: 198556
+2025-03-03 21:17:24,759 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-03 21:17:24,759 - INFO - connections.sonic_connection - Total cost: 0.00198556 Sonic Tokens
+2025-03-03 21:17:24,760 - INFO - connections.sonic_connection - Account balance: 48.8766049692 Sonic Tokens
+2025-03-03 21:17:28,024 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:17:28,026 - INFO - connections.sonic_connection - [TX-28] Sending transaction: method=createBatch, gas=300000, gasPrice=10 gwei
+2025-03-03 21:17:36,375 - INFO - connections.sonic_connection - Initializing Sonic connection...
+2025-03-03 21:17:36,375 - INFO - connections.sonic_connection - 📌 Running in MOCK MODE - No real blockchain transactions will be made
+2025-03-03 21:17:36,376 - INFO - connections.sonic_connection - Loaded default mock data for mock mode
+2025-03-03 21:17:47,537 - INFO - connections.sonic_connection - Initializing Sonic connection...
+2025-03-03 21:17:47,537 - INFO - connections.sonic_connection - 📌 Running in MOCK MODE - No real blockchain transactions will be made
+2025-03-03 21:17:47,537 - INFO - connections.sonic_connection - Loaded default mock data for mock mode
+2025-03-03 21:17:48,905 - INFO - connections.sonic_connection - Connected to network with chain ID: 57054
+2025-03-03 21:17:48,906 - INFO - connections.sonic_connection - Found ABIs directory at: /home/santhoshkumar/Supplai/Supllychain-agent/abis
+2025-03-03 21:17:48,906 - INFO - connections.sonic_connection - Attempting to load BerryTempAgent ABI from: /home/santhoshkumar/Supplai/Supllychain-agent/abis/BerryTempAgent.json
+2025-03-03 21:17:48,906 - INFO - connections.sonic_connection - Loaded ABI array for BerryTempAgent with 25 entries
+2025-03-03 21:17:48,906 - INFO - connections.sonic_connection - BerryTempAgent ABI contains functions: BREACH_PENALTY, MAX_TEMP, MIN_TEMP, OPTIMAL_TEMP, SHELF_LIFE_BASE, agentPredictions, batchCount, berryBatches, createBatch, getAgentPredictions and more...
+2025-03-03 21:17:48,906 - INFO - connections.sonic_connection - Found required function: createBatch
+2025-03-03 21:17:48,907 - INFO - connections.sonic_connection - Found required function: batchCount
+2025-03-03 21:17:48,907 - INFO - connections.sonic_connection - Found required function: getTemperatureHistory
+2025-03-03 21:17:48,907 - INFO - connections.sonic_connection - Attempting to load BerryManager ABI from: /home/santhoshkumar/Supplai/Supllychain-agent/abis/BerryManager.json
+2025-03-03 21:17:48,907 - INFO - connections.sonic_connection - Loaded ABI array for BerryManager with 21 entries
+2025-03-03 21:17:48,907 - INFO - connections.sonic_connection - BerryManager ABI contains functions: INITIAL_REPUTATION, MAX_REPUTATION, MIN_REPUTATION, berryAgent, getSupplierDetails, getSupplierRecommendations, owner, processAgentRecommendation, registerSupplier, renounceOwnership and more...
+2025-03-03 21:17:48,907 - INFO - connections.sonic_connection - Successfully loaded contract ABIs: BerryTempAgent, BerryManager
+2025-03-03 21:17:48,936 - INFO - connections.sonic_connection - Successfully initialized contract instances: berry_temp_agent, berry_manager
+2025-03-03 21:17:48,940 - INFO - connections.sonic_connection - Account loaded with address: 0x1e43eeB0307bb3466Cd237fE58570E6A3996d8ff
+2025-03-03 21:17:48,940 - INFO - connections.sonic_connection - Sonic connection initialization complete
+2025-03-03 21:20:42,636 - INFO - connections.sonic_connection - Initializing Sonic connection...
+2025-03-03 21:20:44,325 - INFO - connections.sonic_connection - Connected to network with chain ID: 57054
+2025-03-03 21:20:44,326 - INFO - connections.sonic_connection - Found ABIs directory at: /home/santhoshkumar/Supplai/Supllychain-agent/abis
+2025-03-03 21:20:44,326 - INFO - connections.sonic_connection - Attempting to load BerryTempAgent ABI from: /home/santhoshkumar/Supplai/Supllychain-agent/abis/BerryTempAgent.json
+2025-03-03 21:20:44,327 - INFO - connections.sonic_connection - Loaded ABI array for BerryTempAgent with 25 entries
+2025-03-03 21:20:44,327 - INFO - connections.sonic_connection - BerryTempAgent ABI contains functions: BREACH_PENALTY, MAX_TEMP, MIN_TEMP, OPTIMAL_TEMP, SHELF_LIFE_BASE, agentPredictions, batchCount, berryBatches, createBatch, getAgentPredictions and more...
+2025-03-03 21:20:44,327 - INFO - connections.sonic_connection - Found required function: createBatch
+2025-03-03 21:20:44,327 - INFO - connections.sonic_connection - Found required function: batchCount
+2025-03-03 21:20:44,327 - INFO - connections.sonic_connection - Found required function: getTemperatureHistory
+2025-03-03 21:20:44,327 - INFO - connections.sonic_connection - Attempting to load BerryManager ABI from: /home/santhoshkumar/Supplai/Supllychain-agent/abis/BerryManager.json
+2025-03-03 21:20:44,328 - INFO - connections.sonic_connection - Loaded ABI array for BerryManager with 21 entries
+2025-03-03 21:20:44,328 - INFO - connections.sonic_connection - BerryManager ABI contains functions: INITIAL_REPUTATION, MAX_REPUTATION, MIN_REPUTATION, berryAgent, getSupplierDetails, getSupplierRecommendations, owner, processAgentRecommendation, registerSupplier, renounceOwnership and more...
+2025-03-03 21:20:44,328 - INFO - connections.sonic_connection - Successfully loaded contract ABIs: BerryTempAgent, BerryManager
+2025-03-03 21:20:44,354 - INFO - connections.sonic_connection - Successfully initialized contract instances: berry_temp_agent, berry_manager
+2025-03-03 21:20:44,358 - INFO - connections.sonic_connection - Account loaded with address: 0x1e43eeB0307bb3466Cd237fE58570E6A3996d8ff
+2025-03-03 21:20:44,636 - INFO - connections.sonic_connection - Account balance: 48.8748157992 Sonic Tokens
+2025-03-03 21:20:44,636 - INFO - connections.sonic_connection - Sonic connection initialization complete
+2025-03-03 21:20:58,658 - INFO - connections.sonic_connection - [TX-1] Preparing transaction: method=recordTemperature, args=[0, 38, 'Delivery Center']
+2025-03-03 21:21:02,668 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:21:02,932 - INFO - connections.sonic_connection - Estimated gas: 353818
+2025-03-03 21:21:02,933 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-03 21:21:02,933 - INFO - connections.sonic_connection - Total cost: 0.00353818 Sonic Tokens
+2025-03-03 21:21:02,933 - INFO - connections.sonic_connection - Account balance: 48.8748157992 Sonic Tokens
+2025-03-03 21:21:05,996 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:21:05,997 - INFO - connections.sonic_connection - [TX-1] Sending transaction: method=recordTemperature, gas=500000, gasPrice=10 gwei
+2025-03-03 21:21:06,818 - INFO - connections.sonic_connection - [TX-1] Waiting for transaction to be mined... (0s elapsed)
+2025-03-03 21:21:08,496 - INFO - connections.sonic_connection - [TX-1] Transaction successful: Gas used: 315364, Cost: 0.00315364 tokens, Time: 9.84s
+2025-03-03 21:21:14,497 - INFO - connections.sonic_connection - [TX-2] Preparing transaction: method=createBatch, args=['Strawberry']
+2025-03-03 21:21:18,258 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:21:18,649 - INFO - connections.sonic_connection - Estimated gas: 198556
+2025-03-03 21:21:18,649 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-03 21:21:18,649 - INFO - connections.sonic_connection - Total cost: 0.00198556 Sonic Tokens
+2025-03-03 21:21:18,649 - INFO - connections.sonic_connection - Account balance: 48.8716621592 Sonic Tokens
+2025-03-03 21:21:21,293 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:21:21,294 - INFO - connections.sonic_connection - [TX-2] Sending transaction: method=createBatch, gas=300000, gasPrice=10 gwei
+2025-03-03 21:21:22,108 - INFO - connections.sonic_connection - [TX-2] Waiting for transaction to be mined... (0s elapsed)
+2025-03-03 21:21:23,416 - INFO - connections.sonic_connection - [TX-2] Transaction successful: Gas used: 178917, Cost: 0.00178917 tokens, Time: 8.92s
+2025-03-03 21:21:23,417 - INFO - connections.sonic_connection - [CALL-1741017083] Calling contract method: batchCount, args: []
+2025-03-03 21:21:24,023 - INFO - connections.sonic_connection - [CALL-1741017083] Contract call successful in 0.61s
+2025-03-03 21:21:30,025 - INFO - connections.sonic_connection - [CALL-1741017090] Calling contract method: getTemperatureHistory, args: [0]
+2025-03-03 21:21:30,638 - INFO - connections.sonic_connection - [CALL-1741017090] Contract call successful in 0.61s
+2025-03-03 21:21:30,638 - INFO - connections.sonic_connection - [CALL-1741017090] Calling contract method: getBatchDetails, args: [0]
+2025-03-03 21:21:31,601 - INFO - connections.sonic_connection - [CALL-1741017090] Contract call successful in 0.96s
+2025-03-03 21:21:37,602 - INFO - connections.sonic_connection - [TX-3] Preparing transaction: method=createBatch, args=['Strawberry']
+2025-03-03 21:21:41,113 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:21:41,560 - INFO - connections.sonic_connection - Estimated gas: 198556
+2025-03-03 21:21:41,560 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-03 21:21:41,561 - INFO - connections.sonic_connection - Total cost: 0.00198556 Sonic Tokens
+2025-03-03 21:21:41,561 - INFO - connections.sonic_connection - Account balance: 48.8698729892 Sonic Tokens
+2025-03-03 21:21:44,397 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:21:44,398 - INFO - connections.sonic_connection - [TX-3] Sending transaction: method=createBatch, gas=300000, gasPrice=10 gwei
+2025-03-03 21:21:45,037 - INFO - connections.sonic_connection - [TX-3] Waiting for transaction to be mined... (0s elapsed)
+2025-03-03 21:21:46,384 - INFO - connections.sonic_connection - [TX-3] Transaction successful: Gas used: 178917, Cost: 0.00178917 tokens, Time: 8.78s
+2025-03-03 21:21:46,384 - INFO - connections.sonic_connection - [CALL-1741017106] Calling contract method: batchCount, args: []
+2025-03-03 21:21:47,141 - INFO - connections.sonic_connection - [CALL-1741017106] Contract call successful in 0.76s
+2025-03-03 21:21:53,142 - INFO - connections.sonic_connection - [TX-4] Preparing transaction: method=createBatch, args=['Strawberry']
+2025-03-03 21:21:56,451 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:21:56,822 - INFO - connections.sonic_connection - Estimated gas: 198556
+2025-03-03 21:21:56,822 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-03 21:21:56,822 - INFO - connections.sonic_connection - Total cost: 0.00198556 Sonic Tokens
+2025-03-03 21:21:56,822 - INFO - connections.sonic_connection - Account balance: 48.8680838192 Sonic Tokens
+2025-03-03 21:22:00,820 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:22:00,821 - INFO - connections.sonic_connection - [TX-4] Sending transaction: method=createBatch, gas=300000, gasPrice=10 gwei
+2025-03-03 21:22:01,365 - INFO - connections.sonic_connection - [TX-4] Waiting for transaction to be mined... (0s elapsed)
+2025-03-03 21:22:03,074 - INFO - connections.sonic_connection - [TX-4] Transaction successful: Gas used: 178917, Cost: 0.00178917 tokens, Time: 9.93s
+2025-03-03 21:22:03,075 - INFO - connections.sonic_connection - [CALL-1741017123] Calling contract method: batchCount, args: []
+2025-03-03 21:22:03,791 - INFO - connections.sonic_connection - [CALL-1741017123] Contract call successful in 0.72s
+2025-03-03 21:22:09,792 - INFO - connections.sonic_connection - [CALL-1741017129] Calling contract method: getTemperatureHistory, args: [0]
+2025-03-03 21:22:10,452 - INFO - connections.sonic_connection - [CALL-1741017129] Contract call successful in 0.66s
+2025-03-03 21:22:10,452 - INFO - connections.sonic_connection - [CALL-1741017130] Calling contract method: getBatchDetails, args: [0]
+2025-03-03 21:22:11,163 - INFO - connections.sonic_connection - [CALL-1741017130] Contract call successful in 0.71s
+2025-03-03 21:22:17,165 - INFO - connections.sonic_connection - [CALL-1741017137] Calling contract method: getTemperatureHistory, args: [0]
+2025-03-03 21:22:17,891 - INFO - connections.sonic_connection - [CALL-1741017137] Contract call successful in 0.73s
+2025-03-03 21:22:17,892 - INFO - connections.sonic_connection - [CALL-1741017137] Calling contract method: getBatchDetails, args: [0]
+2025-03-03 21:22:18,633 - INFO - connections.sonic_connection - [CALL-1741017137] Contract call successful in 0.74s
+2025-03-03 21:22:24,635 - INFO - connections.sonic_connection - [CALL-1741017144] Calling contract method: getTemperatureHistory, args: [0]
+2025-03-03 21:22:25,609 - INFO - connections.sonic_connection - [CALL-1741017144] Contract call successful in 0.97s
+2025-03-03 21:22:25,609 - INFO - connections.sonic_connection - [CALL-1741017145] Calling contract method: getBatchDetails, args: [0]
+2025-03-03 21:22:26,396 - INFO - connections.sonic_connection - [CALL-1741017145] Contract call successful in 0.79s
+2025-03-03 21:22:32,398 - INFO - connections.sonic_connection - [CALL-1741017152] Calling contract method: getTemperatureHistory, args: [0]
+2025-03-03 21:22:33,141 - INFO - connections.sonic_connection - [CALL-1741017152] Contract call successful in 0.74s
+2025-03-03 21:22:33,141 - INFO - connections.sonic_connection - [CALL-1741017153] Calling contract method: getBatchDetails, args: [0]
+2025-03-03 21:22:33,688 - INFO - connections.sonic_connection - [CALL-1741017153] Contract call successful in 0.55s
+2025-03-03 21:22:39,690 - INFO - connections.sonic_connection - [TX-5] Preparing transaction: method=createBatch, args=['Strawberry']
+2025-03-03 21:22:43,367 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:22:43,628 - INFO - connections.sonic_connection - Estimated gas: 198556
+2025-03-03 21:22:43,628 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-03 21:22:43,628 - INFO - connections.sonic_connection - Total cost: 0.00198556 Sonic Tokens
+2025-03-03 21:22:43,628 - INFO - connections.sonic_connection - Account balance: 48.8662946492 Sonic Tokens
+2025-03-03 21:22:46,593 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:22:46,594 - INFO - connections.sonic_connection - [TX-5] Sending transaction: method=createBatch, gas=300000, gasPrice=10 gwei
+2025-03-03 21:22:47,144 - INFO - connections.sonic_connection - [TX-5] Waiting for transaction to be mined... (0s elapsed)
+2025-03-03 21:22:48,745 - INFO - connections.sonic_connection - [TX-5] Transaction successful: Gas used: 178917, Cost: 0.00178917 tokens, Time: 9.06s
+2025-03-03 21:22:48,746 - INFO - connections.sonic_connection - [CALL-1741017168] Calling contract method: batchCount, args: []
+2025-03-03 21:22:49,295 - INFO - connections.sonic_connection - [CALL-1741017168] Contract call successful in 0.55s
+2025-03-03 21:22:55,296 - INFO - connections.sonic_connection - [CALL-1741017175] Calling contract method: getTemperatureHistory, args: [0]
+2025-03-03 21:22:56,237 - INFO - connections.sonic_connection - [CALL-1741017175] Contract call successful in 0.94s
+2025-03-03 21:22:56,237 - INFO - connections.sonic_connection - [CALL-1741017176] Calling contract method: getBatchDetails, args: [0]
+2025-03-03 21:22:57,221 - INFO - connections.sonic_connection - [CALL-1741017176] Contract call successful in 0.98s
+2025-03-03 21:23:03,222 - INFO - connections.sonic_connection - [TX-6] Preparing transaction: method=recordTemperature, args=[0, 50, 'Delivery Center']
+2025-03-03 21:23:08,073 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:23:08,507 - INFO - connections.sonic_connection - Estimated gas: 353660
+2025-03-03 21:23:08,507 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-03 21:23:08,508 - INFO - connections.sonic_connection - Total cost: 0.0035366 Sonic Tokens
+2025-03-03 21:23:08,508 - INFO - connections.sonic_connection - Account balance: 48.8645054792 Sonic Tokens
+2025-03-03 21:23:11,288 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:23:11,290 - INFO - connections.sonic_connection - [TX-6] Sending transaction: method=recordTemperature, gas=500000, gasPrice=10 gwei
+2025-03-03 21:23:11,962 - INFO - connections.sonic_connection - [TX-6] Waiting for transaction to be mined... (0s elapsed)
+2025-03-03 21:23:13,424 - INFO - connections.sonic_connection - [TX-6] Transaction successful: Gas used: 315245, Cost: 0.00315245 tokens, Time: 10.20s
+2025-03-03 21:23:19,426 - INFO - connections.sonic_connection - [TX-7] Preparing transaction: method=createBatch, args=['Strawberry']
+2025-03-03 21:23:23,046 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:23:23,448 - INFO - connections.sonic_connection - Estimated gas: 198556
+2025-03-03 21:23:23,448 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-03 21:23:23,448 - INFO - connections.sonic_connection - Total cost: 0.00198556 Sonic Tokens
+2025-03-03 21:23:23,448 - INFO - connections.sonic_connection - Account balance: 48.8613530292 Sonic Tokens
+2025-03-03 21:23:26,530 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:23:26,531 - INFO - connections.sonic_connection - [TX-7] Sending transaction: method=createBatch, gas=300000, gasPrice=10 gwei
+2025-03-03 21:23:27,275 - INFO - connections.sonic_connection - [TX-7] Waiting for transaction to be mined... (0s elapsed)
+2025-03-03 21:23:28,681 - INFO - connections.sonic_connection - [TX-7] Transaction successful: Gas used: 178917, Cost: 0.00178917 tokens, Time: 9.25s
+2025-03-03 21:23:28,681 - INFO - connections.sonic_connection - [CALL-1741017208] Calling contract method: batchCount, args: []
+2025-03-03 21:23:29,206 - INFO - connections.sonic_connection - [CALL-1741017208] Contract call successful in 0.52s
+2025-03-03 21:23:29,207 - INFO - connections.sonic_connection - [TX-8] Preparing transaction: method=recordTemperature, args=[24, 20, 'Cold Storage']
+2025-03-03 21:23:33,291 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:23:33,833 - INFO - connections.sonic_connection - Estimated gas: 398410
+2025-03-03 21:23:33,834 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-03 21:23:33,834 - INFO - connections.sonic_connection - Total cost: 0.0039841 Sonic Tokens
+2025-03-03 21:23:33,834 - INFO - connections.sonic_connection - Account balance: 48.8595638592 Sonic Tokens
+2025-03-03 21:23:36,963 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:23:36,965 - INFO - connections.sonic_connection - [TX-8] Sending transaction: method=recordTemperature, gas=500000, gasPrice=10 gwei
+2025-03-03 21:23:37,556 - INFO - connections.sonic_connection - [TX-8] Waiting for transaction to be mined... (0s elapsed)
+2025-03-03 21:23:38,922 - INFO - connections.sonic_connection - [TX-8] Transaction successful: Gas used: 348808, Cost: 0.00348808 tokens, Time: 9.72s
+2025-03-03 21:23:39,925 - INFO - connections.sonic_connection - [TX-9] Preparing transaction: method=recordTemperature, args=[24, 25, 'Loading Dock']
+2025-03-03 21:23:43,781 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:23:44,062 - INFO - connections.sonic_connection - Estimated gas: 357138
+2025-03-03 21:23:44,062 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-03 21:23:44,063 - INFO - connections.sonic_connection - Total cost: 0.00357138 Sonic Tokens
+2025-03-03 21:23:44,063 - INFO - connections.sonic_connection - Account balance: 48.8560757792 Sonic Tokens
+2025-03-03 21:23:47,009 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:23:47,011 - INFO - connections.sonic_connection - [TX-9] Sending transaction: method=recordTemperature, gas=500000, gasPrice=10 gwei
+2025-03-03 21:23:47,650 - INFO - connections.sonic_connection - [TX-9] Waiting for transaction to be mined... (0s elapsed)
+2025-03-03 21:23:48,956 - INFO - connections.sonic_connection - [TX-9] Transaction successful: Gas used: 313053, Cost: 0.00313053 tokens, Time: 9.03s
+2025-03-03 21:23:49,958 - INFO - connections.sonic_connection - [TX-10] Preparing transaction: method=recordTemperature, args=[24, 30, 'Transport']
+2025-03-03 21:23:53,619 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:23:54,107 - INFO - connections.sonic_connection - Estimated gas: 353734
+2025-03-03 21:23:54,107 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-03 21:23:54,107 - INFO - connections.sonic_connection - Total cost: 0.00353734 Sonic Tokens
+2025-03-03 21:23:54,107 - INFO - connections.sonic_connection - Account balance: 48.8529452492 Sonic Tokens
+2025-03-03 21:23:57,142 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:23:57,143 - INFO - connections.sonic_connection - [TX-10] Sending transaction: method=recordTemperature, gas=500000, gasPrice=10 gwei
+2025-03-03 21:23:58,087 - INFO - connections.sonic_connection - [TX-10] Waiting for transaction to be mined... (0s elapsed)
+2025-03-03 21:23:59,603 - INFO - connections.sonic_connection - [TX-10] Transaction successful: Gas used: 315301, Cost: 0.00315301 tokens, Time: 9.65s
+2025-03-03 21:24:00,605 - INFO - connections.sonic_connection - [TX-11] Preparing transaction: method=recordTemperature, args=[24, 35, 'Transport']
+2025-03-03 21:24:04,012 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:24:04,672 - INFO - connections.sonic_connection - Estimated gas: 353734
+2025-03-03 21:24:04,672 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-03 21:24:04,672 - INFO - connections.sonic_connection - Total cost: 0.00353734 Sonic Tokens
+2025-03-03 21:24:04,672 - INFO - connections.sonic_connection - Account balance: 48.8497922392 Sonic Tokens
+2025-03-03 21:24:07,882 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:24:07,883 - INFO - connections.sonic_connection - [TX-11] Sending transaction: method=recordTemperature, gas=500000, gasPrice=10 gwei
+2025-03-03 21:24:08,615 - INFO - connections.sonic_connection - [TX-11] Waiting for transaction to be mined... (0s elapsed)
+2025-03-03 21:24:10,103 - INFO - connections.sonic_connection - [TX-11] Transaction successful: Gas used: 315301, Cost: 0.00315301 tokens, Time: 9.50s
+2025-03-03 21:24:11,105 - INFO - connections.sonic_connection - [TX-12] Preparing transaction: method=recordTemperature, args=[24, 28, 'Transport']
+2025-03-03 21:24:15,017 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:24:15,374 - INFO - connections.sonic_connection - Estimated gas: 353746
+2025-03-03 21:24:15,374 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-03 21:24:15,374 - INFO - connections.sonic_connection - Total cost: 0.00353746 Sonic Tokens
+2025-03-03 21:24:15,375 - INFO - connections.sonic_connection - Account balance: 48.8466392292 Sonic Tokens
+2025-03-03 21:24:18,633 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:24:18,634 - INFO - connections.sonic_connection - [TX-12] Sending transaction: method=recordTemperature, gas=500000, gasPrice=10 gwei
+2025-03-03 21:24:19,355 - INFO - connections.sonic_connection - [TX-12] Waiting for transaction to be mined... (0s elapsed)
+2025-03-03 21:24:20,640 - INFO - connections.sonic_connection - [TX-12] Transaction successful: Gas used: 315310, Cost: 0.0031531 tokens, Time: 9.53s
+2025-03-03 21:24:21,642 - INFO - connections.sonic_connection - [TX-13] Preparing transaction: method=recordTemperature, args=[24, 22, 'Delivery Center']
+2025-03-03 21:24:25,155 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:24:25,716 - INFO - connections.sonic_connection - Estimated gas: 353833
+2025-03-03 21:24:25,716 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-03 21:24:25,717 - INFO - connections.sonic_connection - Total cost: 0.00353833 Sonic Tokens
+2025-03-03 21:24:25,717 - INFO - connections.sonic_connection - Account balance: 48.8434861292 Sonic Tokens
+2025-03-03 21:24:28,460 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:24:28,462 - INFO - connections.sonic_connection - [TX-13] Sending transaction: method=recordTemperature, gas=500000, gasPrice=10 gwei
+2025-03-03 21:24:29,153 - INFO - connections.sonic_connection - [TX-13] Waiting for transaction to be mined... (0s elapsed)
+2025-03-03 21:24:30,417 - INFO - connections.sonic_connection - [TX-13] Transaction successful: Gas used: 315374, Cost: 0.00315374 tokens, Time: 8.78s
+2025-03-03 21:24:31,418 - INFO - connections.sonic_connection - [CALL-1741017271] Calling contract method: getTemperatureHistory, args: [24]
+2025-03-03 21:24:32,341 - INFO - connections.sonic_connection - [CALL-1741017271] Contract call successful in 0.92s
+2025-03-03 21:24:32,342 - INFO - connections.sonic_connection - [CALL-1741017272] Calling contract method: getBatchDetails, args: [24]
+2025-03-03 21:24:33,295 - INFO - connections.sonic_connection - [CALL-1741017272] Contract call successful in 0.95s
+2025-03-03 21:24:33,296 - INFO - connections.sonic_connection - [TX-14] Preparing transaction: method=processAgentRecommendation, args=[24]
+2025-03-03 21:24:33,301 - WARNING - connections.sonic_connection - Could not check predictions: 'SonicConnection' object has no attribute 'get_agent_predictions'
+2025-03-03 21:24:36,786 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:24:37,080 - INFO - connections.sonic_connection - Estimated gas: 343550
+2025-03-03 21:24:37,080 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-03 21:24:37,080 - INFO - connections.sonic_connection - Total cost: 0.0034355 Sonic Tokens
+2025-03-03 21:24:37,080 - INFO - connections.sonic_connection - Account balance: 48.8403323892 Sonic Tokens
+2025-03-03 21:24:39,985 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:24:39,986 - INFO - connections.sonic_connection - [TX-14] Sending transaction: method=processAgentRecommendation, gas=500000, gasPrice=10 gwei
+2025-03-03 21:24:40,740 - INFO - connections.sonic_connection - [TX-14] Waiting for transaction to be mined... (0s elapsed)
+2025-03-03 21:24:42,142 - INFO - connections.sonic_connection - [TX-14] Transaction successful: Gas used: 307662, Cost: 0.00307662 tokens, Time: 8.85s
+2025-03-03 21:24:42,143 - INFO - connections.sonic_connection - [CALL-1741017282] Calling contract method: getSupplierDetails, args: ['0x1e43eeB0307bb3466Cd237fE58570E6A3996d8ff']
+2025-03-03 21:24:43,126 - INFO - connections.sonic_connection - [CALL-1741017282] Contract call successful in 0.98s
+2025-03-03 21:24:43,127 - INFO - connections.sonic_connection - [CALL-1741017283] Calling contract method: getBatchDetails, args: [24]
+2025-03-03 21:24:43,682 - INFO - connections.sonic_connection - [CALL-1741017283] Contract call successful in 0.55s
+2025-03-03 21:24:43,682 - INFO - connections.sonic_connection - [CALL-1741017283] Calling contract method: getTemperatureHistory, args: [24]
+2025-03-03 21:24:44,635 - INFO - connections.sonic_connection - [CALL-1741017283] Contract call successful in 0.95s
+2025-03-03 21:24:44,636 - INFO - connections.sonic_connection - [CALL-1741017284] Calling contract method: getAgentPredictions, args: [24]
+2025-03-03 21:24:45,178 - INFO - connections.sonic_connection - [CALL-1741017284] Contract call successful in 0.54s
+2025-03-03 21:31:21,778 - INFO - connections.sonic_connection - Initializing Sonic connection...
+2025-03-03 21:31:23,753 - INFO - connections.sonic_connection - Connected to network with chain ID: 57054
+2025-03-03 21:31:23,753 - INFO - connections.sonic_connection - Found ABIs directory at: /home/santhoshkumar/Supplai/Supllychain-agent/abis
+2025-03-03 21:31:23,753 - INFO - connections.sonic_connection - Attempting to load BerryTempAgent ABI from: /home/santhoshkumar/Supplai/Supllychain-agent/abis/BerryTempAgent.json
+2025-03-03 21:31:23,754 - INFO - connections.sonic_connection - Loaded ABI array for BerryTempAgent with 25 entries
+2025-03-03 21:31:23,754 - INFO - connections.sonic_connection - BerryTempAgent ABI contains functions: BREACH_PENALTY, MAX_TEMP, MIN_TEMP, OPTIMAL_TEMP, SHELF_LIFE_BASE, agentPredictions, batchCount, berryBatches, createBatch, getAgentPredictions and more...
+2025-03-03 21:31:23,754 - INFO - connections.sonic_connection - Found required function: createBatch
+2025-03-03 21:31:23,754 - INFO - connections.sonic_connection - Found required function: batchCount
+2025-03-03 21:31:23,755 - INFO - connections.sonic_connection - Found required function: getTemperatureHistory
+2025-03-03 21:31:23,755 - INFO - connections.sonic_connection - Attempting to load BerryManager ABI from: /home/santhoshkumar/Supplai/Supllychain-agent/abis/BerryManager.json
+2025-03-03 21:31:23,755 - INFO - connections.sonic_connection - Loaded ABI array for BerryManager with 21 entries
+2025-03-03 21:31:23,755 - INFO - connections.sonic_connection - BerryManager ABI contains functions: INITIAL_REPUTATION, MAX_REPUTATION, MIN_REPUTATION, berryAgent, getSupplierDetails, getSupplierRecommendations, owner, processAgentRecommendation, registerSupplier, renounceOwnership and more...
+2025-03-03 21:31:23,755 - INFO - connections.sonic_connection - Successfully loaded contract ABIs: BerryTempAgent, BerryManager
+2025-03-03 21:31:23,771 - INFO - connections.sonic_connection - Successfully initialized contract instances: berry_temp_agent, berry_manager
+2025-03-03 21:31:23,774 - INFO - connections.sonic_connection - Account loaded with address: 0x1e43eeB0307bb3466Cd237fE58570E6A3996d8ff
+2025-03-03 21:31:24,121 - INFO - connections.sonic_connection - Account balance: 48.8372557692 Sonic Tokens
+2025-03-03 21:31:24,121 - INFO - connections.sonic_connection - Sonic connection initialization complete
+2025-03-03 21:31:36,345 - INFO - connections.sonic_connection - [TX-1] Preparing transaction: method=recordTemperature, args=[0, 25, 'Delivery Center']
+2025-03-03 21:31:40,505 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:31:41,091 - INFO - connections.sonic_connection - Estimated gas: 353660
+2025-03-03 21:31:41,091 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-03 21:31:41,091 - INFO - connections.sonic_connection - Total cost: 0.0035366 Sonic Tokens
+2025-03-03 21:31:41,091 - INFO - connections.sonic_connection - Account balance: 48.8372557692 Sonic Tokens
+2025-03-03 21:31:43,997 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:31:43,997 - INFO - connections.sonic_connection - [TX-1] Sending transaction: method=recordTemperature, gas=500000, gasPrice=10 gwei
+2025-03-03 21:31:45,032 - INFO - connections.sonic_connection - [TX-1] Waiting for transaction to be mined... (0s elapsed)
+2025-03-03 21:31:46,513 - INFO - connections.sonic_connection - [TX-1] Transaction successful: Gas used: 315245, Cost: 0.00315245 tokens, Time: 10.17s
+2025-03-03 21:31:52,514 - INFO - connections.sonic_connection - [TX-2] Preparing transaction: method=createBatch, args=['Strawberry']
+2025-03-03 21:31:56,218 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:31:56,605 - INFO - connections.sonic_connection - Estimated gas: 198556
+2025-03-03 21:31:56,605 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-03 21:31:56,605 - INFO - connections.sonic_connection - Total cost: 0.00198556 Sonic Tokens
+2025-03-03 21:31:56,605 - INFO - connections.sonic_connection - Account balance: 48.8341033192 Sonic Tokens
+2025-03-03 21:31:59,612 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:31:59,612 - INFO - connections.sonic_connection - [TX-2] Sending transaction: method=createBatch, gas=300000, gasPrice=10 gwei
+2025-03-03 21:32:00,553 - INFO - connections.sonic_connection - [TX-2] Waiting for transaction to be mined... (0s elapsed)
+2025-03-03 21:32:02,110 - INFO - connections.sonic_connection - [TX-2] Transaction successful: Gas used: 178917, Cost: 0.00178917 tokens, Time: 9.60s
+2025-03-03 21:32:02,110 - INFO - connections.sonic_connection - [CALL-1741017722] Calling contract method: batchCount, args: []
+2025-03-03 21:32:02,818 - INFO - connections.sonic_connection - [CALL-1741017722] Contract call successful in 0.71s
+2025-03-03 21:32:08,819 - INFO - connections.sonic_connection - [TX-3] Preparing transaction: method=recordTemperature, args=[0, 42, 'Delivery Center']
+2025-03-03 21:32:12,511 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:32:12,774 - INFO - connections.sonic_connection - Estimated gas: 353502
+2025-03-03 21:32:12,774 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-03 21:32:12,774 - INFO - connections.sonic_connection - Total cost: 0.00353502 Sonic Tokens
+2025-03-03 21:32:12,774 - INFO - connections.sonic_connection - Account balance: 48.8323141492 Sonic Tokens
+2025-03-03 21:32:15,879 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:32:15,881 - INFO - connections.sonic_connection - [TX-3] Sending transaction: method=recordTemperature, gas=500000, gasPrice=10 gwei
+2025-03-03 21:32:17,056 - INFO - connections.sonic_connection - [TX-3] Waiting for transaction to be mined... (0s elapsed)
+2025-03-03 21:32:18,339 - INFO - connections.sonic_connection - [TX-3] Transaction successful: Gas used: 315126, Cost: 0.00315126 tokens, Time: 9.52s
+2025-03-03 21:32:24,341 - INFO - connections.sonic_connection - [TX-4] Preparing transaction: method=recordTemperature, args=[0, 25, 'Delivery Center']
+2025-03-03 21:32:28,155 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:32:28,421 - INFO - connections.sonic_connection - Estimated gas: 353502
+2025-03-03 21:32:28,421 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-03 21:32:28,421 - INFO - connections.sonic_connection - Total cost: 0.00353502 Sonic Tokens
+2025-03-03 21:32:28,421 - INFO - connections.sonic_connection - Account balance: 48.8291628892 Sonic Tokens
+2025-03-03 21:32:31,947 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:32:31,948 - INFO - connections.sonic_connection - [TX-4] Sending transaction: method=recordTemperature, gas=500000, gasPrice=10 gwei
+2025-03-03 21:32:32,499 - INFO - connections.sonic_connection - [TX-4] Waiting for transaction to be mined... (0s elapsed)
+2025-03-03 21:32:33,854 - INFO - connections.sonic_connection - [TX-4] Transaction successful: Gas used: 315126, Cost: 0.00315126 tokens, Time: 9.51s
+2025-03-03 21:32:39,855 - INFO - connections.sonic_connection - [TX-5] Preparing transaction: method=recordTemperature, args=[0, 50, 'Delivery Center']
+2025-03-03 21:32:44,298 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:32:44,810 - INFO - connections.sonic_connection - Estimated gas: 353502
+2025-03-03 21:32:44,810 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-03 21:32:44,810 - INFO - connections.sonic_connection - Total cost: 0.00353502 Sonic Tokens
+2025-03-03 21:32:44,810 - INFO - connections.sonic_connection - Account balance: 48.8260116292 Sonic Tokens
+2025-03-03 21:32:48,499 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:32:48,500 - INFO - connections.sonic_connection - [TX-5] Sending transaction: method=recordTemperature, gas=500000, gasPrice=10 gwei
+2025-03-03 21:32:49,067 - INFO - connections.sonic_connection - [TX-5] Waiting for transaction to be mined... (0s elapsed)
+2025-03-03 21:32:50,334 - INFO - connections.sonic_connection - [TX-5] Transaction successful: Gas used: 315126, Cost: 0.00315126 tokens, Time: 10.48s
+2025-03-03 21:32:56,335 - INFO - connections.sonic_connection - [TX-6] Preparing transaction: method=recordTemperature, args=[0, 42, 'Delivery Center']
+2025-03-03 21:33:00,232 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:33:00,555 - INFO - connections.sonic_connection - Estimated gas: 353502
+2025-03-03 21:33:00,555 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-03 21:33:00,555 - INFO - connections.sonic_connection - Total cost: 0.00353502 Sonic Tokens
+2025-03-03 21:33:00,555 - INFO - connections.sonic_connection - Account balance: 48.8228603692 Sonic Tokens
+2025-03-03 21:33:03,435 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:33:03,436 - INFO - connections.sonic_connection - [TX-6] Sending transaction: method=recordTemperature, gas=500000, gasPrice=10 gwei
+2025-03-03 21:33:04,473 - INFO - connections.sonic_connection - [TX-6] Waiting for transaction to be mined... (0s elapsed)
+2025-03-03 21:33:05,787 - INFO - connections.sonic_connection - [TX-6] Transaction successful: Gas used: 315126, Cost: 0.00315126 tokens, Time: 9.45s
+2025-03-03 21:33:11,788 - INFO - connections.sonic_connection - [CALL-1741017791] Calling contract method: getTemperatureHistory, args: [0]
+2025-03-03 21:33:12,870 - INFO - connections.sonic_connection - [CALL-1741017791] Contract call successful in 1.08s
+2025-03-03 21:33:12,870 - INFO - connections.sonic_connection - [CALL-1741017792] Calling contract method: getBatchDetails, args: [0]
+2025-03-03 21:33:13,588 - INFO - connections.sonic_connection - [CALL-1741017792] Contract call successful in 0.72s
+2025-03-03 21:33:19,591 - INFO - connections.sonic_connection - [TX-7] Preparing transaction: method=createBatch, args=['Strawberry']
+2025-03-03 21:33:23,005 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:33:23,509 - INFO - connections.sonic_connection - Estimated gas: 198556
+2025-03-03 21:33:23,509 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-03 21:33:23,509 - INFO - connections.sonic_connection - Total cost: 0.00198556 Sonic Tokens
+2025-03-03 21:33:23,509 - INFO - connections.sonic_connection - Account balance: 48.8197091092 Sonic Tokens
+2025-03-03 21:33:26,299 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:33:26,299 - INFO - connections.sonic_connection - [TX-7] Sending transaction: method=createBatch, gas=300000, gasPrice=10 gwei
+2025-03-03 21:33:27,275 - INFO - connections.sonic_connection - [TX-7] Waiting for transaction to be mined... (0s elapsed)
+2025-03-03 21:33:28,743 - INFO - connections.sonic_connection - [TX-7] Transaction successful: Gas used: 178917, Cost: 0.00178917 tokens, Time: 9.15s
+2025-03-03 21:33:28,744 - INFO - connections.sonic_connection - [CALL-1741017808] Calling contract method: batchCount, args: []
+2025-03-03 21:33:29,534 - INFO - connections.sonic_connection - [CALL-1741017808] Contract call successful in 0.79s
+2025-03-03 21:33:29,535 - INFO - connections.sonic_connection - [TX-8] Preparing transaction: method=recordTemperature, args=[26, 20, 'Cold Storage']
+2025-03-03 21:33:34,068 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:33:34,560 - INFO - connections.sonic_connection - Estimated gas: 398410
+2025-03-03 21:33:34,561 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-03 21:33:34,561 - INFO - connections.sonic_connection - Total cost: 0.0039841 Sonic Tokens
+2025-03-03 21:33:34,561 - INFO - connections.sonic_connection - Account balance: 48.8179199392 Sonic Tokens
+2025-03-03 21:33:37,379 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:33:37,381 - INFO - connections.sonic_connection - [TX-8] Sending transaction: method=recordTemperature, gas=500000, gasPrice=10 gwei
+2025-03-03 21:33:38,020 - INFO - connections.sonic_connection - [TX-8] Waiting for transaction to be mined... (0s elapsed)
+2025-03-03 21:33:39,496 - INFO - connections.sonic_connection - [TX-8] Transaction successful: Gas used: 348808, Cost: 0.00348808 tokens, Time: 9.96s
+2025-03-03 21:33:40,498 - INFO - connections.sonic_connection - [TX-9] Preparing transaction: method=recordTemperature, args=[26, 25, 'Loading Dock']
+2025-03-03 21:33:44,075 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:33:44,566 - INFO - connections.sonic_connection - Estimated gas: 357138
+2025-03-03 21:33:44,566 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-03 21:33:44,566 - INFO - connections.sonic_connection - Total cost: 0.00357138 Sonic Tokens
+2025-03-03 21:33:44,566 - INFO - connections.sonic_connection - Account balance: 48.8144318592 Sonic Tokens
+2025-03-03 21:33:47,755 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:33:47,756 - INFO - connections.sonic_connection - [TX-9] Sending transaction: method=recordTemperature, gas=500000, gasPrice=10 gwei
+2025-03-03 21:33:48,375 - INFO - connections.sonic_connection - [TX-9] Waiting for transaction to be mined... (0s elapsed)
+2025-03-03 21:33:49,940 - INFO - connections.sonic_connection - [TX-9] Transaction successful: Gas used: 313053, Cost: 0.00313053 tokens, Time: 9.44s
+2025-03-03 21:33:50,942 - INFO - connections.sonic_connection - [TX-10] Preparing transaction: method=recordTemperature, args=[26, 30, 'Transport']
+2025-03-03 21:33:54,546 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:33:55,058 - INFO - connections.sonic_connection - Estimated gas: 353734
+2025-03-03 21:33:55,058 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-03 21:33:55,058 - INFO - connections.sonic_connection - Total cost: 0.00353734 Sonic Tokens
+2025-03-03 21:33:55,058 - INFO - connections.sonic_connection - Account balance: 48.8113013292 Sonic Tokens
+2025-03-03 21:33:58,314 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:33:58,314 - INFO - connections.sonic_connection - [TX-10] Sending transaction: method=recordTemperature, gas=500000, gasPrice=10 gwei
+2025-03-03 21:33:59,034 - INFO - connections.sonic_connection - [TX-10] Waiting for transaction to be mined... (0s elapsed)
+2025-03-03 21:34:00,335 - INFO - connections.sonic_connection - [TX-10] Transaction successful: Gas used: 315301, Cost: 0.00315301 tokens, Time: 9.39s
+2025-03-03 21:34:01,338 - INFO - connections.sonic_connection - [TX-11] Preparing transaction: method=recordTemperature, args=[26, 35, 'Transport']
+2025-03-03 21:34:05,092 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:34:05,357 - INFO - connections.sonic_connection - Estimated gas: 353734
+2025-03-03 21:34:05,357 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-03 21:34:05,357 - INFO - connections.sonic_connection - Total cost: 0.00353734 Sonic Tokens
+2025-03-03 21:34:05,357 - INFO - connections.sonic_connection - Account balance: 48.8081483192 Sonic Tokens
+2025-03-03 21:34:08,166 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:34:08,168 - INFO - connections.sonic_connection - [TX-11] Sending transaction: method=recordTemperature, gas=500000, gasPrice=10 gwei
+2025-03-03 21:34:08,919 - INFO - connections.sonic_connection - [TX-11] Waiting for transaction to be mined... (0s elapsed)
+2025-03-03 21:34:10,421 - INFO - connections.sonic_connection - [TX-11] Transaction successful: Gas used: 315301, Cost: 0.00315301 tokens, Time: 9.08s
+2025-03-03 21:34:11,423 - INFO - connections.sonic_connection - [TX-12] Preparing transaction: method=recordTemperature, args=[26, 28, 'Transport']
+2025-03-03 21:34:15,215 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:34:15,495 - INFO - connections.sonic_connection - Estimated gas: 353746
+2025-03-03 21:34:15,495 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-03 21:34:15,495 - INFO - connections.sonic_connection - Total cost: 0.00353746 Sonic Tokens
+2025-03-03 21:34:15,495 - INFO - connections.sonic_connection - Account balance: 48.8049953092 Sonic Tokens
+2025-03-03 21:34:18,300 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:34:18,302 - INFO - connections.sonic_connection - [TX-12] Sending transaction: method=recordTemperature, gas=500000, gasPrice=10 gwei
+2025-03-03 21:34:19,225 - INFO - connections.sonic_connection - [TX-12] Waiting for transaction to be mined... (0s elapsed)
+2025-03-03 21:34:20,660 - INFO - connections.sonic_connection - [TX-12] Transaction successful: Gas used: 315310, Cost: 0.0031531 tokens, Time: 9.24s
+2025-03-03 21:34:21,662 - INFO - connections.sonic_connection - [TX-13] Preparing transaction: method=recordTemperature, args=[26, 22, 'Delivery Center']
+2025-03-03 21:34:24,941 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:34:25,201 - INFO - connections.sonic_connection - Estimated gas: 353833
+2025-03-03 21:34:25,201 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-03 21:34:25,201 - INFO - connections.sonic_connection - Total cost: 0.00353833 Sonic Tokens
+2025-03-03 21:34:25,201 - INFO - connections.sonic_connection - Account balance: 48.8018422092 Sonic Tokens
+2025-03-03 21:34:27,867 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:34:27,868 - INFO - connections.sonic_connection - [TX-13] Sending transaction: method=recordTemperature, gas=500000, gasPrice=10 gwei
+2025-03-03 21:34:28,603 - INFO - connections.sonic_connection - [TX-13] Waiting for transaction to be mined... (0s elapsed)
+2025-03-03 21:34:30,184 - INFO - connections.sonic_connection - [TX-13] Transaction successful: Gas used: 315374, Cost: 0.00315374 tokens, Time: 8.52s
+2025-03-03 21:34:31,186 - INFO - connections.sonic_connection - [CALL-1741017871] Calling contract method: getTemperatureHistory, args: [26]
+2025-03-03 21:34:32,126 - INFO - connections.sonic_connection - [CALL-1741017871] Contract call successful in 0.94s
+2025-03-03 21:34:32,126 - INFO - connections.sonic_connection - [CALL-1741017872] Calling contract method: getBatchDetails, args: [26]
+2025-03-03 21:34:33,035 - INFO - connections.sonic_connection - [CALL-1741017872] Contract call successful in 0.91s
+2025-03-03 21:34:33,036 - INFO - connections.sonic_connection - [TX-14] Preparing transaction: method=processAgentRecommendation, args=[26]
+2025-03-03 21:34:33,042 - WARNING - connections.sonic_connection - Could not check predictions: 'SonicConnection' object has no attribute 'get_agent_predictions'
+2025-03-03 21:34:36,452 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:34:36,737 - INFO - connections.sonic_connection - Estimated gas: 343550
+2025-03-03 21:34:36,737 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-03 21:34:36,737 - INFO - connections.sonic_connection - Total cost: 0.0034355 Sonic Tokens
+2025-03-03 21:34:36,738 - INFO - connections.sonic_connection - Account balance: 48.7986884692 Sonic Tokens
+2025-03-03 21:34:40,012 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:34:40,013 - INFO - connections.sonic_connection - [TX-14] Sending transaction: method=processAgentRecommendation, gas=500000, gasPrice=10 gwei
+2025-03-03 21:34:40,829 - INFO - connections.sonic_connection - [TX-14] Waiting for transaction to be mined... (0s elapsed)
+2025-03-03 21:34:42,095 - INFO - connections.sonic_connection - [TX-14] Transaction successful: Gas used: 307662, Cost: 0.00307662 tokens, Time: 9.06s
+2025-03-03 21:34:42,096 - INFO - connections.sonic_connection - [CALL-1741017882] Calling contract method: getSupplierDetails, args: ['0x1e43eeB0307bb3466Cd237fE58570E6A3996d8ff']
+2025-03-03 21:34:42,944 - INFO - connections.sonic_connection - [CALL-1741017882] Contract call successful in 0.85s
+2025-03-03 21:34:42,945 - INFO - connections.sonic_connection - [CALL-1741017882] Calling contract method: getBatchDetails, args: [26]
+2025-03-03 21:34:43,595 - INFO - connections.sonic_connection - [CALL-1741017882] Contract call successful in 0.65s
+2025-03-03 21:34:43,596 - INFO - connections.sonic_connection - [CALL-1741017883] Calling contract method: getTemperatureHistory, args: [26]
+2025-03-03 21:34:44,397 - INFO - connections.sonic_connection - [CALL-1741017883] Contract call successful in 0.80s
+2025-03-03 21:34:44,398 - INFO - connections.sonic_connection - [CALL-1741017884] Calling contract method: getAgentPredictions, args: [26]
+2025-03-03 21:34:45,196 - INFO - connections.sonic_connection - [CALL-1741017884] Contract call successful in 0.80s
+2025-03-03 21:34:51,198 - INFO - connections.sonic_connection - [TX-15] Preparing transaction: method=recordTemperature, args=[0, 50, 'Delivery Center']
+2025-03-03 21:34:55,065 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:34:55,432 - INFO - connections.sonic_connection - Estimated gas: 353502
+2025-03-03 21:34:55,432 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-03 21:34:55,432 - INFO - connections.sonic_connection - Total cost: 0.00353502 Sonic Tokens
+2025-03-03 21:34:55,432 - INFO - connections.sonic_connection - Account balance: 48.7956118492 Sonic Tokens
+2025-03-03 21:34:58,444 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:34:58,446 - INFO - connections.sonic_connection - [TX-15] Sending transaction: method=recordTemperature, gas=500000, gasPrice=10 gwei
+2025-03-03 21:34:59,159 - INFO - connections.sonic_connection - [TX-15] Waiting for transaction to be mined... (0s elapsed)
+2025-03-03 21:35:00,696 - INFO - connections.sonic_connection - [TX-15] Transaction successful: Gas used: 315126, Cost: 0.00315126 tokens, Time: 9.50s
+2025-03-03 21:35:06,697 - INFO - connections.sonic_connection - [TX-16] Preparing transaction: method=recordTemperature, args=[0, 25, 'Delivery Center']
+2025-03-03 21:35:10,565 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:35:11,054 - INFO - connections.sonic_connection - Estimated gas: 353502
+2025-03-03 21:35:11,054 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-03 21:35:11,054 - INFO - connections.sonic_connection - Total cost: 0.00353502 Sonic Tokens
+2025-03-03 21:35:11,055 - INFO - connections.sonic_connection - Account balance: 48.7924605892 Sonic Tokens
+2025-03-03 21:35:14,170 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:35:14,171 - INFO - connections.sonic_connection - [TX-16] Sending transaction: method=recordTemperature, gas=500000, gasPrice=10 gwei
+2025-03-03 21:35:14,828 - INFO - connections.sonic_connection - [TX-16] Waiting for transaction to be mined... (0s elapsed)
+2025-03-03 21:35:16,345 - INFO - connections.sonic_connection - [TX-16] Transaction successful: Gas used: 315126, Cost: 0.00315126 tokens, Time: 9.65s
+2025-03-03 21:35:22,346 - INFO - connections.sonic_connection - [TX-17] Preparing transaction: method=createBatch, args=['Strawberry']
+2025-03-03 21:35:26,121 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:35:26,390 - INFO - connections.sonic_connection - Estimated gas: 198556
+2025-03-03 21:35:26,391 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-03 21:35:26,391 - INFO - connections.sonic_connection - Total cost: 0.00198556 Sonic Tokens
+2025-03-03 21:35:26,391 - INFO - connections.sonic_connection - Account balance: 48.7893093292 Sonic Tokens
+2025-03-03 21:35:29,561 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-03 21:35:29,562 - INFO - connections.sonic_connection - [TX-17] Sending transaction: method=createBatch, gas=300000, gasPrice=10 gwei
+2025-03-03 21:35:30,479 - INFO - connections.sonic_connection - [TX-17] Waiting for transaction to be mined... (0s elapsed)
+2025-03-03 21:35:31,801 - INFO - connections.sonic_connection - [TX-17] Transaction successful: Gas used: 178917, Cost: 0.00178917 tokens, Time: 9.45s
+2025-03-03 21:35:31,801 - INFO - connections.sonic_connection - [CALL-1741017931] Calling contract method: batchCount, args: []
+2025-03-03 21:35:32,723 - INFO - connections.sonic_connection - [CALL-1741017931] Contract call successful in 0.92s
+2025-03-03 21:35:38,725 - INFO - connections.sonic_connection - [TX-18] Preparing transaction: method=createBatch, args=['Strawberry']

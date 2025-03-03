@@ -82,6 +82,7 @@ def send_alert(alert_type, message, details=None):
         except Exception as e:
             logger.error(f"Failed to send webhook alert: {e}")
 
+
 def update_health_metrics(category, success=True, value=1):
     """Update health monitoring metrics"""
     global health_stats
@@ -94,7 +95,8 @@ def update_health_metrics(category, success=True, value=1):
             health_stats["failed_transactions"] += value
     
     elif category == "temperature_breach":
-        health_stats["temperature_breaches"] += value
+        # Increment the breach counter by 1, not by the dict value
+        health_stats["temperature_breaches"] += 1  # Changed from: health_stats["temperature_breaches"] += value
         
         # Update breach severity counts
         severity = "unknown"
@@ -234,7 +236,7 @@ async def monitor_berry_temperature(agent, **kwargs):
             "contract_address": BERRY_TEMP_AGENT_ADDRESS,
             "method": "recordTemperature",
             "args": [batch_id, int(temperature * 10), location],
-            "gas_limit": 300000
+            "gas_limit": 500000
         }
         
         sonic_connection = agent.connection_manager.connections["sonic"]
