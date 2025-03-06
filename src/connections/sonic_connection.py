@@ -10,8 +10,9 @@ from dotenv import load_dotenv, set_key
 from web3 import Web3
 from web3.middleware import geth_poa_middleware
 from src.constants.abi import ERC20_ABI
-from src.connections.base_connection import BaseConnection, Action, ActionParameter
+from src.connections.anthropic_connection import AnthropicConnection
 from src.constants.networks import SONIC_NETWORKS
+from src.connections.base_connection import BaseConnection, Action, ActionParameter
 
 # Configure logging
 logger = logging.getLogger("connections.sonic_connection")
@@ -22,7 +23,6 @@ logger.addHandler(file_handler)
 # Contract addresses
 BERRY_TEMP_AGENT_ADDRESS = "0x39D85a2d6f485D521d008a5711F6ffE02b591b6E"
 BERRY_MANAGER_ADDRESS = "0x8BBD24387E3F6b842C16a35F2F52A5bB1835948A"
-
 
 # Transaction history storage
 transaction_history = []
@@ -49,6 +49,9 @@ class SonicConnection(BaseConnection):
             "last_tx_time": None,
             "total_cost": 0
         }
+        
+        # Reference to the parent agent (set by connection manager)
+        self.agent = None
         
         # Enable mock mode if specified
         self.use_mock_mode = config.get("use_mock_mode", False)
@@ -92,6 +95,489 @@ class SonicConnection(BaseConnection):
             logger.error(f"Error during connection initialization: {e}", exc_info=True)
             if not self.use_mock_mode:
                 raise
+
+    def perform_action(self, action_name: str, kwargs: Dict[str, Any]) -> Any:
+        """Execute a Sonic action with validation"""
+        if action_name not in self.actions:
+            raise KeyError(f"Unknown action: {action_name}")
+
+        action = self.actions[action_name]
+        errors = []
+        
+        # Validate parameters if they are provided
+        if kwargs:
+            errors = action.validate_params(kwargs)
+        
+        if errors:
+            raise ValueError(f"Invalid parameters: {', '.join(errors)}")
+
+        # Call the appropriate method based on action name
+        method_name = action_name.replace('-', '_')
+        if not hasattr(self, method_name):
+            raise AttributeError(f"Method {method_name} not found on SonicConnection")
+        
+        method = getattr(self, method_name)
+        
+        # Log the action being performed
+        logger.info(f"Executing action {action_name} with parameters: {kwargs}")
+        
+        # Call the method with the provided parameters
+        try:
+            return method(**kwargs)
+        except Exception as e:
+            logger.error(f"Error executing action {action_name}: {str(e)}", exc_info=True)
+            raise
+
+    def analyze_text_with_llm(self, prompt: str, system_prompt: str = None, model: str = None):
+        """Use AnthropicConnection capabilities to analyze text"""
+        try:
+            # Access the AnthropicConnection through the agent
+            if hasattr(self, 'agent') and hasattr(self.agent, 'connection_manager'):
+                anthropic_conn = self.agent.connection_manager.connections.get('anthropic')
+                
+                if anthropic_conn and isinstance(anthropic_conn, AnthropicConnection):
+                    # If no system prompt provided, use a default focused on berry analysis
+                    if not system_prompt:
+                        system_prompt = """You are a specialized AI assistant for berry supply chain monitoring.
+                        Your expertise includes cold chain management, temperature-sensitive produce handling,
+                        quality assessment, and shelf-life prediction for berries.
+                        Provide data-driven, accurate analysis with practical recommendations."""
+                    
+                    # Use the generate_text method from AnthropicConnection
+                    return anthropic_conn.generate_text(
+                        prompt=prompt,
+                        system_prompt=system_prompt,
+                        model=model or anthropic_conn.config.get("model")
+                    )
+            
+            # Fallback if AnthropicConnection is not available
+            logger.warning("AnthropicConnection not available, using mock response")
+            return "Analysis not available without AnthropicConnection"
+            
+        except Exception as e:
+            logger.error(f"Failed to analyze text with LLM: {e}", exc_info=True)
+            return f"Error analyzing text: {str(e)}"
+
+    def monitor_berry_temperature(self, batch_id: int, temperature: float, location: str) -> Dict[str, Any]:
+        """Monitor and analyze temperature data for berry shipments"""
+        try:
+            logger.info(f"Monitoring temperature for batch {batch_id}: {temperature}°C at {location}")
+            
+            # Convert temperature to integer representation as expected by the contract (multiplied by 10)
+            temp_int = int(temperature * 10)
+            
+            # Call record_temperature method which handles the blockchain interaction
+            result = self.record_temperature(batch_id, temp_int, location)
+            
+            # Analyze temperature data
+            is_breach = temperature > 4.0 or temperature < 0.0
+            severity = "None"
+            
+            if is_breach:
+                if temperature > 6.0 or temperature < -1.0:
+                    severity = "Critical"
+                else:
+                    severity = "Warning"
+                    
+            # Add analysis to result
+            result.update({
+                "analysis": {
+                    "is_breach": is_breach,
+                    "severity": severity,
+                    "optimal_range": "0.0°C - 4.0°C",
+                    "recommendation": self._generate_recommendation(temperature, is_breach, severity)
+                }
+            })
+            
+            return result
+        except Exception as e:
+            logger.error(f"Failed to monitor temperature: {e}", exc_info=True)
+            return {
+                "success": False,
+                "error": str(e),
+                "batch_id": batch_id,
+                "temperature": temperature,
+                "location": location
+            }
+            
+    def _generate_recommendation(self, temperature: float, is_breach: bool, severity: str) -> str:
+        """Generate a recommendation based on temperature data"""
+        if not is_breach:
+            return "Temperature within acceptable range. Continue standard monitoring."
+        elif severity == "Warning":
+            return f"Temperature ({temperature}°C) outside optimal range. Increase monitoring frequency and check cooling systems."
+        else:  # Critical
+            return f"Critical temperature breach ({temperature}°C). Immediate intervention required. Consider moving product to alternative cold storage."
+
+    def manage_berry_quality(self, batch_id: int) -> Dict[str, Any]:
+        """Assess and predict berry quality based on temperature history"""
+        try:
+            logger.info(f"Assessing quality for batch {batch_id}")
+            
+            # Get temperature history
+            tx_data = {
+                "contract_address": BERRY_TEMP_AGENT_ADDRESS,
+                "method": "getTemperatureHistory",
+                "args": [batch_id]
+            }
+            
+            temp_history = self.call_contract(tx_data)
+            
+            # Get batch details
+            batch_details = self.get_batch_details(batch_id)
+            
+            # Calculate quality score and shelf life
+            quality_score = 100
+            shelf_life_hours = 72  # Default
+            
+            # Process temperature readings
+            breach_count = 0
+            reading_count = len(temp_history) if temp_history else 0
+            
+            for reading in temp_history or []:
+                # Extract temperature (handle both list and dict formats)
+                if isinstance(reading, list):
+                    temp = reading[1] / 10.0 if len(reading) > 1 else 0
+                else:
+                    temp = reading.get("temperature", 0)
+                    
+                # Check for breaches
+                if temp > 4.0:
+                    breach_count += 1
+                    deviation = temp - 4.0
+                    quality_score -= deviation * 5
+                    shelf_life_hours -= deviation * 4
+                elif temp < 0.0:
+                    breach_count += 1
+                    deviation = 0.0 - temp
+                    quality_score -= deviation * 7
+                    shelf_life_hours -= deviation * 6
+            
+            # Ensure values don't go below zero
+            quality_score = max(0, quality_score)
+            shelf_life_hours = max(0, shelf_life_hours)
+            
+            # Determine recommended action
+            action = "No Action"
+            if quality_score < 60:
+                action = "Reject"
+            elif quality_score < 70:
+                action = "Reroute"
+            elif quality_score < 80:
+                action = "Expedite"
+            elif quality_score < 90:
+                action = "Alert"
+                
+            return {
+                "success": True,
+                "batch_id": batch_id,
+                "berry_type": batch_details.get("berryType", "Unknown"),
+                "quality_score": round(quality_score, 1),
+                "shelf_life_hours": round(shelf_life_hours, 1),
+                "breach_count": breach_count,
+                "reading_count": reading_count,
+                "breach_percentage": round((breach_count / reading_count * 100) if reading_count > 0 else 0, 1),
+                "recommended_action": action
+            }
+        except Exception as e:
+            logger.error(f"Failed to assess quality: {e}", exc_info=True)
+            return {
+                "success": False,
+                "error": str(e),
+                "batch_id": batch_id
+            }
+
+    def process_agent_recommendations(self, batch_id: int) -> Dict[str, Any]:
+        """Process agent recommendations and update supplier reputation"""
+        try:
+            logger.info(f"Processing recommendations for batch {batch_id}")
+            
+            # Call contract method
+            tx_data = {
+                "contract_address": BERRY_MANAGER_ADDRESS,
+                "method": "processAgentRecommendation",
+                "args": [batch_id],
+                "gas_limit": 500000
+            }
+            
+            result = self.send_transaction(tx_data)
+            
+            # Get supplier details
+            supplier_tx_data = {
+                "contract_address": BERRY_MANAGER_ADDRESS,
+                "method": "getSupplierDetails",
+                "args": [self.account.address if self.account else "0x0"]
+            }
+            
+            supplier_details = self.call_contract(supplier_tx_data)
+            
+            # Format supplier details
+            if supplier_details:
+                supplier_info = {
+                    "account": supplier_details[0] if len(supplier_details) > 0 else "Unknown",
+                    "reputation": supplier_details[2] if len(supplier_details) > 2 else 0,
+                    "total_batches": supplier_details[3] if len(supplier_details) > 3 else 0,
+                    "successful_batches": supplier_details[4] if len(supplier_details) > 4 else 0
+                }
+                result.update({"supplier_info": supplier_info})
+                
+            return result
+        except Exception as e:
+            logger.error(f"Failed to process recommendations: {e}", exc_info=True)
+            return {
+                "success": False,
+                "error": str(e),
+                "batch_id": batch_id
+            }
+
+    def manage_batch_lifecycle(self, action: str, batch_id: int = None, berry_type: str = None) -> Dict[str, Any]:
+        """Manage berry batch lifecycle from creation to delivery"""
+        try:
+            logger.info(f"Managing batch lifecycle: {action}")
+            
+            if action == "create":
+                if not berry_type:
+                    berry_type = "Strawberry"  # Default
+                return self.create_batch(berry_type)
+                
+            elif action == "complete":
+                if batch_id is None:
+                    raise ValueError("batch_id is required for complete action")
+                    
+                # Call contract method
+                tx_data = {
+                    "contract_address": BERRY_MANAGER_ADDRESS,
+                    "method": "completeShipment",
+                    "args": [batch_id],
+                    "gas_limit": 400000
+                }
+                
+                return self.send_transaction(tx_data)
+                
+            elif action == "status":
+                if batch_id is None:
+                    raise ValueError("batch_id is required for status action")
+                    
+                return self.get_batch_details(batch_id)
+                
+            elif action == "report":
+                if batch_id is None:
+                    raise ValueError("batch_id is required for report action")
+                    
+                # Get batch details
+                batch_details = self.get_batch_details(batch_id)
+                
+                # Get temperature history
+                tx_data = {
+                    "contract_address": BERRY_TEMP_AGENT_ADDRESS,
+                    "method": "getTemperatureHistory",
+                    "args": [batch_id]
+                }
+                
+                temp_history = self.call_contract(tx_data)
+                
+                # Format temperature history
+                formatted_history = []
+                for reading in temp_history or []:
+                    if isinstance(reading, list):
+                        formatted_reading = {
+                            "timestamp": reading[0] if len(reading) > 0 else 0,
+                            "temperature": reading[1]/10.0 if len(reading) > 1 else 0,
+                            "location": reading[2] if len(reading) > 2 else "Unknown",
+                            "is_breach": reading[3] if len(reading) > 3 else False
+                        }
+                    else:
+                        formatted_reading = reading
+                        
+                    formatted_history.append(formatted_reading)
+                    
+                # Combine data into report
+                report = {
+                    "batch_details": batch_details,
+                    "temperature_history": formatted_history[:10],  # Include first 10 readings
+                    "reading_count": len(temp_history or [])
+                }
+                
+                return {
+                    "success": True,
+                    "batch_id": batch_id,
+                    "report": report
+                }
+            else:
+                raise ValueError(f"Unknown action: {action}")
+                
+        except Exception as e:
+            logger.error(f"Failed to manage batch lifecycle: {e}", exc_info=True)
+            return {
+                "success": False,
+                "error": str(e),
+                "action": action,
+                "batch_id": batch_id
+            }
+
+    def system_health_check(self, reset_counters: bool = False) -> Dict[str, Any]:
+        """Perform a system health check and return metrics"""
+        try:
+            logger.info("Performing system health check")
+            
+            # Check connection status
+            is_connected = self._web3.is_connected() if not self.use_mock_mode else True
+            
+            # Check account balance
+            balance = 0
+            if self.account and not self.use_mock_mode:
+                balance = self._web3.eth.get_balance(self.account.address)
+                
+            # Calculate transaction success rate
+            success_rate = 0
+            if self.transaction_stats["sent"] > 0:
+                success_rate = (self.transaction_stats["successful"] / self.transaction_stats["sent"]) * 100
+                
+            # Reset counters if requested
+            if reset_counters:
+                self.transaction_stats = {
+                    "sent": 0,
+                    "successful": 0,
+                    "failed": 0,
+                    "total_gas_used": 0,
+                    "avg_gas_used": 0,
+                    "last_tx_time": None,
+                    "total_cost": 0
+                }
+                
+            # Assemble health report
+            health_report = {
+                "timestamp": datetime.now().isoformat(),
+                "connection": {
+                    "is_connected": is_connected,
+                    "network": self.network_name,
+                    "account": self.account.address if self.account else None,
+                    "balance": self._web3.from_wei(balance, 'ether') if balance > 0 else 0
+                },
+                "transactions": {
+                    "sent": self.transaction_stats["sent"],
+                    "successful": self.transaction_stats["successful"],
+                    "failed": self.transaction_stats["failed"],
+                    "success_rate": f"{success_rate:.2f}%",
+                    "total_gas_used": self.transaction_stats["total_gas_used"],
+                    "avg_gas_used": self.transaction_stats["avg_gas_used"],
+                    "total_cost": f"{self.transaction_stats['total_cost']:.6f} Sonic Tokens"
+                },
+                "counters_reset": reset_counters
+            }
+            
+            return {
+                "success": True,
+                "health_report": health_report
+            }
+        except Exception as e:
+            logger.error(f"Failed to perform health check: {e}", exc_info=True)
+            return {
+                "success": False,
+                "error": str(e)
+            }
+
+    def manage_batch_sequence(self, berry_type: str = None, temperatures: List[float] = None, 
+                             locations: List[str] = None, complete_shipment: bool = False) -> Dict[str, Any]:
+        """Execute a complete batch lifecycle sequence"""
+        try:
+            logger.info("Executing batch sequence")
+            
+            # Set defaults if not provided
+            if not berry_type:
+                berry_type = "Strawberry"
+                
+            if not temperatures:
+                temperatures = [2.0, 2.5, 3.0, 3.5, 2.8, 2.2]
+                
+            if not locations:
+                locations = ["Cold Storage", "Loading Dock", "Transport", "Transport", "Transport", "Delivery"]
+                
+            # Step 1: Create batch
+            create_result = self.manage_batch_lifecycle(action="create", berry_type=berry_type)
+            
+            if not create_result.get("success", False):
+                raise Exception(f"Failed to create batch: {create_result.get('error', 'Unknown error')}")
+                
+            batch_id = create_result.get("batch_id", 0)
+            
+            # Step 2: Record temperatures
+            temp_results = []
+            for temp, location in zip(temperatures, locations):
+                temp_result = self.monitor_berry_temperature(batch_id, temp, location)
+                temp_results.append(temp_result)
+                time.sleep(1)  # Small delay to avoid transaction collisions
+                
+            # Step 3: Assess quality
+            quality_result = self.manage_berry_quality(batch_id)
+            
+            # Step 4: Process recommendations
+            rec_result = self.process_agent_recommendations(batch_id)
+            
+            # Step 5: Complete shipment if requested
+            complete_result = None
+            if complete_shipment:
+                complete_result = self.manage_batch_lifecycle(action="complete", batch_id=batch_id)
+                
+            # Step 6: Generate report
+            report_result = self.manage_batch_lifecycle(action="report", batch_id=batch_id)
+            
+            return {
+                "success": True,
+                "batch_id": batch_id,
+                "berry_type": berry_type,
+                "temperature_count": len(temp_results),
+                "quality_result": quality_result,
+                "complete_shipment": complete_shipment,
+                "complete_result": complete_result,
+                "report": report_result.get("report", {})
+            }
+        except Exception as e:
+            logger.error(f"Failed to execute batch sequence: {e}", exc_info=True)
+            return {
+                "success": False,
+                "error": str(e)
+            }
+            
+    def get_agent_predictions(self, batch_id: int) -> List[Dict[str, Any]]:
+        """Get agent predictions for a berry batch"""
+        if self.use_mock_mode:
+            logger.info(f"MOCK MODE: Getting agent predictions for batch {batch_id}")
+            return [{
+                "timestamp": int(datetime.now().timestamp()) - 1800,
+                "predictedQuality": 85,
+                "recommendedAction": 3,
+                "actionDescription": "Monitor closely. Continue with standard delivery procedures."
+            }]
+                
+        try:
+            if not self.berry_temp_agent:
+                raise SonicConnectionError("BerryTempAgent contract not initialized")
+            
+            # Use call_contract method
+            tx_data = {
+                "contract_address": BERRY_TEMP_AGENT_ADDRESS,
+                "method": "getAgentPredictions",
+                "args": [batch_id]
+            }
+            
+            predictions = self.call_contract(tx_data)
+            
+            # Format predictions
+            formatted_predictions = []
+            for prediction in predictions:
+                formatted_predictions.append({
+                    "timestamp": prediction[0],
+                    "predictedQuality": prediction[1],
+                    "recommendedAction": prediction[2],
+                    "actionDescription": prediction[3]
+                })
+                    
+            return formatted_predictions
+                
+        except Exception as e:
+            logger.error(f"Failed to get agent predictions: {e}")
+            return []
 
     def _get_explorer_link(self, tx_hash: str) -> str:
         """Generate block explorer link for transaction"""
@@ -614,42 +1100,6 @@ class SonicConnection(BaseConnection):
                     ActionParameter("complete_shipment", False, bool, "Whether to complete the shipment")
                 ],
                 description="Execute a complete batch lifecycle sequence"
-            ),
-            
-            # Original Sonic Actions
-            "get-token-by-ticker": Action(
-                name="get-token-by-ticker",
-                parameters=[
-                    ActionParameter("ticker", True, str, "Token ticker symbol to look up")
-                ],
-                description="Get token address by ticker symbol"
-            ),
-            "get-balance": Action(
-                name="get-balance",
-                parameters=[
-                    ActionParameter("address", False, str, "Address to check balance for"),
-                    ActionParameter("token_address", False, str, "Optional token address")
-                ],
-                description="Get $S or token balance"
-                ),
-            "transfer": Action(
-                name="transfer",
-                parameters=[
-                    ActionParameter("to_address", True, str, "Recipient address"),
-                    ActionParameter("amount", True, float, "Amount to transfer"),
-                    ActionParameter("token_address", False, str, "Optional token address")
-                    ],
-                description="Send $S or tokens"
-            ),
-            "swap": Action(
-                name="swap",
-                parameters=[
-                    ActionParameter("token_in", True, str, "Input token address"),
-                    ActionParameter("token_out", True, str, "Output token address"),
-                    ActionParameter("amount", True, float, "Amount to swap"),
-                    ActionParameter("slippage", False, float, "Max slippage percentage")
-                ],
-                description="Swap tokens"
             )
         }
 
@@ -714,7 +1164,6 @@ class SonicConnection(BaseConnection):
                 logger.error(f"Configuration check failed: {e}")
             return False
 
-    # Enhanced transaction method with retry and better error handling
     def send_transaction(self, tx_data: Dict[str, Any]) -> Dict[str, Any]:
         """Send a transaction to the blockchain with improved retry mechanism and error handling"""
         start_time = time.time()
@@ -1133,7 +1582,6 @@ class SonicConnection(BaseConnection):
                 
             raise
 
-    # Berry contract interaction methods with improved error handling
     def create_batch(self, berry_type: str) -> Dict[str, Any]:
         """Create a new berry batch"""
         logger.info(f"Creating new batch for berry type: {berry_type}")
@@ -1281,44 +1729,4 @@ class SonicConnection(BaseConnection):
                 "isActive": False,
                 "qualityScore": 0
             }
-            
-def get_agent_predictions(self, batch_id: int) -> List[Dict[str, Any]]:
-    """Get agent predictions for a berry batch"""
-    if self.use_mock_mode:
-        logger.info(f"MOCK MODE: Getting agent predictions for batch {batch_id}")
-        return [{
-            "timestamp": int(datetime.now().timestamp()) - 1800,
-            "predictedQuality": 85,
-            "recommendedAction": 3,
-            "actionDescription": "Monitor closely. Continue with standard delivery procedures."
-        }]
-            
-    try:
-        if not self.berry_temp_agent:
-            raise SonicConnectionError("BerryTempAgent contract not initialized")
-        
-        # Use call_contract method
-        tx_data = {
-            "contract_address": BERRY_TEMP_AGENT_ADDRESS,
-            "method": "getAgentPredictions",
-            "args": [batch_id]
-        }
-        
-        predictions = self.call_contract(tx_data)
-        
-        # Format predictions
-        formatted_predictions = []
-        for prediction in predictions:
-            formatted_predictions.append({
-                "timestamp": prediction[0],
-                "predictedQuality": prediction[1],
-                "recommendedAction": prediction[2],
-                "actionDescription": prediction[3]
-            })
-                
-        return formatted_predictions
-            
-    except Exception as e:
-        logger.error(f"Failed to get agent predictions: {e}")
-        return []            
-            
+                    
