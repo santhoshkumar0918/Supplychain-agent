@@ -107,6 +107,28 @@
     {
       "type": "event",
       "anonymous": false,
+      "name": "ShipmentCompleted",
+      "inputs": [
+        {
+          "type": "uint256",
+          "name": "batchId",
+          "indexed": true
+        },
+        {
+          "type": "address",
+          "name": "supplier",
+          "indexed": true
+        },
+        {
+          "type": "uint256",
+          "name": "timestamp",
+          "indexed": false
+        }
+      ]
+    },
+    {
+      "type": "event",
+      "anonymous": false,
       "name": "TemperatureRecorded",
       "inputs": [
         {
@@ -291,6 +313,19 @@
           "name": "predictedShelfLife"
         }
       ]
+    },
+    {
+      "type": "function",
+      "name": "completeShipment",
+      "constant": false,
+      "payable": false,
+      "inputs": [
+        {
+          "type": "uint256",
+          "name": "batchId"
+        }
+      ],
+      "outputs": []
     },
     {
       "type": "function",
@@ -623,6 +658,28 @@
     {
       "type": "event",
       "anonymous": false,
+      "name": "ShipmentCompleted",
+      "inputs": [
+        {
+          "type": "uint256",
+          "name": "batchId",
+          "indexed": true
+        },
+        {
+          "type": "address",
+          "name": "supplier",
+          "indexed": true
+        },
+        {
+          "type": "uint256",
+          "name": "timestamp",
+          "indexed": false
+        }
+      ]
+    },
+    {
+      "type": "event",
+      "anonymous": false,
       "name": "SupplierActionTaken",
       "inputs": [
         {
@@ -701,6 +758,43 @@
       "outputs": [
         {
           "type": "address",
+          "name": ""
+        }
+      ]
+    },
+    {
+      "type": "function",
+      "name": "completeShipment",
+      "constant": false,
+      "payable": false,
+      "inputs": [
+        {
+          "type": "uint256",
+          "name": "batchId"
+        }
+      ],
+      "outputs": [
+        {
+          "type": "bool",
+          "name": ""
+        }
+      ]
+    },
+    {
+      "type": "function",
+      "name": "completedShipments",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [
+        {
+          "type": "uint256",
+          "name": ""
+        }
+      ],
+      "outputs": [
+        {
+          "type": "bool",
           "name": ""
         }
       ]

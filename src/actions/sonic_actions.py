@@ -20,8 +20,8 @@ logger.addHandler(file_handler)
 load_dotenv()
 
 # Constants for berry temperature monitoring
-BERRY_TEMP_AGENT_ADDRESS = "0x39D85a2d6f485D521d008a5711F6ffE02b591b6E"
-BERRY_MANAGER_ADDRESS = "0x8BBD24387E3F6b842C16a35F2F52A5bB1835948A"
+BERRY_TEMP_AGENT_ADDRESS = "0x428bC2B646B3CfeD15699fBaf66688F928f80f56"
+BERRY_MANAGER_ADDRESS = "0x70C0899d28Bf93D1cA1D36aE7f3c158Fecb6CAE9"
 OPTIMAL_TEMP = 2   # 2°C
 MAX_TEMP = 4       # 4°C
 MIN_TEMP = 0       # 0°C
@@ -812,41 +812,23 @@ async def manage_batch_lifecycle(agent, **kwargs):
                 "execution_time": execution_time
             }
             
+        
         elif action == "complete":
             batch_tag = f"[Batch #{batch_id}]"
-            
-            # Complete a shipment
-            tx_data = {
-                "contract_address": BERRY_MANAGER_ADDRESS,
-                "method": "completeShipment",
-                "args": [batch_id],
-                "gas_limit": 400000  # Increased gas limit
-            }
-            
-            tx_result = sonic_connection.send_transaction(tx_data)
-            
-            # Update transaction metrics
-            update_health_metrics("transaction", tx_result.get("success", False))
-            
-            logger.info(f"{batch_tag} Shipment completion transaction: {tx_result}")
-            
-            # Update batch completed metrics
-            update_health_metrics("batch_completed")
-            
-            # Calculate execution time
+            logger.info(f"{batch_tag} Shipment completion is now handled via frontend")
+    
+    # Calculate execution time
             execution_time = (datetime.now() - start_time).total_seconds()
-            logger.info(f"{batch_tag} Completed shipment in {execution_time:.2f} seconds")
-            
+    
             return {
-                "status": "completed",
-                "action": "complete",
-                "batch_id": batch_id,
-                "timestamp": datetime.now().isoformat(),
-                "transaction_hash": tx_result.get("transaction_hash", ""),
-                "transaction_url": tx_result.get("transaction_url", ""),
-                "execution_time": execution_time
-            }
-            
+                 "status": "redirected",
+                 "action": "complete",
+                 "batch_id": batch_id,
+                 "message": "Shipment completion is now handled directly through the frontend interface",
+                 "timestamp": datetime.now().isoformat(),
+                 "execution_time": execution_time
+    }
+        
         elif action == "status":
             batch_tag = f"[Batch #{batch_id}]"
             
@@ -1205,26 +1187,17 @@ async def manage_batch_sequence(agent, **kwargs):
         
         logger.info(f"{batch_tag} Recommendation processing complete")
         
-        # Step 5: Complete shipment if requested
+        manual_completion_message = None
+        report_result = {"batch_details": {}}  # Define report_result with a default value
+        
         if complete_shipment:
-            logger.info(f"{batch_tag} Step 5: Completing shipment")
-            complete_result = await manage_batch_lifecycle(agent, action="complete", batch_id=batch_id)
-            
-            if complete_result.get("status") != "completed":
-                raise Exception(f"Failed to complete shipment: {complete_result.get('error', 'Unknown error')}")
-            
-            logger.info(f"{batch_tag} Shipment completed successfully")
+            logger.info(f"{batch_tag} Step 5: Shipment must be completed via frontend")
+            manual_completion_message = "Shipment completion is now handled directly through the frontend interface"
+            logger.info(f"{batch_tag} Please complete shipment using the frontend interface")
         else:
             logger.info(f"{batch_tag} Skipping shipment completion as per request")
-        
-        # Step 6: Generate final report
-        logger.info(f"{batch_tag} Step 6: Generating final report")
-        report_result = await manage_batch_lifecycle(agent, action="report", batch_id=batch_id)
-        
-        # Calculate execution time
-        execution_time = (datetime.now() - start_time).total_seconds()
-        logger.info(f"{batch_tag} Batch sequence completed in {execution_time:.2f} seconds")
-        
+
+# Then later in the return statement, include it:
         return {
             "status": "completed",
             "batch_id": batch_id,
@@ -1234,10 +1207,12 @@ async def manage_batch_sequence(agent, **kwargs):
             "shelf_life_hours": shelf_life,
             "recommended_action": recommended_action,
             "shipment_completed": complete_shipment,
+            "manual_completion_message": manual_completion_message,  # Include the message here
             "report": report_result.get("batch_details", {}),
             "timestamp": datetime.now().isoformat(),
             "execution_time": execution_time
         }
+        
         
     except Exception as e:
         # Log detailed error with traceback

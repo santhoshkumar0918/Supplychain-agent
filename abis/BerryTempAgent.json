@@ -56,6 +56,16 @@
   {
     "type": "event",
     "anonymous": false,
+    "name": "ShipmentCompleted",
+    "inputs": [
+      { "type": "uint256", "name": "batchId", "indexed": true },
+      { "type": "address", "name": "supplier", "indexed": true },
+      { "type": "uint256", "name": "timestamp", "indexed": false }
+    ]
+  },
+  {
+    "type": "event",
+    "anonymous": false,
     "name": "TemperatureRecorded",
     "inputs": [
       { "type": "uint256", "name": "batchId", "indexed": true },
@@ -151,6 +161,14 @@
       { "type": "uint256", "name": "qualityScore" },
       { "type": "uint256", "name": "predictedShelfLife" }
     ]
+  },
+  {
+    "type": "function",
+    "name": "completeShipment",
+    "constant": false,
+    "payable": false,
+    "inputs": [{ "type": "uint256", "name": "batchId" }],
+    "outputs": []
   },
   {
     "type": "function",

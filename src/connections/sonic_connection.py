@@ -21,8 +21,8 @@ file_handler.setFormatter(logging.Formatter("%(asctime)s - %(levelname)s - %(nam
 logger.addHandler(file_handler)
 
 # Contract addresses
-BERRY_TEMP_AGENT_ADDRESS = "0x39D85a2d6f485D521d008a5711F6ffE02b591b6E"
-BERRY_MANAGER_ADDRESS = "0x8BBD24387E3F6b842C16a35F2F52A5bB1835948A"
+BERRY_TEMP_AGENT_ADDRESS = "0x428bC2B646B3CfeD15699fBaf66688F928f80f56"
+BERRY_MANAGER_ADDRESS = "0x70C0899d28Bf93D1cA1D36aE7f3c158Fecb6CAE9"
 
 # Transaction history storage
 transaction_history = []
@@ -212,63 +212,72 @@ class SonicConnection(BaseConnection):
     def manage_berry_quality(self, batch_id: int) -> Dict[str, Any]:
         """Assess and predict berry quality based on temperature history"""
         try:
-            logger.info(f"Assessing quality for batch {batch_id}")
-            
-            # Get temperature history
-            tx_data = {
+           logger.info(f"Assessing quality for batch {batch_id}")
+        
+        # Get temperature history
+           tx_data = {
                 "contract_address": BERRY_TEMP_AGENT_ADDRESS,
                 "method": "getTemperatureHistory",
                 "args": [batch_id]
-            }
-            
-            temp_history = self.call_contract(tx_data)
-            
-            # Get batch details
-            batch_details = self.get_batch_details(batch_id)
-            
-            # Calculate quality score and shelf life
-            quality_score = 100
-            shelf_life_hours = 72  # Default
-            
-            # Process temperature readings
-            breach_count = 0
-            reading_count = len(temp_history) if temp_history else 0
-            
-            for reading in temp_history or []:
-                # Extract temperature (handle both list and dict formats)
-                if isinstance(reading, list):
-                    temp = reading[1] / 10.0 if len(reading) > 1 else 0
-                else:
-                    temp = reading.get("temperature", 0)
-                    
-                # Check for breaches
-                if temp > 4.0:
-                    breach_count += 1
-                    deviation = temp - 4.0
-                    quality_score -= deviation * 5
-                    shelf_life_hours -= deviation * 4
-                elif temp < 0.0:
-                    breach_count += 1
-                    deviation = 0.0 - temp
-                    quality_score -= deviation * 7
-                    shelf_life_hours -= deviation * 6
-            
-            # Ensure values don't go below zero
-            quality_score = max(0, quality_score)
-            shelf_life_hours = max(0, shelf_life_hours)
-            
-            # Determine recommended action
-            action = "No Action"
-            if quality_score < 60:
-                action = "Reject"
-            elif quality_score < 70:
-                action = "Reroute"
-            elif quality_score < 80:
-                action = "Expedite"
-            elif quality_score < 90:
-                action = "Alert"
+             }
+        
+           temp_history = self.call_contract(tx_data)
+        
+        # Get batch details
+           batch_details = self.get_batch_details(batch_id)
+        
+        # Calculate quality score and shelf life
+           quality_score = 100
+           shelf_life_hours = 72  # Default
+        
+        # Process temperature readings
+           breach_count = 0
+           reading_count = len(temp_history) if temp_history else 0
+        
+           for reading in temp_history or []:
+            # Extract temperature (handle different data formats)
+             if isinstance(reading, tuple):
+                # Extract temperature from tuple format
+                temp = reading[1] / 10.0 if len(reading) > 1 else 0
+             elif isinstance(reading, list):
+                # Extract temperature from list format
+                temp = reading[1] / 10.0 if len(reading) > 1 else 0
+             elif isinstance(reading, dict):
+                # Extract temperature from dictionary format
+                temp = reading.get("temperature", 0)
+             else:
+                # Default case if format is unknown
+                temp = 0
+                logger.warning(f"Unknown temperature reading format: {type(reading)}")
                 
-            return {
+            # Check for breaches
+             if temp > 4.0:
+                breach_count += 1
+                deviation = temp - 4.0
+                quality_score -= deviation * 5
+                shelf_life_hours -= deviation * 4
+             elif temp < 0.0:
+                breach_count += 1
+                deviation = 0.0 - temp
+                quality_score -= deviation * 7
+                shelf_life_hours -= deviation * 6
+        
+        # Ensure values don't go below zero
+             quality_score = max(0, quality_score)
+             shelf_life_hours = max(0, shelf_life_hours)
+        
+        # Determine recommended action
+             action = "No Action"
+             if quality_score < 60:
+              action = "Reject"
+             elif quality_score < 70:
+              action = "Reroute"
+             elif quality_score < 80:
+              action = "Expedite"
+             elif quality_score < 90:
+              action = "Alert"
+            
+             return {
                 "success": True,
                 "batch_id": batch_id,
                 "berry_type": batch_details.get("berryType", "Unknown"),
@@ -280,12 +289,12 @@ class SonicConnection(BaseConnection):
                 "recommended_action": action
             }
         except Exception as e:
-            logger.error(f"Failed to assess quality: {e}", exc_info=True)
-            return {
-                "success": False,
-                "error": str(e),
-                "batch_id": batch_id
-            }
+           logger.error(f"Failed to assess quality: {e}", exc_info=True)
+        return {
+            "success": False,
+            "error": str(e),
+            "batch_id": batch_id
+        }
 
     def process_agent_recommendations(self, batch_id: int) -> Dict[str, Any]:
         """Process agent recommendations and update supplier reputation"""
@@ -341,18 +350,19 @@ class SonicConnection(BaseConnection):
                 return self.create_batch(berry_type)
                 
             elif action == "complete":
-                if batch_id is None:
-                    raise ValueError("batch_id is required for complete action")
+                batch_tag = f"[Batch #{batch_id}]"
+                logger.info(f"{batch_tag} Shipment completion is now handled via frontend")
                     
                 # Call contract method
-                tx_data = {
-                    "contract_address": BERRY_MANAGER_ADDRESS,
-                    "method": "completeShipment",
-                    "args": [batch_id],
-                    "gas_limit": 400000
+                return {
+                    "success": False,
+                    "action": "complete",
+                    "batch_id": batch_id,
+                    "message": "Shipment completion is now handled directly through the frontend interface",
+                    "manual_action_required": True
+                    
                 }
                 
-                return self.send_transaction(tx_data)
                 
             elif action == "status":
                 if batch_id is None:
@@ -517,7 +527,12 @@ class SonicConnection(BaseConnection):
             # Step 5: Complete shipment if requested
             complete_result = None
             if complete_shipment:
-                complete_result = self.manage_batch_lifecycle(action="complete", batch_id=batch_id)
+               logger.info(f"Batch {batch_id}: Shipment completion should be done via frontend")
+               complete_result = {
+                        "success": False,
+                        "message": "Shipment completion is now handled directly through the frontend interface",
+                        "manual_action_required": True
+                     }
                 
             # Step 6: Generate report
             report_result = self.manage_batch_lifecycle(action="report", batch_id=batch_id)
