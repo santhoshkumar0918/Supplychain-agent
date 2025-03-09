@@ -212,72 +212,72 @@ class SonicConnection(BaseConnection):
     def manage_berry_quality(self, batch_id: int) -> Dict[str, Any]:
         """Assess and predict berry quality based on temperature history"""
         try:
-           logger.info(f"Assessing quality for batch {batch_id}")
+            logger.info(f"Assessing quality for batch {batch_id}")
         
-        # Get temperature history
-           tx_data = {
+            # Get temperature history
+            tx_data = {
                 "contract_address": BERRY_TEMP_AGENT_ADDRESS,
                 "method": "getTemperatureHistory",
                 "args": [batch_id]
-             }
+            }
         
-           temp_history = self.call_contract(tx_data)
+            temp_history = self.call_contract(tx_data)
         
-        # Get batch details
-           batch_details = self.get_batch_details(batch_id)
+            # Get batch details
+            batch_details = self.get_batch_details(batch_id)
         
-        # Calculate quality score and shelf life
-           quality_score = 100
-           shelf_life_hours = 72  # Default
+            # Calculate quality score and shelf life
+            quality_score = 100
+            shelf_life_hours = 72  # Default
         
-        # Process temperature readings
-           breach_count = 0
-           reading_count = len(temp_history) if temp_history else 0
+            # Process temperature readings
+            breach_count = 0
+            reading_count = len(temp_history) if temp_history else 0
         
-           for reading in temp_history or []:
-            # Extract temperature (handle different data formats)
-             if isinstance(reading, tuple):
-                # Extract temperature from tuple format
-                temp = reading[1] / 10.0 if len(reading) > 1 else 0
-             elif isinstance(reading, list):
-                # Extract temperature from list format
-                temp = reading[1] / 10.0 if len(reading) > 1 else 0
-             elif isinstance(reading, dict):
-                # Extract temperature from dictionary format
-                temp = reading.get("temperature", 0)
-             else:
-                # Default case if format is unknown
-                temp = 0
-                logger.warning(f"Unknown temperature reading format: {type(reading)}")
+            for reading in temp_history or []:
+                # Extract temperature (handle different data formats)
+                if isinstance(reading, tuple):
+                    # Extract temperature from tuple format
+                    temp = reading[1] / 10.0 if len(reading) > 1 else 0
+                elif isinstance(reading, list):
+                    # Extract temperature from list format
+                    temp = reading[1] / 10.0 if len(reading) > 1 else 0
+                elif isinstance(reading, dict):
+                    # Extract temperature from dictionary format
+                    temp = reading.get("temperature", 0)
+                else:
+                    # Default case if format is unknown
+                    temp = 0
+                    logger.warning(f"Unknown temperature reading format: {type(reading)}")
                 
-            # Check for breaches
-             if temp > 4.0:
-                breach_count += 1
-                deviation = temp - 4.0
-                quality_score -= deviation * 5
-                shelf_life_hours -= deviation * 4
-             elif temp < 0.0:
-                breach_count += 1
-                deviation = 0.0 - temp
-                quality_score -= deviation * 7
-                shelf_life_hours -= deviation * 6
+                # Check for breaches
+                if temp > 4.0:
+                    breach_count += 1
+                    deviation = temp - 4.0
+                    quality_score -= deviation * 5
+                    shelf_life_hours -= deviation * 4
+                elif temp < 0.0:
+                    breach_count += 1
+                    deviation = 0.0 - temp
+                    quality_score -= deviation * 7
+                    shelf_life_hours -= deviation * 6
         
-        # Ensure values don't go below zero
-             quality_score = max(0, quality_score)
-             shelf_life_hours = max(0, shelf_life_hours)
+                # Ensure values don't go below zero
+                quality_score = max(0, quality_score)
+                shelf_life_hours = max(0, shelf_life_hours)
         
-        # Determine recommended action
-             action = "No Action"
-             if quality_score < 60:
-              action = "Reject"
-             elif quality_score < 70:
-              action = "Reroute"
-             elif quality_score < 80:
-              action = "Expedite"
-             elif quality_score < 90:
-              action = "Alert"
+            # Determine recommended action
+            action = "No Action"
+            if quality_score < 60:
+                action = "Reject"
+            elif quality_score < 70:
+                action = "Reroute"
+            elif quality_score < 80:
+                action = "Expedite"
+            elif quality_score < 90:
+                action = "Alert"
             
-             return {
+            return {
                 "success": True,
                 "batch_id": batch_id,
                 "berry_type": batch_details.get("berryType", "Unknown"),
@@ -289,12 +289,12 @@ class SonicConnection(BaseConnection):
                 "recommended_action": action
             }
         except Exception as e:
-           logger.error(f"Failed to assess quality: {e}", exc_info=True)
-        return {
-            "success": False,
-            "error": str(e),
-            "batch_id": batch_id
-        }
+            logger.error(f"Failed to assess quality: {e}", exc_info=True)
+            return {
+                "success": False,
+                "error": str(e),
+                "batch_id": batch_id
+            }
 
     def process_agent_recommendations(self, batch_id: int) -> Dict[str, Any]:
         """Process agent recommendations and update supplier reputation"""
@@ -1744,4 +1744,3 @@ class SonicConnection(BaseConnection):
                 "isActive": False,
                 "qualityScore": 0
             }
-                    
