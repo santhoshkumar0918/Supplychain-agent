@@ -218,20 +218,20 @@ class ZerePyServer:
             """Execute a registered action from action_handler"""
             if not self.state.cli.agent:
                 raise HTTPException(status_code=400, detail="No agent loaded")
-            
+    
             try:
                 # Check if action is registered
                 registered_actions = list_registered_actions()
                 if action_request.action not in registered_actions:
                     raise HTTPException(status_code=404, 
-                                      detail=f"Action '{action_request.action}' not registered. Available actions: {registered_actions}")
-                
+                                       detail=f"Action '{action_request.action}' not registered. Available actions: {registered_actions}")
+        
                 # Execute the registered action
                 try:
                     logger.info(f"Executing registered action: {action_request.action} with params: {action_request.params}")
-                    
-                    # Extract parameters from the request params dictionary
-                    result = execute_action(self.state.cli.agent, action_request.action, **action_request.params)
+            
+                    # The key change is here - add the await keyword
+                    result = await execute_action(self.state.cli.agent, action_request.action, **action_request.params)
                     return {"status": "success", "result": result}
                 except Exception as e:
                     logger.error(f"Registered action execution error: {str(e)}", exc_info=True)
@@ -243,7 +243,7 @@ class ZerePyServer:
             except Exception as e:
                 logger.error(f"General error processing registered action request: {str(e)}", exc_info=True)
                 raise HTTPException(status_code=500, detail=str(e))
-
+    
         @self.app.post("/agent/start")
         async def start_agent():
             """Start the agent loop"""

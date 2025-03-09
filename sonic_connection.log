@@ -13458,3 +13458,152 @@ web3.exceptions.ABIFunctionNotFound: ("The function 'completeShipment' was not f
 2025-03-07 20:50:32,755 - INFO - connections.sonic_connection - [TX-11] Transaction successful: Gas used: 178886, Cost: 0.00178886 tokens, Time: 11.21s
 2025-03-07 20:51:12,528 - INFO - connections.sonic_connection - Executing action system-health-check with parameters: {'reset_counters': False}
 2025-03-07 20:51:12,528 - INFO - connections.sonic_connection - Performing system health check
+2025-03-08 18:20:10,998 - INFO - connections.sonic_connection - Initializing Sonic connection...
+2025-03-08 18:20:14,242 - INFO - connections.sonic_connection - Connected to network with chain ID: 57054
+2025-03-08 18:20:14,243 - INFO - connections.sonic_connection - Found ABIs directory at: /home/santhoshkumar/Supplai/Supllychain-agent/abis
+2025-03-08 18:20:14,243 - INFO - connections.sonic_connection - Attempting to load BerryTempAgent ABI from: /home/santhoshkumar/Supplai/Supllychain-agent/abis/BerryTempAgent.json
+2025-03-08 18:20:14,250 - INFO - connections.sonic_connection - Loaded ABI array for BerryTempAgent with 27 entries
+2025-03-08 18:20:14,250 - INFO - connections.sonic_connection - BerryTempAgent ABI contains functions: BREACH_PENALTY, MAX_TEMP, MIN_TEMP, OPTIMAL_TEMP, SHELF_LIFE_BASE, agentPredictions, batchCount, berryBatches, completeShipment, createBatch and more...
+2025-03-08 18:20:14,250 - INFO - connections.sonic_connection - Found required function: createBatch
+2025-03-08 18:20:14,251 - INFO - connections.sonic_connection - Found required function: batchCount
+2025-03-08 18:20:14,251 - INFO - connections.sonic_connection - Found required function: getTemperatureHistory
+2025-03-08 18:20:14,251 - INFO - connections.sonic_connection - Attempting to load BerryManager ABI from: /home/santhoshkumar/Supplai/Supllychain-agent/abis/BerryManager.json
+2025-03-08 18:20:14,251 - INFO - connections.sonic_connection - Loaded ABI array for BerryManager with 24 entries
+2025-03-08 18:20:14,251 - INFO - connections.sonic_connection - BerryManager ABI contains functions: INITIAL_REPUTATION, MAX_REPUTATION, MIN_REPUTATION, berryAgent, completeShipment, completedShipments, getSupplierDetails, getSupplierRecommendations, owner, processAgentRecommendation and more...
+2025-03-08 18:20:14,251 - INFO - connections.sonic_connection - Successfully loaded contract ABIs: BerryTempAgent, BerryManager
+2025-03-08 18:20:14,264 - INFO - connections.sonic_connection - Successfully initialized contract instances: berry_temp_agent, berry_manager
+2025-03-08 18:20:14,268 - INFO - connections.sonic_connection - Account loaded with address: 0x1e43eeB0307bb3466Cd237fE58570E6A3996d8ff
+2025-03-08 18:20:14,616 - INFO - connections.sonic_connection - Account balance: 46.9612194933 Sonic Tokens
+2025-03-08 18:20:14,616 - INFO - connections.sonic_connection - Sonic connection initialization complete
+2025-03-08 18:31:36,760 - INFO - connections.sonic_connection - Initializing Sonic connection...
+2025-03-08 18:31:38,338 - INFO - connections.sonic_connection - Connected to network with chain ID: 57054
+2025-03-08 18:31:38,338 - INFO - connections.sonic_connection - Found ABIs directory at: /home/santhoshkumar/Supplai/Supllychain-agent/abis
+2025-03-08 18:31:38,338 - INFO - connections.sonic_connection - Attempting to load BerryTempAgent ABI from: /home/santhoshkumar/Supplai/Supllychain-agent/abis/BerryTempAgent.json
+2025-03-08 18:31:38,338 - INFO - connections.sonic_connection - Loaded ABI array for BerryTempAgent with 27 entries
+2025-03-08 18:31:38,338 - INFO - connections.sonic_connection - BerryTempAgent ABI contains functions: BREACH_PENALTY, MAX_TEMP, MIN_TEMP, OPTIMAL_TEMP, SHELF_LIFE_BASE, agentPredictions, batchCount, berryBatches, completeShipment, createBatch and more...
+2025-03-08 18:31:38,338 - INFO - connections.sonic_connection - Found required function: createBatch
+2025-03-08 18:31:38,339 - INFO - connections.sonic_connection - Found required function: batchCount
+2025-03-08 18:31:38,339 - INFO - connections.sonic_connection - Found required function: getTemperatureHistory
+2025-03-08 18:31:38,339 - INFO - connections.sonic_connection - Attempting to load BerryManager ABI from: /home/santhoshkumar/Supplai/Supllychain-agent/abis/BerryManager.json
+2025-03-08 18:31:38,339 - INFO - connections.sonic_connection - Loaded ABI array for BerryManager with 24 entries
+2025-03-08 18:31:38,339 - INFO - connections.sonic_connection - BerryManager ABI contains functions: INITIAL_REPUTATION, MAX_REPUTATION, MIN_REPUTATION, berryAgent, completeShipment, completedShipments, getSupplierDetails, getSupplierRecommendations, owner, processAgentRecommendation and more...
+2025-03-08 18:31:38,339 - INFO - connections.sonic_connection - Successfully loaded contract ABIs: BerryTempAgent, BerryManager
+2025-03-08 18:31:38,350 - INFO - connections.sonic_connection - Successfully initialized contract instances: berry_temp_agent, berry_manager
+2025-03-08 18:31:38,355 - INFO - connections.sonic_connection - Account loaded with address: 0x1e43eeB0307bb3466Cd237fE58570E6A3996d8ff
+2025-03-08 18:31:38,614 - INFO - connections.sonic_connection - Account balance: 46.9612194933 Sonic Tokens
+2025-03-08 18:31:38,614 - INFO - connections.sonic_connection - Sonic connection initialization complete
+2025-03-08 18:34:43,409 - INFO - connections.sonic_connection - Initializing Sonic connection...
+2025-03-08 18:34:44,940 - INFO - connections.sonic_connection - Connected to network with chain ID: 57054
+2025-03-08 18:34:44,940 - INFO - connections.sonic_connection - Found ABIs directory at: /home/santhoshkumar/Supplai/Supllychain-agent/abis
+2025-03-08 18:34:44,940 - INFO - connections.sonic_connection - Attempting to load BerryTempAgent ABI from: /home/santhoshkumar/Supplai/Supllychain-agent/abis/BerryTempAgent.json
+2025-03-08 18:34:44,940 - INFO - connections.sonic_connection - Loaded ABI array for BerryTempAgent with 27 entries
+2025-03-08 18:34:44,940 - INFO - connections.sonic_connection - BerryTempAgent ABI contains functions: BREACH_PENALTY, MAX_TEMP, MIN_TEMP, OPTIMAL_TEMP, SHELF_LIFE_BASE, agentPredictions, batchCount, berryBatches, completeShipment, createBatch and more...
+2025-03-08 18:34:44,940 - INFO - connections.sonic_connection - Found required function: createBatch
+2025-03-08 18:34:44,940 - INFO - connections.sonic_connection - Found required function: batchCount
+2025-03-08 18:34:44,940 - INFO - connections.sonic_connection - Found required function: getTemperatureHistory
+2025-03-08 18:34:44,941 - INFO - connections.sonic_connection - Attempting to load BerryManager ABI from: /home/santhoshkumar/Supplai/Supllychain-agent/abis/BerryManager.json
+2025-03-08 18:34:44,941 - INFO - connections.sonic_connection - Loaded ABI array for BerryManager with 24 entries
+2025-03-08 18:34:44,941 - INFO - connections.sonic_connection - BerryManager ABI contains functions: INITIAL_REPUTATION, MAX_REPUTATION, MIN_REPUTATION, berryAgent, completeShipment, completedShipments, getSupplierDetails, getSupplierRecommendations, owner, processAgentRecommendation and more...
+2025-03-08 18:34:44,941 - INFO - connections.sonic_connection - Successfully loaded contract ABIs: BerryTempAgent, BerryManager
+2025-03-08 18:34:44,953 - INFO - connections.sonic_connection - Successfully initialized contract instances: berry_temp_agent, berry_manager
+2025-03-08 18:34:44,957 - INFO - connections.sonic_connection - Account loaded with address: 0x1e43eeB0307bb3466Cd237fE58570E6A3996d8ff
+2025-03-08 18:34:45,329 - INFO - connections.sonic_connection - Account balance: 46.9612194933 Sonic Tokens
+2025-03-08 18:34:45,329 - INFO - connections.sonic_connection - Sonic connection initialization complete
+2025-03-08 18:37:42,010 - INFO - connections.sonic_connection - Initializing Sonic connection...
+2025-03-08 18:37:45,295 - INFO - connections.sonic_connection - Connected to network with chain ID: 57054
+2025-03-08 18:37:45,295 - INFO - connections.sonic_connection - Found ABIs directory at: /home/santhoshkumar/Supplai/Supllychain-agent/abis
+2025-03-08 18:37:45,295 - INFO - connections.sonic_connection - Attempting to load BerryTempAgent ABI from: /home/santhoshkumar/Supplai/Supllychain-agent/abis/BerryTempAgent.json
+2025-03-08 18:37:45,295 - INFO - connections.sonic_connection - Loaded ABI array for BerryTempAgent with 27 entries
+2025-03-08 18:37:45,295 - INFO - connections.sonic_connection - BerryTempAgent ABI contains functions: BREACH_PENALTY, MAX_TEMP, MIN_TEMP, OPTIMAL_TEMP, SHELF_LIFE_BASE, agentPredictions, batchCount, berryBatches, completeShipment, createBatch and more...
+2025-03-08 18:37:45,295 - INFO - connections.sonic_connection - Found required function: createBatch
+2025-03-08 18:37:45,295 - INFO - connections.sonic_connection - Found required function: batchCount
+2025-03-08 18:37:45,295 - INFO - connections.sonic_connection - Found required function: getTemperatureHistory
+2025-03-08 18:37:45,295 - INFO - connections.sonic_connection - Attempting to load BerryManager ABI from: /home/santhoshkumar/Supplai/Supllychain-agent/abis/BerryManager.json
+2025-03-08 18:37:45,296 - INFO - connections.sonic_connection - Loaded ABI array for BerryManager with 24 entries
+2025-03-08 18:37:45,296 - INFO - connections.sonic_connection - BerryManager ABI contains functions: INITIAL_REPUTATION, MAX_REPUTATION, MIN_REPUTATION, berryAgent, completeShipment, completedShipments, getSupplierDetails, getSupplierRecommendations, owner, processAgentRecommendation and more...
+2025-03-08 18:37:45,296 - INFO - connections.sonic_connection - Successfully loaded contract ABIs: BerryTempAgent, BerryManager
+2025-03-08 18:37:45,307 - INFO - connections.sonic_connection - Successfully initialized contract instances: berry_temp_agent, berry_manager
+2025-03-08 18:37:45,311 - INFO - connections.sonic_connection - Account loaded with address: 0x1e43eeB0307bb3466Cd237fE58570E6A3996d8ff
+2025-03-08 18:37:45,578 - INFO - connections.sonic_connection - Account balance: 46.9612194933 Sonic Tokens
+2025-03-08 18:37:45,578 - INFO - connections.sonic_connection - Sonic connection initialization complete
+2025-03-08 18:38:01,069 - INFO - connections.sonic_connection - [TX-1] Preparing transaction: method=recordTemperature, args=[0, 31, 'Delivery Center']
+2025-03-08 18:38:05,419 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-08 18:38:05,698 - INFO - connections.sonic_connection - Estimated gas: 377930
+2025-03-08 18:38:05,698 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-08 18:38:05,698 - INFO - connections.sonic_connection - Total cost: 0.0037793 Sonic Tokens
+2025-03-08 18:38:05,698 - INFO - connections.sonic_connection - Account balance: 46.9612194933 Sonic Tokens
+2025-03-08 18:38:08,416 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-08 18:38:08,417 - INFO - connections.sonic_connection - [TX-1] Sending transaction: method=recordTemperature, gas=500000, gasPrice=10 gwei
+2025-03-08 18:38:08,986 - INFO - connections.sonic_connection - [TX-1] Waiting for transaction to be mined... (0s elapsed)
+2025-03-08 18:38:10,435 - INFO - connections.sonic_connection - [TX-1] Transaction successful: Gas used: 333447, Cost: 0.00333447 tokens, Time: 9.37s
+2025-03-08 18:38:32,285 - INFO - connections.sonic_connection - [TX-2] Preparing transaction: method=recordTemperature, args=[0, 42, 'Delivery Center']
+2025-03-08 18:38:35,931 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-08 18:38:36,449 - INFO - connections.sonic_connection - Estimated gas: 357162
+2025-03-08 18:38:36,450 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-08 18:38:36,450 - INFO - connections.sonic_connection - Total cost: 0.00357162 Sonic Tokens
+2025-03-08 18:38:36,450 - INFO - connections.sonic_connection - Account balance: 46.9578850233 Sonic Tokens
+2025-03-08 18:38:39,112 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-08 18:38:39,113 - INFO - connections.sonic_connection - [TX-2] Sending transaction: method=recordTemperature, gas=500000, gasPrice=10 gwei
+2025-03-08 18:38:39,706 - INFO - connections.sonic_connection - [TX-2] Waiting for transaction to be mined... (0s elapsed)
+2025-03-08 18:38:41,127 - INFO - connections.sonic_connection - [TX-2] Transaction successful: Gas used: 313071, Cost: 0.00313071 tokens, Time: 8.84s
+2025-03-08 18:40:43,048 - INFO - connections.sonic_connection - [TX-3] Preparing transaction: method=recordTemperature, args=[0, 31, 'Delivery Center']
+2025-03-08 18:40:47,383 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-08 18:40:47,700 - INFO - connections.sonic_connection - Estimated gas: 353802
+2025-03-08 18:40:47,701 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-08 18:40:47,701 - INFO - connections.sonic_connection - Total cost: 0.00353802 Sonic Tokens
+2025-03-08 18:40:47,701 - INFO - connections.sonic_connection - Account balance: 46.9547543133 Sonic Tokens
+2025-03-08 18:40:49,891 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-08 18:40:49,892 - INFO - connections.sonic_connection - [TX-3] Sending transaction: method=recordTemperature, gas=500000, gasPrice=10 gwei
+2025-03-08 18:40:50,426 - INFO - connections.sonic_connection - [TX-3] Waiting for transaction to be mined... (0s elapsed)
+2025-03-08 18:40:51,691 - INFO - connections.sonic_connection - [TX-3] Transaction successful: Gas used: 315351, Cost: 0.00315351 tokens, Time: 8.64s
+2025-03-08 18:59:02,750 - INFO - connections.sonic_connection - Initializing Sonic connection...
+2025-03-08 18:59:04,276 - INFO - connections.sonic_connection - Connected to network with chain ID: 57054
+2025-03-08 18:59:04,277 - INFO - connections.sonic_connection - Found ABIs directory at: /home/santhoshkumar/Supplai/Supllychain-agent/abis
+2025-03-08 18:59:04,277 - INFO - connections.sonic_connection - Attempting to load BerryTempAgent ABI from: /home/santhoshkumar/Supplai/Supllychain-agent/abis/BerryTempAgent.json
+2025-03-08 18:59:04,277 - INFO - connections.sonic_connection - Loaded ABI array for BerryTempAgent with 27 entries
+2025-03-08 18:59:04,277 - INFO - connections.sonic_connection - BerryTempAgent ABI contains functions: BREACH_PENALTY, MAX_TEMP, MIN_TEMP, OPTIMAL_TEMP, SHELF_LIFE_BASE, agentPredictions, batchCount, berryBatches, completeShipment, createBatch and more...
+2025-03-08 18:59:04,277 - INFO - connections.sonic_connection - Found required function: createBatch
+2025-03-08 18:59:04,277 - INFO - connections.sonic_connection - Found required function: batchCount
+2025-03-08 18:59:04,277 - INFO - connections.sonic_connection - Found required function: getTemperatureHistory
+2025-03-08 18:59:04,277 - INFO - connections.sonic_connection - Attempting to load BerryManager ABI from: /home/santhoshkumar/Supplai/Supllychain-agent/abis/BerryManager.json
+2025-03-08 18:59:04,278 - INFO - connections.sonic_connection - Loaded ABI array for BerryManager with 24 entries
+2025-03-08 18:59:04,278 - INFO - connections.sonic_connection - BerryManager ABI contains functions: INITIAL_REPUTATION, MAX_REPUTATION, MIN_REPUTATION, berryAgent, completeShipment, completedShipments, getSupplierDetails, getSupplierRecommendations, owner, processAgentRecommendation and more...
+2025-03-08 18:59:04,278 - INFO - connections.sonic_connection - Successfully loaded contract ABIs: BerryTempAgent, BerryManager
+2025-03-08 18:59:04,299 - INFO - connections.sonic_connection - Successfully initialized contract instances: berry_temp_agent, berry_manager
+2025-03-08 18:59:04,307 - INFO - connections.sonic_connection - Account loaded with address: 0x1e43eeB0307bb3466Cd237fE58570E6A3996d8ff
+2025-03-08 18:59:04,619 - INFO - connections.sonic_connection - Account balance: 46.9516008033 Sonic Tokens
+2025-03-08 18:59:04,619 - INFO - connections.sonic_connection - Sonic connection initialization complete
+2025-03-08 18:59:24,581 - INFO - connections.sonic_connection - [TX-1] Preparing transaction: method=recordTemperature, args=[0, 25, 'Delivery Center']
+2025-03-08 18:59:28,289 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-08 18:59:28,562 - INFO - connections.sonic_connection - Estimated gas: 353802
+2025-03-08 18:59:28,562 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-08 18:59:28,563 - INFO - connections.sonic_connection - Total cost: 0.00353802 Sonic Tokens
+2025-03-08 18:59:28,563 - INFO - connections.sonic_connection - Account balance: 46.9516008033 Sonic Tokens
+2025-03-08 18:59:31,574 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-08 18:59:31,576 - INFO - connections.sonic_connection - [TX-1] Sending transaction: method=recordTemperature, gas=500000, gasPrice=10 gwei
+2025-03-08 18:59:32,108 - INFO - connections.sonic_connection - [TX-1] Waiting for transaction to be mined... (0s elapsed)
+2025-03-08 18:59:33,387 - INFO - connections.sonic_connection - [TX-1] Transaction successful: Gas used: 315351, Cost: 0.00315351 tokens, Time: 8.81s
+2025-03-08 19:11:22,188 - INFO - connections.sonic_connection - [TX-2] Preparing transaction: method=recordTemperature, args=[0, 38, 'Delivery Center']
+2025-03-08 19:11:26,357 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-08 19:11:26,740 - INFO - connections.sonic_connection - Estimated gas: 353814
+2025-03-08 19:11:26,740 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-08 19:11:26,740 - INFO - connections.sonic_connection - Total cost: 0.00353814 Sonic Tokens
+2025-03-08 19:11:26,740 - INFO - connections.sonic_connection - Account balance: 46.9484472933 Sonic Tokens
+2025-03-08 19:11:29,018 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-08 19:11:29,019 - INFO - connections.sonic_connection - [TX-2] Sending transaction: method=recordTemperature, gas=500000, gasPrice=10 gwei
+2025-03-08 19:11:29,575 - INFO - connections.sonic_connection - [TX-2] Waiting for transaction to be mined... (0s elapsed)
+2025-03-08 19:11:30,940 - INFO - connections.sonic_connection - [TX-2] Transaction successful: Gas used: 315360, Cost: 0.0031536 tokens, Time: 8.75s
+2025-03-08 20:24:41,985 - INFO - connections.sonic_connection - [TX-3] Preparing transaction: method=recordTemperature, args=[3, 25, 'Cold Storage']
+2025-03-08 20:24:45,785 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-08 20:24:46,086 - INFO - connections.sonic_connection - Estimated gas: 353626
+2025-03-08 20:24:46,086 - INFO - connections.sonic_connection - Gas price: 10 gwei
+2025-03-08 20:24:46,086 - INFO - connections.sonic_connection - Total cost: 0.00353626 Sonic Tokens
+2025-03-08 20:24:46,087 - INFO - connections.sonic_connection - Account balance: 46.9452936933 Sonic Tokens
+2025-03-08 20:24:48,300 - INFO - connections.sonic_connection - Using gas price: 10 gwei
+2025-03-08 20:24:48,301 - INFO - connections.sonic_connection - [TX-3] Sending transaction: method=recordTemperature, gas=500000, gasPrice=10 gwei
+2025-03-08 20:24:48,839 - INFO - connections.sonic_connection - [TX-3] Waiting for transaction to be mined... (0s elapsed)
+2025-03-08 20:24:50,101 - INFO - connections.sonic_connection - [TX-3] Transaction successful: Gas used: 315220, Cost: 0.0031522 tokens, Time: 8.12s
+2025-03-08 20:25:12,244 - INFO - connections.sonic_connection - [CALL-1741445712] Calling contract method: getTemperatureHistory, args: [3]
+2025-03-08 20:25:12,973 - INFO - connections.sonic_connection - [CALL-1741445712] Contract call successful in 0.73s
+2025-03-08 20:25:12,974 - INFO - connections.sonic_connection - [CALL-1741445712] Calling contract method: getBatchDetails, args: [3]
+2025-03-08 20:25:13,757 - INFO - connections.sonic_connection - [CALL-1741445712] Contract call successful in 0.78s

@@ -7238,3 +7238,44 @@ requests.exceptions.ConnectionError: HTTPSConnectionPool(host='rpc.blaze.sonicla
 2025-03-07 04:44:41,700 - INFO - actions.sonic_actions - [Batch #0] Recording temperature 2.9°C at Cold Storage
 2025-03-07 04:44:50,263 - INFO - actions.sonic_actions - [Batch #0] Temperature recording transaction: {'success': True, 'transaction_hash': '0x2ba92c611c9e9d25c6dec5d36ce1f0d04b3def186a32d1ded093906dfb6375f6', 'transaction_url': 'https://testnet.sonicscan.org/tx/0x2ba92c611c9e9d25c6dec5d36ce1f0d04b3def186a32d1ded093906dfb6375f6', 'gas_used': 294489, 'effective_gas_price': 10000000000, 'execution_time': 8.563133478164673}
 2025-03-07 04:44:50,264 - INFO - actions.sonic_actions - [Batch #0] Temperature monitoring completed in 8.57 seconds
+2025-03-08 18:38:01,069 - INFO - actions.sonic_actions - Starting berry temperature monitoring...
+2025-03-08 18:38:01,069 - INFO - actions.sonic_actions - [Batch #0] Using mock temperature data: 3.1°C
+2025-03-08 18:38:01,069 - INFO - actions.sonic_actions - [Batch #0] Auto-determined location: Delivery Center
+2025-03-08 18:38:01,069 - INFO - actions.sonic_actions - [Batch #0] Recording temperature 3.1°C at Delivery Center
+2025-03-08 18:38:10,435 - INFO - actions.sonic_actions - [Batch #0] Temperature recording transaction: {'success': True, 'transaction_hash': '0xd65196a8dbd3475141b7899497bb1c433d85dfd2605123388141d449a19146c0', 'transaction_url': 'https://testnet.sonicscan.org/tx/0xd65196a8dbd3475141b7899497bb1c433d85dfd2605123388141d449a19146c0', 'gas_used': 333447, 'effective_gas_price': 10000000000, 'execution_time': 9.365617752075195}
+2025-03-08 18:38:10,435 - INFO - actions.sonic_actions - [Batch #0] Temperature monitoring completed in 9.37 seconds
+2025-03-08 18:38:32,285 - INFO - actions.sonic_actions - Starting berry temperature monitoring...
+2025-03-08 18:38:32,285 - INFO - actions.sonic_actions - [Batch #0] Using mock temperature data: 4.2°C
+2025-03-08 18:38:32,285 - INFO - actions.sonic_actions - [Batch #0] Auto-determined location: Delivery Center
+2025-03-08 18:38:32,285 - INFO - actions.sonic_actions - [Batch #0] Recording temperature 4.2°C at Delivery Center
+2025-03-08 18:38:41,128 - INFO - actions.sonic_actions - [Batch #0] Temperature recording transaction: {'success': True, 'transaction_hash': '0x17e492b7dfddce2cb32d203a2b76b8893f97b0bc1b42fa782756c2939c954eab', 'transaction_url': 'https://testnet.sonicscan.org/tx/0x17e492b7dfddce2cb32d203a2b76b8893f97b0bc1b42fa782756c2939c954eab', 'gas_used': 313071, 'effective_gas_price': 10000000000, 'execution_time': 8.842443466186523}
+2025-03-08 18:38:41,128 - INFO - actions.sonic_actions - Alert would be sent (alerting disabled): temperature_breach_warning - Temperature breach detected: 4.2°C, Severity: Warning, Batch: 0, Location: Delivery Center
+2025-03-08 18:38:41,128 - WARNING - actions.sonic_actions - [Batch #0] Temperature breach detected: 4.2°C, Severity: Warning
+2025-03-08 18:38:41,128 - INFO - actions.sonic_actions - [Batch #0] Temperature monitoring completed in 8.84 seconds
+2025-03-08 18:40:43,048 - INFO - actions.sonic_actions - Starting berry temperature monitoring...
+2025-03-08 18:40:43,048 - INFO - actions.sonic_actions - [Batch #0] Using mock temperature data: 3.1°C
+2025-03-08 18:40:43,048 - INFO - actions.sonic_actions - [Batch #0] Auto-determined location: Delivery Center
+2025-03-08 18:40:43,048 - INFO - actions.sonic_actions - [Batch #0] Recording temperature 3.1°C at Delivery Center
+2025-03-08 18:40:51,692 - INFO - actions.sonic_actions - [Batch #0] Temperature recording transaction: {'success': True, 'transaction_hash': '0x8b5a8c17b63b170edcab396ff98533a1ceab722186d254c639b688c30b1bb508', 'transaction_url': 'https://testnet.sonicscan.org/tx/0x8b5a8c17b63b170edcab396ff98533a1ceab722186d254c639b688c30b1bb508', 'gas_used': 315351, 'effective_gas_price': 10000000000, 'execution_time': 8.643004894256592}
+2025-03-08 18:40:51,692 - INFO - actions.sonic_actions - [Batch #0] Temperature monitoring completed in 8.64 seconds
+2025-03-08 18:59:24,580 - INFO - actions.sonic_actions - Starting berry temperature monitoring...
+2025-03-08 18:59:24,580 - INFO - actions.sonic_actions - [Batch #0] Using mock temperature data: 2.5°C
+2025-03-08 18:59:24,580 - INFO - actions.sonic_actions - [Batch #0] Auto-determined location: Delivery Center
+2025-03-08 18:59:24,581 - INFO - actions.sonic_actions - [Batch #0] Recording temperature 2.5°C at Delivery Center
+2025-03-08 18:59:33,387 - INFO - actions.sonic_actions - [Batch #0] Temperature recording transaction: {'success': True, 'transaction_hash': '0x29da3a4ed2e7bd86a963ae42e1ac3a7a5b26fd9b205fdfe7ad1c6e253327e18d', 'transaction_url': 'https://testnet.sonicscan.org/tx/0x29da3a4ed2e7bd86a963ae42e1ac3a7a5b26fd9b205fdfe7ad1c6e253327e18d', 'gas_used': 315351, 'effective_gas_price': 10000000000, 'execution_time': 8.805710315704346}
+2025-03-08 18:59:33,387 - INFO - actions.sonic_actions - [Batch #0] Temperature monitoring completed in 8.81 seconds
+2025-03-08 19:11:22,188 - INFO - actions.sonic_actions - Starting berry temperature monitoring...
+2025-03-08 19:11:22,188 - INFO - actions.sonic_actions - [Batch #0] Using mock temperature data: 3.8°C
+2025-03-08 19:11:22,188 - INFO - actions.sonic_actions - [Batch #0] Auto-determined location: Delivery Center
+2025-03-08 19:11:22,188 - INFO - actions.sonic_actions - [Batch #0] Recording temperature 3.8°C at Delivery Center
+2025-03-08 19:11:30,940 - INFO - actions.sonic_actions - [Batch #0] Temperature recording transaction: {'success': True, 'transaction_hash': '0x3b37d9a4ec8854ef480a78ffbd3beeb9d9a01c9cc8f0157eda83865cb6597126', 'transaction_url': 'https://testnet.sonicscan.org/tx/0x3b37d9a4ec8854ef480a78ffbd3beeb9d9a01c9cc8f0157eda83865cb6597126', 'gas_used': 315360, 'effective_gas_price': 10000000000, 'execution_time': 8.752151727676392}
+2025-03-08 19:11:30,940 - INFO - actions.sonic_actions - [Batch #0] Temperature monitoring completed in 8.75 seconds
+2025-03-08 20:24:41,985 - INFO - actions.sonic_actions - Starting berry temperature monitoring...
+2025-03-08 20:24:41,985 - INFO - actions.sonic_actions - [Batch #3] Recording temperature 2.5°C at Cold Storage
+2025-03-08 20:24:50,101 - INFO - actions.sonic_actions - [Batch #3] Temperature recording transaction: {'success': True, 'transaction_hash': '0x51f730f64f2ba3660268fdaec77fe99f6a33ffafbb039f1724f766fe03bf364e', 'transaction_url': 'https://testnet.sonicscan.org/tx/0x51f730f64f2ba3660268fdaec77fe99f6a33ffafbb039f1724f766fe03bf364e', 'gas_used': 315220, 'effective_gas_price': 10000000000, 'execution_time': 8.116287469863892}
+2025-03-08 20:24:50,101 - INFO - actions.sonic_actions - [Batch #3] Temperature monitoring completed in 8.12 seconds
+2025-03-08 20:25:12,244 - INFO - actions.sonic_actions - Starting berry quality assessment...
+2025-03-08 20:25:13,757 - INFO - actions.sonic_actions - [Batch #3] Berry type: Raspberry
+2025-03-08 20:25:13,757 - INFO - actions.sonic_actions - [Batch #3] Base shelf life for Raspberry: 48 hours
+2025-03-08 20:25:13,758 - INFO - actions.sonic_actions - [Batch #3] Temperature breach statistics: 1/7 readings (14.3%)
+2025-03-08 20:25:13,758 - INFO - actions.sonic_actions - [Batch #3] Quality assessment complete: No Action, Score: 97.5/100, Shelf life: 46.0 hours
