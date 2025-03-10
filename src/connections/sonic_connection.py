@@ -1671,7 +1671,7 @@ class SonicConnection(BaseConnection):
                 "contract_address": BERRY_TEMP_AGENT_ADDRESS,
                 "method": "recordTemperature",
                 "args": [batch_id, temperature, location],
-                "gas_limit": 500000  # Increased from 300000 to 450000
+                "gas_limit": 500000  
             }
             
             result = self.send_transaction(tx_data)
