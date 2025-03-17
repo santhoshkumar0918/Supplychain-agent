@@ -327,6 +327,208 @@ async def monitor_berry_temperature(agent, **kwargs):
             "error": str(e),
             "execution_time": execution_time
         }
+        
+
+
+
+@register_action("get-transaction-history")
+async def get_transaction_history(agent, **kwargs):
+    """Fetch transaction history with pagination"""
+    start_time = datetime.now()
+    
+    try:
+        logger.info("Fetching transaction history...")
+        
+        # Get parameters
+        page = kwargs.get("page", 1)
+        limit = kwargs.get("limit", 10)
+        
+        # Access the Sonic connection
+        sonic_connection = agent.connection_manager.connections.get("sonic")
+        if not sonic_connection:
+            raise ValueError("Sonic connection not available")
+        
+        # Access the transaction_history from SonicConnection
+        all_transactions = getattr(sonic_connection, "transaction_history", [])
+        
+        if not all_transactions or len(all_transactions) == 0:
+            logger.info("No transaction history found in connection, generating mock data")
+            # Generate mock transaction data if none exists
+            mock_transactions = []
+            for i in range(20):  # Make sure we're creating 20 transactions
+                timestamp = datetime.now() - timedelta(hours=i)
+                tx_type = "Batch Creation" if i % 3 == 0 else "Temperature Update" if i % 3 == 1 else "Status Change"
+                success = i % 5 != 0  # Make every 5th transaction a failure
+                
+                # Format a proper hex string in Python (not JavaScript)
+                tx_hash = format(i+1, 'x').zfill(64)
+                
+                mock_tx = {
+                    "id": f"tx-{i+1}",
+                    "type": "blockchain" if i % 2 == 0 else "contract",
+                    "method": tx_type,
+                    "timestamp": timestamp.isoformat(),
+                    "result": {
+                        "success": success,
+                        "transaction_hash": f"0x{tx_hash}" if success else "",
+                        "transaction_url": f"https://etherscan.io/tx/0x{tx_hash}" if success else "",
+                        "gas_used": 75000 + (i * 1000) if success else 0,
+                        "effective_gas_price": 10000000000,  # 10 Gwei
+                        "execution_time": 1.5 + (i * 0.1)
+                    }
+                }
+                
+                # Add error for failed transactions
+                if not success:
+                    mock_tx["result"]["error"] = "Transaction reverted: gas limit exceeded"
+                
+                mock_transactions.append(mock_tx)
+            
+            all_transactions = mock_transactions
+            
+            # Debug log to verify we have the expected number of transactions
+            logger.info(f"Generated {len(all_transactions)} mock transactions")
+        
+        # Format transactions for the frontend
+        formatted_transactions = []
+        for tx in all_transactions:
+            # Extract needed fields from the transaction record
+            tx_id = tx.get("id", f"tx-{len(formatted_transactions)+1}")
+            tx_type = tx.get("method", "Unknown")
+            timestamp = tx.get("timestamp", datetime.now().isoformat())
+            
+            # Get result data
+            result = tx.get("result", {})
+            success = result.get("success", False)
+            tx_hash = result.get("transaction_hash", "")
+            tx_url = result.get("transaction_url", "")
+            gas_used = result.get("gas_used", 0)
+            execution_time = result.get("execution_time", 0)
+            error = result.get("error", "")
+            
+            # Create formatted transaction object
+            formatted_tx = {
+                "id": tx_id,
+                "transaction_hash": tx_hash,
+                "transaction_url": tx_url,
+                "timestamp": timestamp,
+                "type": tx_type,
+                "success": success,
+                "gas_used": gas_used,
+                "execution_time": execution_time
+            }
+            
+            # Add error if present
+            if error:
+                formatted_tx["error"] = error
+                
+            formatted_transactions.append(formatted_tx)
+        
+        # Apply pagination
+        total = len(formatted_transactions)
+        start_index = (page - 1) * limit
+        end_index = min(start_index + limit, total)
+        paginated_transactions = formatted_transactions[start_index:end_index]
+        
+        # Calculate execution time
+        execution_time = (datetime.now() - start_time).total_seconds()
+        logger.info(f"Returned {len(paginated_transactions)} transactions (page {page}/{(total + limit - 1) // limit})")
+        
+        # Update the health metrics to reflect transaction count
+        health_stats["transaction_count"] = total
+        health_stats["successful_transactions"] = sum(1 for tx in formatted_transactions if tx["success"])
+        health_stats["failed_transactions"] = sum(1 for tx in formatted_transactions if not tx["success"])
+        
+        return {
+            "status": "success",
+            "transactions": paginated_transactions,
+            "total": total,
+            "page": page,
+            "limit": limit,
+            "execution_time": execution_time
+        }
+        
+    except Exception as e:
+        logger.error(f"Failed to fetch transaction history: {str(e)}", exc_info=True)
+        return {
+            "status": "error",
+            "error": str(e),
+            "execution_time": (datetime.now() - start_time).total_seconds()
+        }
+
+@register_action("get-transaction-details")
+async def get_transaction_details(agent, **kwargs):
+    """Get details of a specific transaction"""
+    start_time = datetime.now()
+    
+    try:
+        logger.info("Fetching transaction details...")
+        
+        # Get transaction hash from parameters
+        transaction_hash = kwargs.get("transaction_hash")
+        if not transaction_hash:
+            raise ValueError("Transaction hash is required")
+        
+        # Access the Sonic connection
+        sonic_connection = agent.connection_manager.connections.get("sonic")
+        if not sonic_connection:
+            raise ValueError("Sonic connection not available")
+        
+        # Access the transaction_history from SonicConnection
+        all_transactions = getattr(sonic_connection, "transaction_history", [])
+        
+        # Find the transaction by hash
+        transaction = None
+        for tx in all_transactions:
+            result = tx.get("result", {})
+            if result.get("transaction_hash") == transaction_hash:
+                transaction = tx
+                break
+        
+        # If transaction not found, return error
+        if not transaction:
+            logger.warning(f"Transaction with hash {transaction_hash} not found")
+            return {
+                "status": "error",
+                "error": f"Transaction with hash {transaction_hash} not found",
+                "execution_time": (datetime.now() - start_time).total_seconds()
+            }
+        
+        # Format transaction for the frontend
+        result = transaction.get("result", {})
+        formatted_tx = {
+            "id": transaction.get("id", "unknown"),
+            "transaction_hash": result.get("transaction_hash", ""),
+            "transaction_url": result.get("transaction_url", ""),
+            "timestamp": transaction.get("timestamp", datetime.now().isoformat()),
+            "type": transaction.get("method", "Unknown"),
+            "success": result.get("success", False),
+            "gas_used": result.get("gas_used", 0),
+            "execution_time": result.get("execution_time", 0),
+        }
+        
+        # Add error if present
+        if "error" in result:
+            formatted_tx["error"] = result["error"]
+        
+        # Calculate execution time
+        execution_time = (datetime.now() - start_time).total_seconds()
+        logger.info(f"Retrieved transaction details for {transaction_hash}")
+        
+        return {
+            "status": "success",
+            "transaction": formatted_tx,
+            "execution_time": execution_time
+        }
+        
+    except Exception as e:
+        logger.error(f"Failed to fetch transaction details: {str(e)}", exc_info=True)
+        return {
+            "status": "error",
+            "error": str(e),
+            "execution_time": (datetime.now() - start_time).total_seconds()
+        } 
+        
 @register_action("manage-batch-sequence") 
 async def manage_batch_sequence(agent, **kwargs):
     """Execute a complete batch lifecycle sequence"""

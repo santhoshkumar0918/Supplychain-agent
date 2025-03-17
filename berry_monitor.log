@@ -7279,3 +7279,168 @@ requests.exceptions.ConnectionError: HTTPSConnectionPool(host='rpc.blaze.sonicla
 2025-03-08 20:25:13,757 - INFO - actions.sonic_actions - [Batch #3] Base shelf life for Raspberry: 48 hours
 2025-03-08 20:25:13,758 - INFO - actions.sonic_actions - [Batch #3] Temperature breach statistics: 1/7 readings (14.3%)
 2025-03-08 20:25:13,758 - INFO - actions.sonic_actions - [Batch #3] Quality assessment complete: No Action, Score: 97.5/100, Shelf life: 46.0 hours
+2025-03-17 20:51:30,319 - INFO - actions.sonic_actions - Fetching transaction history...
+2025-03-17 20:51:30,331 - INFO - actions.sonic_actions - No transaction history found in connection, generating mock data
+2025-03-17 20:51:30,342 - ERROR - actions.sonic_actions - Failed to fetch transaction history: 'int' object has no attribute 'toString'
+Traceback (most recent call last):
+  File "/home/santhoshkumar/Supplai/Supllychain-agent/src/actions/sonic_actions.py", line 368, in get_transaction_history
+    "transaction_hash": f"0x{(i+1).toString(16).padStart(64, '0')}" if success else "",
+                             ^^^^^^^^^^^^^^
+AttributeError: 'int' object has no attribute 'toString'
+2025-03-17 20:51:30,471 - INFO - actions.sonic_actions - Fetching transaction history...
+2025-03-17 20:51:30,482 - INFO - actions.sonic_actions - No transaction history found in connection, generating mock data
+2025-03-17 20:51:30,492 - ERROR - actions.sonic_actions - Failed to fetch transaction history: 'int' object has no attribute 'toString'
+Traceback (most recent call last):
+  File "/home/santhoshkumar/Supplai/Supllychain-agent/src/actions/sonic_actions.py", line 368, in get_transaction_history
+    "transaction_hash": f"0x{(i+1).toString(16).padStart(64, '0')}" if success else "",
+                             ^^^^^^^^^^^^^^
+AttributeError: 'int' object has no attribute 'toString'
+2025-03-17 20:52:00,099 - INFO - actions.sonic_actions - Fetching transaction history...
+2025-03-17 20:52:00,105 - INFO - actions.sonic_actions - No transaction history found in connection, generating mock data
+2025-03-17 20:52:00,117 - ERROR - actions.sonic_actions - Failed to fetch transaction history: 'int' object has no attribute 'toString'
+Traceback (most recent call last):
+  File "/home/santhoshkumar/Supplai/Supllychain-agent/src/actions/sonic_actions.py", line 368, in get_transaction_history
+    "transaction_hash": f"0x{(i+1).toString(16).padStart(64, '0')}" if success else "",
+                             ^^^^^^^^^^^^^^
+AttributeError: 'int' object has no attribute 'toString'
+2025-03-17 20:52:00,155 - INFO - actions.sonic_actions - Fetching transaction history...
+2025-03-17 20:52:00,166 - INFO - actions.sonic_actions - No transaction history found in connection, generating mock data
+2025-03-17 20:52:00,176 - ERROR - actions.sonic_actions - Failed to fetch transaction history: 'int' object has no attribute 'toString'
+Traceback (most recent call last):
+  File "/home/santhoshkumar/Supplai/Supllychain-agent/src/actions/sonic_actions.py", line 368, in get_transaction_history
+    "transaction_hash": f"0x{(i+1).toString(16).padStart(64, '0')}" if success else "",
+                             ^^^^^^^^^^^^^^
+AttributeError: 'int' object has no attribute 'toString'
+2025-03-17 20:52:00,237 - INFO - actions.sonic_actions - Fetching transaction history...
+2025-03-17 20:52:00,248 - INFO - actions.sonic_actions - No transaction history found in connection, generating mock data
+2025-03-17 20:52:00,253 - ERROR - actions.sonic_actions - Failed to fetch transaction history: 'int' object has no attribute 'toString'
+Traceback (most recent call last):
+  File "/home/santhoshkumar/Supplai/Supllychain-agent/src/actions/sonic_actions.py", line 368, in get_transaction_history
+    "transaction_hash": f"0x{(i+1).toString(16).padStart(64, '0')}" if success else "",
+                             ^^^^^^^^^^^^^^
+AttributeError: 'int' object has no attribute 'toString'
+2025-03-17 20:52:00,340 - INFO - actions.sonic_actions - Fetching transaction history...
+2025-03-17 20:52:00,351 - INFO - actions.sonic_actions - No transaction history found in connection, generating mock data
+2025-03-17 20:52:00,361 - ERROR - actions.sonic_actions - Failed to fetch transaction history: 'int' object has no attribute 'toString'
+Traceback (most recent call last):
+  File "/home/santhoshkumar/Supplai/Supllychain-agent/src/actions/sonic_actions.py", line 368, in get_transaction_history
+    "transaction_hash": f"0x{(i+1).toString(16).padStart(64, '0')}" if success else "",
+                             ^^^^^^^^^^^^^^
+AttributeError: 'int' object has no attribute 'toString'
+2025-03-17 20:52:00,416 - INFO - actions.sonic_actions - Fetching transaction history...
+2025-03-17 20:52:00,426 - INFO - actions.sonic_actions - No transaction history found in connection, generating mock data
+2025-03-17 20:52:00,437 - ERROR - actions.sonic_actions - Failed to fetch transaction history: 'int' object has no attribute 'toString'
+Traceback (most recent call last):
+  File "/home/santhoshkumar/Supplai/Supllychain-agent/src/actions/sonic_actions.py", line 368, in get_transaction_history
+    "transaction_hash": f"0x{(i+1).toString(16).padStart(64, '0')}" if success else "",
+                             ^^^^^^^^^^^^^^
+AttributeError: 'int' object has no attribute 'toString'
+2025-03-17 20:52:00,493 - INFO - actions.sonic_actions - Fetching transaction history...
+2025-03-17 20:52:00,503 - INFO - actions.sonic_actions - No transaction history found in connection, generating mock data
+2025-03-17 20:52:00,509 - ERROR - actions.sonic_actions - Failed to fetch transaction history: 'int' object has no attribute 'toString'
+Traceback (most recent call last):
+  File "/home/santhoshkumar/Supplai/Supllychain-agent/src/actions/sonic_actions.py", line 368, in get_transaction_history
+    "transaction_hash": f"0x{(i+1).toString(16).padStart(64, '0')}" if success else "",
+                             ^^^^^^^^^^^^^^
+AttributeError: 'int' object has no attribute 'toString'
+2025-03-17 20:52:01,513 - INFO - actions.sonic_actions - Fetching transaction history...
+2025-03-17 20:52:01,518 - INFO - actions.sonic_actions - No transaction history found in connection, generating mock data
+2025-03-17 20:52:01,529 - ERROR - actions.sonic_actions - Failed to fetch transaction history: 'int' object has no attribute 'toString'
+Traceback (most recent call last):
+  File "/home/santhoshkumar/Supplai/Supllychain-agent/src/actions/sonic_actions.py", line 368, in get_transaction_history
+    "transaction_hash": f"0x{(i+1).toString(16).padStart(64, '0')}" if success else "",
+                             ^^^^^^^^^^^^^^
+AttributeError: 'int' object has no attribute 'toString'
+2025-03-17 20:52:01,573 - INFO - actions.sonic_actions - Fetching transaction history...
+2025-03-17 20:52:01,583 - INFO - actions.sonic_actions - No transaction history found in connection, generating mock data
+2025-03-17 20:52:01,594 - ERROR - actions.sonic_actions - Failed to fetch transaction history: 'int' object has no attribute 'toString'
+Traceback (most recent call last):
+  File "/home/santhoshkumar/Supplai/Supllychain-agent/src/actions/sonic_actions.py", line 368, in get_transaction_history
+    "transaction_hash": f"0x{(i+1).toString(16).padStart(64, '0')}" if success else "",
+                             ^^^^^^^^^^^^^^
+AttributeError: 'int' object has no attribute 'toString'
+2025-03-17 20:52:08,013 - INFO - actions.sonic_actions - Fetching transaction history...
+2025-03-17 20:52:08,024 - INFO - actions.sonic_actions - No transaction history found in connection, generating mock data
+2025-03-17 20:52:08,034 - ERROR - actions.sonic_actions - Failed to fetch transaction history: 'int' object has no attribute 'toString'
+Traceback (most recent call last):
+  File "/home/santhoshkumar/Supplai/Supllychain-agent/src/actions/sonic_actions.py", line 368, in get_transaction_history
+    "transaction_hash": f"0x{(i+1).toString(16).padStart(64, '0')}" if success else "",
+                             ^^^^^^^^^^^^^^
+AttributeError: 'int' object has no attribute 'toString'
+2025-03-17 20:52:10,733 - INFO - actions.sonic_actions - Fetching transaction history...
+2025-03-17 20:52:10,733 - INFO - actions.sonic_actions - No transaction history found in connection, generating mock data
+2025-03-17 20:52:10,734 - ERROR - actions.sonic_actions - Failed to fetch transaction history: 'int' object has no attribute 'toString'
+Traceback (most recent call last):
+  File "/home/santhoshkumar/Supplai/Supllychain-agent/src/actions/sonic_actions.py", line 368, in get_transaction_history
+    "transaction_hash": f"0x{(i+1).toString(16).padStart(64, '0')}" if success else "",
+                             ^^^^^^^^^^^^^^
+AttributeError: 'int' object has no attribute 'toString'
+2025-03-17 20:58:54,030 - INFO - actions.sonic_actions - Fetching transaction history...
+2025-03-17 20:58:54,040 - INFO - actions.sonic_actions - No transaction history found in connection, generating mock data
+2025-03-17 20:58:54,051 - INFO - actions.sonic_actions - Returned 1 transactions (page 1/1)
+2025-03-17 20:58:54,113 - INFO - actions.sonic_actions - Fetching transaction history...
+2025-03-17 20:58:54,123 - INFO - actions.sonic_actions - No transaction history found in connection, generating mock data
+2025-03-17 20:58:54,134 - INFO - actions.sonic_actions - Returned 1 transactions (page 1/1)
+2025-03-17 20:59:00,797 - INFO - actions.sonic_actions - Fetching transaction history...
+2025-03-17 20:59:00,807 - INFO - actions.sonic_actions - No transaction history found in connection, generating mock data
+2025-03-17 20:59:00,818 - INFO - actions.sonic_actions - Returned 1 transactions (page 1/1)
+2025-03-17 20:59:00,867 - INFO - actions.sonic_actions - Fetching transaction history...
+2025-03-17 20:59:00,872 - INFO - actions.sonic_actions - No transaction history found in connection, generating mock data
+2025-03-17 20:59:00,882 - INFO - actions.sonic_actions - Returned 1 transactions (page 1/1)
+2025-03-17 20:59:00,915 - INFO - actions.sonic_actions - Fetching transaction history...
+2025-03-17 20:59:00,926 - INFO - actions.sonic_actions - No transaction history found in connection, generating mock data
+2025-03-17 20:59:00,936 - INFO - actions.sonic_actions - Returned 1 transactions (page 1/1)
+2025-03-17 20:59:00,970 - INFO - actions.sonic_actions - Fetching transaction history...
+2025-03-17 20:59:00,980 - INFO - actions.sonic_actions - No transaction history found in connection, generating mock data
+2025-03-17 20:59:00,991 - INFO - actions.sonic_actions - Returned 1 transactions (page 1/1)
+2025-03-17 20:59:23,767 - INFO - actions.sonic_actions - Fetching transaction history...
+2025-03-17 20:59:23,778 - INFO - actions.sonic_actions - No transaction history found in connection, generating mock data
+2025-03-17 20:59:23,789 - INFO - actions.sonic_actions - Returned 1 transactions (page 1/1)
+2025-03-17 20:59:23,840 - INFO - actions.sonic_actions - Fetching transaction history...
+2025-03-17 20:59:23,840 - INFO - actions.sonic_actions - No transaction history found in connection, generating mock data
+2025-03-17 20:59:23,840 - INFO - actions.sonic_actions - Returned 1 transactions (page 1/1)
+2025-03-17 20:59:24,088 - INFO - actions.sonic_actions - Fetching transaction history...
+2025-03-17 20:59:24,099 - INFO - actions.sonic_actions - No transaction history found in connection, generating mock data
+2025-03-17 20:59:24,109 - INFO - actions.sonic_actions - Returned 1 transactions (page 1/1)
+2025-03-17 20:59:24,154 - INFO - actions.sonic_actions - Fetching transaction history...
+2025-03-17 20:59:24,164 - INFO - actions.sonic_actions - No transaction history found in connection, generating mock data
+2025-03-17 20:59:24,175 - INFO - actions.sonic_actions - Returned 1 transactions (page 1/1)
+2025-03-17 20:59:24,224 - INFO - actions.sonic_actions - Fetching transaction history...
+2025-03-17 20:59:24,229 - INFO - actions.sonic_actions - No transaction history found in connection, generating mock data
+2025-03-17 20:59:24,230 - INFO - actions.sonic_actions - Returned 1 transactions (page 1/1)
+2025-03-17 20:59:24,262 - INFO - actions.sonic_actions - Fetching transaction history...
+2025-03-17 20:59:24,273 - INFO - actions.sonic_actions - No transaction history found in connection, generating mock data
+2025-03-17 20:59:24,283 - INFO - actions.sonic_actions - Returned 1 transactions (page 1/1)
+2025-03-17 20:59:25,304 - INFO - actions.sonic_actions - Fetching transaction history...
+2025-03-17 20:59:25,314 - INFO - actions.sonic_actions - No transaction history found in connection, generating mock data
+2025-03-17 20:59:25,325 - INFO - actions.sonic_actions - Returned 1 transactions (page 1/1)
+2025-03-17 20:59:25,368 - INFO - actions.sonic_actions - Fetching transaction history...
+2025-03-17 20:59:25,379 - INFO - actions.sonic_actions - No transaction history found in connection, generating mock data
+2025-03-17 20:59:25,389 - INFO - actions.sonic_actions - Returned 1 transactions (page 1/1)
+2025-03-17 21:00:05,897 - INFO - actions.sonic_actions - Fetching transaction history...
+2025-03-17 21:00:05,903 - INFO - actions.sonic_actions - No transaction history found in connection, generating mock data
+2025-03-17 21:00:05,913 - INFO - actions.sonic_actions - Returned 1 transactions (page 1/1)
+2025-03-17 21:04:31,682 - INFO - actions.sonic_actions - Fetching transaction history...
+2025-03-17 21:04:31,692 - INFO - actions.sonic_actions - No transaction history found in connection, generating mock data
+2025-03-17 21:04:31,703 - INFO - actions.sonic_actions - Returned 1 transactions (page 1/1)
+2025-03-17 21:04:31,747 - INFO - actions.sonic_actions - Fetching transaction history...
+2025-03-17 21:04:31,757 - INFO - actions.sonic_actions - No transaction history found in connection, generating mock data
+2025-03-17 21:04:31,768 - INFO - actions.sonic_actions - Returned 1 transactions (page 1/1)
+2025-03-17 21:04:31,835 - INFO - actions.sonic_actions - Fetching transaction history...
+2025-03-17 21:04:31,845 - INFO - actions.sonic_actions - No transaction history found in connection, generating mock data
+2025-03-17 21:04:31,856 - INFO - actions.sonic_actions - Returned 1 transactions (page 1/1)
+2025-03-17 21:04:31,888 - INFO - actions.sonic_actions - Fetching transaction history...
+2025-03-17 21:04:31,899 - INFO - actions.sonic_actions - No transaction history found in connection, generating mock data
+2025-03-17 21:04:31,909 - INFO - actions.sonic_actions - Returned 1 transactions (page 1/1)
+2025-03-17 21:04:31,980 - INFO - actions.sonic_actions - Fetching transaction history...
+2025-03-17 21:04:31,990 - INFO - actions.sonic_actions - No transaction history found in connection, generating mock data
+2025-03-17 21:04:32,001 - INFO - actions.sonic_actions - Returned 1 transactions (page 1/1)
+2025-03-17 21:04:32,033 - INFO - actions.sonic_actions - Fetching transaction history...
+2025-03-17 21:04:32,044 - INFO - actions.sonic_actions - No transaction history found in connection, generating mock data
+2025-03-17 21:04:32,054 - INFO - actions.sonic_actions - Returned 1 transactions (page 1/1)
+2025-03-17 21:04:33,082 - INFO - actions.sonic_actions - Fetching transaction history...
+2025-03-17 21:04:33,093 - INFO - actions.sonic_actions - No transaction history found in connection, generating mock data
+2025-03-17 21:04:33,104 - INFO - actions.sonic_actions - Returned 1 transactions (page 1/1)
+2025-03-17 21:04:33,141 - INFO - actions.sonic_actions - Fetching transaction history...
+2025-03-17 21:04:33,141 - INFO - actions.sonic_actions - No transaction history found in connection, generating mock data
+2025-03-17 21:04:33,152 - INFO - actions.sonic_actions - Returned 1 transactions (page 1/1)
